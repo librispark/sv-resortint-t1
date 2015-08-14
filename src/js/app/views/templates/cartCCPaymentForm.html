@@ -1,0 +1,152 @@
+<p>{{Localization.paymentProcessing.sectionDescription}} <small>{{Localization.paymentProcessing.err.requiredInfo}}</small></p>
+<form id="cartCCPaymentForm" class="form-horizontal well span8 offset2">
+    <h5>{{Localization.paymentProcessing.transaction}}</h5>
+    <div class="control-group">
+        <label class="control-label">{{Localization.paymentProcessing.guestLabel}}</label>
+        <div class="controls">
+            <p>{{FirstName}} {{LastName}}</p>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCEmail">{{Localization.paymentProcessing.userIDLabel}}</label>
+        <div class="controls">
+            <p>{{email}}</p>
+            <input type="hidden" id="cartCCEmail" name="cartCCEmail" value="{{email}}"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCTotal">{{Localization.paymentProcessing.totalLabel}}</label>
+        <div class="controls">
+            <p>{{Localization.general.currencyPrefix}}{{toFixed balance 2}}{{Localization.general.currencyPostfix}}</p>
+            <input type="hidden" id="cartCCTotal" name="cartCCTotal" class="disabled" value="{{balance}}"/>
+        </div>
+    </div>
+    <h5>{{Localization.paymentProcessing.cardInfo}}</h5>
+    <div class="control-group">
+        <label class="control-label" for="cartCCNum">{{Localization.paymentProcessing.cardNumberLabel}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCNum" name="cartCCNum" class="required" placeholder="{{Localization.paymentProcessing.cardNumberBlank}}" value=""/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCtype">
+            {{Localization.paymentProcessing.cardTypeLabel}}
+        </label>
+        <div class="controls card-type">
+            <select id="cartCCtype" name="cartCCtype" class="" >
+                {{#if Customization.payment.ccEnabledVisa}}<option value="VISA">{{Localization.general.paymentCards.visa}}</option>{{/if}}
+                {{#if Customization.payment.ccEnabledMC}}<option value="M/C">{{Localization.general.paymentCards.masterCard}}</option>{{/if}}
+                {{#if Customization.payment.ccEnabledAmex}}<option value="AMEX">{{Localization.general.paymentCards.amex}}</option>{{/if}}
+                {{#if Customization.payment.ccEnabledDisc}}<option value="DISC">{{Localization.general.paymentCards.discover}}</option>{{/if}}
+            </select>
+            <span class="logos">
+            {{#if Customization.payment.ccEnabledVisa}}<img src="img/ccLogo-visa.png" height="25" alt="Visa" />{{/if}}
+            {{#if Customization.payment.ccEnabledMC}}<img src="img/ccLogo-mastercard.png" height="25" alt="MasterCard" />{{/if}}
+            {{#if Customization.payment.ccEnabledAmex}}<img src="img/ccLogo-amex.png" height="25" alt="American Express" />{{/if}}
+            {{#if Customization.payment.ccEnabledDisc}}<img src="img/ccLogo-discover.png" height="25" alt="Discover" />{{/if}}
+            </span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="input01">{{Localization.paymentProcessing.expiryLabel}}</label>
+        <div class="controls form-inline">
+            <div id="cartCCexpContainer">
+                <select id="cartCCexpmon" name="cartCCexpmon" class="required input-small" placeholder="{{Localization.paymentProcessing.expiryMonthBlank}}">
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+                <select id="cartCCexpyear" name="cartCCexpyear" class="input-small">
+                    {{#each years}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCcvv">{{Localization.paymentProcessing.cvvLabel}} *</label>
+        <div class="controls">
+            <input type="text" id="cartCCcvv" name="cartCCcvv" class="required input-mini" size="4" pvalue=""/>
+        </div>
+    </div>
+    <h5>{{Localization.paymentProcessing.billingAddress}}</h5>
+    <div class="control-group">
+        <label class="control-label" for="cartCCFName">{{Localization.newUser.firstNameTitle}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCFName" name="cartCCFName" class="required" placeholder="{{Localization.paymentProcessing.cardHolderBlank}}" value=""/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCLName">{{Localization.newUser.lastNameTitle}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCLName" name="cartCCLName" class="required" placeholder="{{Localization.paymentProcessing.cardHolderBlank}}" value=""/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCaddress">{{Localization.paymentProcessing.addressLabel}}{{#if Customization.requirePaymentAddress}} *{{/if}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCaddress" name="cartCCaddress" class="{{#if Customization.requirePaymentAddress}}required{{/if}}" value=""/>
+        </div>
+    </div>
+    {{#if Customization.showPaymentAllAddressFields}}
+    <div class="control-group">
+        <label class="control-label" for="cartCCaddress2">{{Localization.paymentProcessing.addressLabel2}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCaddress2" name="cartCCaddress2" value=""/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCcity">{{Localization.newUser.cityTitle}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCcity" name="cartCCcity" class="" value=""/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCstate">{{Localization.newUser.stateTitle}}</label>
+        <div class="controls">
+            <select id="cartCCstate" name="cartCCstate">
+            <option value=""></option>
+            {{#Localization.stateList}}
+            <option value="{{code}}">{{#if ../Customization.showProvinceCode}}{{code}} - {{/if}}{{name}}</option>
+            {{/Localization.stateList}}
+
+            </select>
+        </div>
+    </div>
+    {{/if}}
+    <div class="control-group">
+        <label class="control-label" for="cartCCzip">{{Localization.paymentProcessing.zipLabel}}{{#if Customization.requirePaymentPostalCode}} *{{/if}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCzip" name="cartCCzip" class="{{#if Customization.requirePaymentPostalCode}}required{{/if}}" value=""/>
+        </div>
+    </div>
+    {{#if Customization.showPaymentAllAddressFields}}
+    <div class="control-group">
+        <label class="control-label" for="cartCCcountry">{{Localization.newUser.countryTitle}}</label>
+        <div class="controls">
+            <select  id="cartCCcountry" name="cartCCcountry">
+                <option value=""></option>
+                {{#Localization.countryList}}
+                <option value="{{code}}" {{#equal ../Customization.defaultCountry code}} selected="selected"{{/equal}}{{#equal ../Customization.defaultCountry name}} selected="selected"{{/equal}}>{{name}}</option>
+                {{/Localization.countryList}}
+            </select>
+        </div>
+    </div>
+    {{/if}}
+    <div class="control-group">
+        <label class="control-label" for="cartCCFormSubmit"></label>
+        <div class="controls">
+            <input type="submit" id="cartCCFormSubmit" class="btn pull-right error-hide disabled" value="{{Localization.paymentProcessing.checkoutButtonLabel}}">
+        </div>
+    </div>
+</form>

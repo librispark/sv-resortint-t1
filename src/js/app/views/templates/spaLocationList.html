@@ -1,0 +1,137 @@
+<p>{{Localization.spaBooking.locationSelection.instructions}}</p>
+<p>{{Localization.spaBooking.locationSelection.customerCustomTextHeader}}</p>
+<div class="span10 offset1">
+    <div class="accordion " id="accordion2">
+        <!--<p>{{Localization.spaBooking.locationSelection.locationLabel}}</p>-->
+        {{#spaLocations}}
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{LocationId}}">
+                    {{LocationName}} {{#if ../Customization.spaBooking.showPropertyName}}<small>{{PropertyName}}</small>{{/if}}
+                </a>
+            </div>
+            <div id="collapse{{LocationId}}" class="accordion-body {{#equal LocationId ../showitem}}in {{/equal}}{{#if ../Customization.spaBooking.autoExpandResults}}in {{/if}}collapse">
+                <div class="accordion-inner">
+                    <div class="row">
+                        {{#if LocationImage}}
+                        <div class="span3 pagination-centered">
+                            <img width="270" src="{{LocationImage}}" alt="">
+                        </div>
+                        <div class="span4">
+                        {{else}}
+                        {{! <!-- }}<div class="span7">{{! --> }}
+                        {{/if}}
+                            {{#equal ShowDescriptionDetail "Y"}}
+                                <p>{{{nl2br ../DescriptionDetail}}}</p>
+                            {{/equal}}
+                            {{#equal ShowAddress "Y"}}
+                            <p>{{../LocationAddress}}<br />
+                                {{../LocationCity}}, {{../LocationStateProv}}<br />
+                                {{../LocationPostalCode}}</p>
+                            {{/equal}}
+                            {{#equal ShowPhoneNumber "Y"}}
+                            <p>{{../../Localization.general.location.phone}}:
+                                <a href="tel:{{LocationPhone}}">{{LocationPhone}}</a></p>
+                            {{/equal}}
+                            {{#if LocationWebAddress}}
+                            <p>{{../../Localization.general.location.website}}:
+                                <a href="http://{{LocationWebAddress}}">{{LocationWebAddress}}</a></p>
+                            {{/if}}
+                            {{#equal ShowEmailAddress "Y"}}
+                            <p>{{../../Localization.general.location.email}}:
+                                <a href="mailto:{{LocationEmail}}">{{LocationEmail}}</a></p>
+                            {{/equal}}
+                        </div>
+                        <div class="span2">
+                            {{#equal BookingType "Service"}}<a class="btn btn-primary" style="margin-top:4px" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}" href="#/spaBooking/service/Location{{../LocationId}}{{../../spaDate}}">{{../../Localization.spaBooking.serviceSelection.serviceNameLabel}}</a>{{/equal}}
+
+                            {{#equal BookingType "All"}}<a class="btn btn-primary" style="margin-top:4px" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}" href="#/spaBooking/service/Location{{../LocationId}}{{../../spaDate}}">{{../../Localization.spaBooking.serviceSelection.serviceNameLabel}}</a>
+                            <br/><br/><br/>
+                            <a class="btn btn-primary " style="margin-top:4px" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}" href="#/spaBooking/class/Location{{../LocationId}}{{../../spaDate}}">{{../../Localization.spaBooking.classSelection.classNameLabel}}</a>{{/equal}}
+
+                            {{#equal BookingType "Class"}}<br/><br/><br/>
+                            <a class="btn btn-primary " style="margin-top:4px" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}" href="#/spaBooking/class/Location{{../LocationId}}{{../../spaDate}}">{{../../Localization.spaBooking.classSelection.classNameLabel}}</a>{{/equal}}
+                        </div>
+                    </div>
+                    {{#equal ShowHoursOfOperation "Y"}}
+                    <div class="row">
+                        {{#if LocationImage}}
+                        <div class="span6 offset3">
+                        {{else}}
+                        <div class="span8">
+                        {{/if}}
+                            <p>{{../../Localization.general.location.hours}}:</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {{#if LocationImage}}
+                        <div class="span3 offset3">
+                        {{else}}
+                        <div class="span4">
+                        {{/if}}
+                            <dl class="span">
+                                <dt>{{../../Localization.CultureInfo.dayNames.[1]}}</dt>
+                                <dd>{{#equal MondayStart MondayEnd}}{{../../Localization.general.location.closed}}{{else}}
+                                    {{RSDateToString MondayStart ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{../../../Localization.spaBooking.classSelection.dateTo}}
+                                    {{RSDateToString MondayEnd ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{/equal}}</dd>
+                                <dt>{{../../Localization.CultureInfo.dayNames.[2]}}</dt>
+                                <dd>{{#equal TuesdayStart TuesdayEnd}}{{../../Localization.general.location.closed}}{{else}}
+                                    {{RSDateToString TuesdayStart ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{../../../Localization.spaBooking.classSelection.dateTo}}
+                                    {{RSDateToString TuesdayEnd ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{/equal}}</dd>
+                                <dt>{{../../Localization.CultureInfo.dayNames.[3]}}</dt>
+                                <dd>{{#equal WednesdayStart WednesdayEnd}}{{../../Localization.general.location.closed}}{{else}}
+                                    {{RSDateToString WednesdayStart ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{../../../Localization.spaBooking.classSelection.dateTo}}
+                                    {{RSDateToString WednesdayEnd ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{/equal}}</dd>
+                                <dt>{{../../Localization.CultureInfo.dayNames.[4]}}</dt>
+                                <dd>{{#equal ThursdayStart ThursdayEnd}}{{../../Localization.general.location.closed}}{{else}}
+                                    {{RSDateToString ThursdayStart ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{../../../Localization.spaBooking.classSelection.dateTo}}
+                                    {{RSDateToString ThursdayEnd ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{/equal}}</dd>
+                            </dl>
+                        </div>
+                        {{#if LocationImage}}
+                        <div class="span3">
+                        {{else}}
+                        <div class="span4">
+                        {{/if}}
+                            <dl class="span">
+                                <dt>{{../../Localization.CultureInfo.dayNames.[5]}}</dt>
+                                <dd>{{#equal FridayStart FridayEnd}}{{../../Localization.general.location.closed}}{{else}}
+                                    {{RSDateToString FridayStart ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{../../../Localization.spaBooking.classSelection.dateTo}}
+                                    {{RSDateToString FridayEnd ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{/equal}}</dd>
+                                <dt>{{../../Localization.CultureInfo.dayNames.[6]}}</dt>
+                                <dd>{{#equal SaturdayStart SaturdayEnd}}{{../../Localization.general.location.closed}}{{else}}
+                                    {{RSDateToString SaturdayStart ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{../../../Localization.spaBooking.classSelection.dateTo}}
+                                    {{RSDateToString SaturdayEnd ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{/equal}}</dd>
+                                <dt>{{../../Localization.CultureInfo.dayNames.[0]}}</dt>
+                                <dd>{{#equal SundayStart SundayEnd}}{{../../Localization.general.location.closed}}{{else}}
+                                    {{RSDateToString SundayStart ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{../../../Localization.spaBooking.classSelection.dateTo}}
+                                    {{RSDateToString SundayEnd ../../../Localization.CultureInfo.formatPatterns.shortTime}}
+                                    {{/equal}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    {{/equal}}
+                </div>
+            </div>
+        </div>
+        {{/spaLocations}}
+    </div>
+</div>
+<div class=" span10 ohyeah offset1">
+    <div class="accordion " id="packageSelectionaccordion3">
+        <p>{{Localization.spaBooking.locationSelection.customerCustomTextFooter}}</p>
+    </div>
+</div>

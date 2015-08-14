@@ -1,0 +1,28 @@
+<div class="container">
+    <div id="alerts"></div>
+    <div class="row">
+        <div class="span8">
+            <img src="img/banner.jpg" alt="" />
+        </div>
+        <div class="span4">
+            <div class="page-header">
+                <h2>{{Localization.general.features.title}}</h2>
+            </div>
+            <p>
+                {{siteName}} {{Localization.general.features.intro}}:
+            </p>
+            <div id="serviceList" class="well">
+                <ul class="nav nav-list">
+                    {{#services}}
+                    <li><a href="#/{{href}}"><i class="icon-{{icon}}"></i> {{name}}</a></li>
+                    {{/services}}
+                </ul>
+            </div>
+            {{#if Customization.goHomeOnHome}}<p class="goHomeOnHome">
+                {{Localization.general.features.goHomeLabel}}
+                <a class="btn btn-small" href="{{backLink}}">{{Localization.general.features.goHomeButtonLabel}}</a>
+            </p>{{/if}}
+            {{{Localization.general.features.extraHTML}}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<form id="spaServiceForm" class="form-horizontal span">
+    <div class="page-header">
+        <h2>{{location.LocationName}}
+            <small>{{Localization.spaBooking.serviceSelection.serviceTitle}}{{#if Customization.spaBooking.showPropertyName}} - {{location.PropertyName}}{{/if}}</small>
+        </h2>
+        {{#equal location.BookingType "All"}}<p><a class="btn btn-mini pull-right crossTypeLink" href="#/spaBooking/class/Location{{location.LocationId}}">{{Localization.spaBooking.alsoClasses}}</a></p>{{/equal}}
+    </div>
+    <p>{{Localization.spaBooking.serviceSelection.instructions}}</p>
+    <p>{{{Localization.spaBooking.serviceSelection.customerCustomTextHeader}}}</p>
+    <input type="hidden" id="spaServiceDate" class="spaServiceDate" />
+    <input type="hidden" id="spaServiceTime" class="spaServiceTime"/>
+    <input type="hidden" id="spaRecipientGender" class="spaRecipientGender"/>
+    <input type="hidden" id="spaServiceStaff" class="spaServiceStaff"/>
+    <input type="hidden" id="serviceRecipient" class="serviceRecipient"/>
+    <div class="tabbable tabs-left-desktop" id="categories">
+        <ul class="nav nav-tabs span" id="categoryTabs">
+            <h4>{{Localization.spaBooking.categorySelection.locationLabel}}</h4>
+            {{#categories}}
+            <li
+            {{#equal name ../showcategory.name}} class="active"{{/equal}}><a href="#category_{{stripChars name}}"
+                                                                             data-toggle="tab"
+                                                                             class="{{#equal name ../showcategory.name}}active{{/equal}} alert-hide">{{name}}</a></li>
+            {{/categories}}
+        </ul>
+        <div class="tab-content">
+            <h4>{{Localization.spaBooking.serviceSelection.serviceNameLabel}}</h4>
+            {{#equal showitem ""}}
+            <div class="span2 notie7"></div>
+            <div class="alert alert-success span4" style="margin-top: 6px;"><i class="icon-arrow-left visible-desktop"></i><strong> {{../Localization.spaBooking.categorySelection.unselectText}} </strong><i class="icon-arrow-up upicon hidden-desktop"></i></div>
+            {{/equal}}
+            <div style="overflow-y:hidden; height:1px">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </div>
+            {{#categories}}
+            <div class="tab-pane accordion {{first}}{{#equal name ../showcategory.name}} active{{/equal}}"
+                 id="category_{{stripChars name}}">
+                {{#value}}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a id="spaItemToggle{{SpaItemId}}" class="spaItemToggle accordion-toggle clearfix alert-hide{{#equal ../../location.AllowStaff "Y"}}{{#if ../../../staffGenderOrId}} spaItemHasStaff{{/if}}{{/equal}}" data-toggle="collapse" data-parent="#category_{{stripChars ../name}}" href="#spaItem{{SpaItemId}}">
+                            <span class="pull-left-ie7">{{ItemName}}</span>
+                            <div class="pull-right ">
+                                <span class="label label-info">{{#if ../../Customization.spaBooking.showItemPrice}}{{../../../Localization.general.currencyPrefix}}{{toFixed Price 2}}{{../../../Localization.general.currencyPostfix}} - {{/if}}{{ServiceTime}} {{../../Localization.spaBooking.serviceSelection.minutesLabel}}</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div id="spaItem{{SpaItemId}}" class="spaItem accordion-body collapse empty">
+                        &nbsp;
+                    </div>
+                </div>
+                {{/value}}
+            </div>
+            {{/categories}}
+        </div>
+    </div>
+</form>
+<div class=" span10 ohyeah offset1">
+    <div class="accordion " id="packageSelectionaccordion3">
+        <p>{{Localization.spaBooking.serviceSelection.customerCustomTextFooter}}</p>
+    </div>
+</div>

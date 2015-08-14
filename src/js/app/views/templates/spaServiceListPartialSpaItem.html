@@ -1,0 +1,174 @@
+						<div class="accordion-inner clearfix">
+
+                            <div class="row-fluid"><!--
+                                <div class="span2 notie7"></div> -->
+                                {{#if ItemImage}}
+                                <div class="span3 pagination-centered">
+                                    <img width="270" src="{{ItemImage}}" alt="">
+                                </div>
+                                <div class="span6">
+                                {{else}}{{! <!-- this comment is just a trick to make your tag-matching editor not lose its hair }}
+                                <div class="span9">{{! --> }}
+                                {{/if}}
+                                    <p>{{{nl2br ItemDesc}}}</p>
+                                    <p style="padding-top: 6px">
+                                        {{Localization.spaBooking.confirmation.servicePriceLabel}} <strong>{{Localization.general.currencyPrefix}}{{toFixed Price 2}}{{Localization.general.currencyPostfix}}</strong>
+                                        - {{Localization.spaBooking.confirmation.serviceDurationLabel}} <strong>{{ServiceTime}}</strong>
+                                    </p>
+
+                                    {{!-- #equal location.AllowOverbook "G" --}}
+                                    {{#if showBookForGroupMember}}
+                                    <div class="control-group serviceRecipientGroup">
+                                        <label class="control-label" style="text-align: left;" for="serviceRecipient">{{Localization.spaBooking.serviceSelection.otherName}}</label>
+
+                                        <select class="serviceRecipient" name="serviceRecipient">
+                                            <option {{#equal "" guestName}}selected="selected"{{/equal}} value="">{{#if user.Name.FirstName}}{{user.Name.FirstName}} {{user.Name.LastName}}{{else}}{{Localization.spaBooking.serviceSelection.meLabel}}{{/if}}</option>
+                                            {{#group}}
+                                                <option {{#equal CustomerId ../guestName}}selected="selected"{{/equal}} data-gender="{{Gender}}" value="{{CustomerId}}">{{Name.FirstName}} {{Name.LastName}}</option>
+                                            {{/group}}
+                                            {{#unless Customization.spaBooking.disallowQuickAddGroupMember}}<option id="newMemberOption">Add new Member</option>{{/unless}}
+                                        </select>
+                                        <div class="newMember hide">
+                                            <h4>{{Localization.newUser.newGroupMember}}</h4>
+                                            <div class="pull-left">
+                                                <label for="newMemberFirstName">{{Localization.newUser.firstNameTitle}}</label>
+                                                <input class="span2 newMemberFirstName" type=text name="newMemberFirstName" id="" placeholder="{{Localization.newUser.firstNameTitle}}"/>
+                                            </div>
+                                            <div class="pull-left">
+                                                <label for="newMemberLastName">{{Localization.newUser.lastNameTitle}}</label>
+                                                <input class="span2 newMemberLastName" type=text name="newMemberLastName" id="" placeholder="{{Localization.newUser.lastNameTitle}}"/>
+                                            </div>
+                                            <div class="pull-left">
+                                                <label>&nbsp;</label>
+                                                <a class="btn btn-primary btn-small newMemberAdd">{{Localization.newUser.addButtonLabel}}</a>
+                                            </div>
+                                        </div>
+<!--
+                                        <div class="controls">
+                                            <div class="btn-group" data-toggle="buttons-radio">
+                                                <a class="btn btn-small {{#equal ../guestName "me"}}active {{else}} {{#if ../../guestName}} {{else}}active {{/if}}{{/equal}} me">{{../Localization.spaBooking.serviceSelection.meLabel}}</a>
+                                                <a class="btn btn-small {{#equal ../guestName "me"}} {{else}}{{#if ../../guestName}} active {{else}} {{/if}}{{/equal}}someone">{{../Localization.spaBooking.serviceSelection.someoneLabel}}</a>
+                                            </div>
+                                        </div>
+-->
+                                    </div>
+
+
+<!--
+                                    <div class="control-group someoneInput {{#equal ../guestName "me"}} hidden {{else}} {{#if ../../guestName}} {{else}} hidden {{/if}} {{/equal}}">
+                                        <label class="control-label" style="text-align: left;" for="someoneInput{{SpaItemId}}">{{../Localization.spaBooking.serviceSelection.otherNameLabel}}</label>
+                                        <div class="controls">
+                                            <input id="someoneInput{{SpaItemId}}" class="someoneInputField required" type="text"
+                                                    value="{{#equal ../guestName "me"}}
+                                                    {{else}}{{guestName}}{{/equal}}"/>
+                                        </div>
+                                    </div>
+ -->
+                                    {{else}}
+                                    {{#unless Customization.spaBooking.disallowBookForGroupMember}}
+                                    <div class="well well-small loginPrompt">
+                                        <strong>{{Localization.spaBooking.areYouAMember}}</strong>
+                                        <a class="btn btn-small pull-right" style="position: relative; top:-4px; left: 4px" href="#/profile/login/next{{url}}">{{Localization.general.login.loginButtonLabel}}</a><br/>
+                                        {{Localization.spaBooking.loginToReceive}}
+                                    </div>{{/unless}}
+                                    {{/if}}
+                                    {{!-- /equal --}}
+                                    <div class="clearfix ">
+                                        {{#equal SameGender "Y"}}
+                                        <p>&nbsp;</p>
+
+                                        <p>{{../Localization.spaBooking.serviceSelection.sameGender}}</p>
+                                        {{else}}{{#unless ../staffGenderOrId}}{{#equal ../../staffOrGender "Y"}}
+                                        <a class="btn btn-info btn-mini moreOptionsButton" data-toggle="collapse"
+                                                data-target="#itemStaffPref{{../../SpaItemId}}" onclick="return false">
+                                            {{../../../Localization.spaBooking.serviceSelection.moreOptions}}
+                                        </a>
+                                        {{/equal}}{{/unless}}{{/equal}}
+                                    </div>
+                                    {{#equal staffOrGender "Y"}}
+                                    <div class="clearfix form-narrow">
+                                        <div id="itemStaffPref{{../SpaItemId}}"
+                                             class="itemStaffPref {{! "> }} {{#equal ../SameGender "Y"}}in {{/equal}}{{#if ../staffGenderOrId}} in {{/if}}collapse  ">
+									{{/equal}}
+									        {{#equal SameGender "Y"}}
+                                            <div class="control-group">
+                                                <label class="control-label" for="spaRecipientGender{{SpaItemId}}">{{../Localization.spaBooking.serviceSelection.sameGenderLabel}}</label>
+
+                                                <div class="controls">
+                                                    <select id="spaRecipientGender{{SpaItemId}}"
+                                                            class="spaRecipientGender required">
+                                                        <option value="">
+                                                            {{../Localization.spaBooking.serviceSelection.err.genderRequired}}
+                                                        </option>
+                                                        <option value="M"
+                                                        {{#equal ../staffGenderOrId "M"}}selected="selected"{{else}}{{#equal ../../Customization.spaBooking.defaultGender "M"}}selected="selected"{{/equal}}
+                                                        {{/equal}}>{{../Localization.general.gender.male}}</option>
+                                                        <option value="F"
+                                                        {{#equal ../staffGenderOrId "F"}}selected="selected"{{else}}{{#equal ../../Customization.spaBooking.defaultGender "F"}}selected="selected"{{/equal}}
+                                                        {{/equal}}>{{../Localization.general.gender.female}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                                {{#equal ../staffOrGender "Y"}}{{#unless ../../staffGenderOrId}}
+                                            <p style="margin-left: 30px"><a class="btn btn-info btn-mini moreOptionsButton" data-toggle="collapse"
+                                                    data-target="#itemStaffPrefCtrl{{../SpaItemId}}" onclick="return false">
+                                                {{../../../Localization.spaBooking.serviceSelection.moreOptions}}
+                                            </a></p>
+                                                {{/unless}} {{/equal}}
+                                            {{/equal}}
+                                    {{#equal staffOrGender "Y"}}
+
+
+                                            <div id="itemStaffPrefCtrl{{../SpaItemId}}" class="itemStaffPref control-group {{! "> }}{{#equal ../SameGender "Y"}} {{#if ../../staffGenderOrId}}in{{/if}} collapse{{/equal}}">
+                                                <label class="control-label" for="spaServiceStaff{{../SpaItemId}}">{{../Localization.spaBooking.serviceSelection.staffLabel}}</label>
+
+                                                <div class="controls">
+                                                    <select id="spaServiceStaff{{../SpaItemId}}"
+                                                            class="spaServiceStaff">
+                                                        <option value="">
+                                                            {{../Localization.general.gender.noPreference}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    {{/equal}}
+
+
+
+                                </div>
+                                <div class="span3 spa">
+                                    <h4>{{Localization.spaBooking.serviceSelection.dateLabel}}</h4>
+                                    <div class="input-append spaServiceDateContainer" style="position: relative">
+                                        {{#if Customization.spaBooking.forceSpaDate}}
+                                            <input type="hidden" id="spaServiceDate{{SpaItemId}}" name="spaServiceDate" class="span2 spaServiceDate bookingdate required" readonly="readonly" value=""/>
+                                            {{RSDateToString Customization.spaBooking.forceSpaDate Localization.CultureInfo.formatPatterns.longDate}}
+                                        {{else}}
+                                            {{#if showDateList}}
+                                                <select class="spaServiceDate bookingdate required">
+                                                    {{#../dateList}}
+                                                        <option {{#equal machine ../../selectedDate}}selected="selected"{{/equal}} value="{{machine}}">{{human}}</option>
+                                                    {{/../dateList}}
+                                                </select>
+                                            {{else}}
+                                            <input type="text" id="spaServiceDate{{SpaItemId}}" name="spaServiceDate" class="span2 spaServiceDate datepicker bookingdate required" readonly="readonly" value=""/><label for="spaServiceDate{{SpaItemId}}" class="add-on"><i class="icon-calendar"></i></label>
+                                            {{/if}}
+                                        {{/if}}
+                                    </div>
+                                    <h4>{{Localization.spaBooking.serviceSelection.timeLabel}}</h4>
+                                    <select class="spaServiceTime spaServiceTimeSelect span2">
+                                        <option>{{Localization.spaBooking.serviceSelection.err.dateRequired}}</option>
+                                    </select>
+                                    <a class="spaServiceButton btn {{#if Customization.spaBooking.alwaysQueryPrice}} {{else}}btn-primary{{/if}} disabled error-hide"
+                                       title="{{Localization.spaBooking.serviceSelection.err.dateRequired}}"
+                                       data-loading-text="{{Localization.general.progressIndicatorMessage}}"
+                                       data-duration="{{ServiceTime}}"
+                                       href="#/spaBooking/serviceItem/{{SpaItemId}}">{{Localization.spaBooking.serviceSelection.checkAvailability}}</a>
+
+                                </div>
+                            </div>
+
+                        </div>

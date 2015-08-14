@@ -1,0 +1,45 @@
+<p>{{Localization.golf.title}}</p>
+<p>{{Localization.golf.customerCustomTextHeader}}</p>
+<div class="span10 offset1">
+    <div class="accordion " id="accordion2">
+        <p>{{Localization.golf.selectLocationDefault}}</p>
+        {{#golfLocations}}
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{LocationId}}">
+                    {{LocationName}}
+                </a>
+            </div>
+            <div id="collapse{{LocationId}}" class="accordion-body {{#equal LocationId ../showitem}}in {{/equal}}collapse">
+                <div class="accordion-inner">
+
+                    <div class="row">
+                        {{#if LocationImage}}
+                        <div class="span3 pagination-centered">
+                            <img width="270" src="{{LocationImage}}" alt="">
+                        </div>
+                        <div class="span4">
+                        {{else}}
+                        {{! <!-- }}<div class="span7">{{! --> }}
+                        {{/if}}
+                            <p>{{LocationAddress}}<br />
+                                {{LocationCity}}, {{LocationStateProv}}<br />
+                                {{LocationPostalCode}}</p>
+                            {{#if LocationPhone}}<p>{{../../Localization.general.location.phone}}: <a href="tel:{{LocationPhone}}">{{LocationPhone}}</a></p>{{/if}}
+                            {{#if LocationWebAddress}}<p>{{../../Localization.general.location.website}}: <a href="http://{{LocationWebAddress}}">{{LocationWebAddress}}</a></p>{{/if}}
+                        </div>
+                        <div class="span2">
+                            <a class="btn btn-primary" style="margin-top:4px" data-loading-text="{{../Localization.general.progressIndicatorMessage}}" href="#/golfBooking/location/{{LocationId}}">{{../Localization.golf.selectLocation}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/golfLocations}}
+    </div>
+</div>
+<div class=" span10 ohyeah offset1">
+    <div class="accordion " id="packageSelectionaccordion3">
+        <p>{{Localization.golf.customerCustomTextFooter}}</p>
+    </div>
+</div>

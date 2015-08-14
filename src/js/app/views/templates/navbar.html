@@ -1,0 +1,79 @@
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#/">
+                {{siteName}}
+            </a>
+            <div class="nav-collapse" style="height: 0px;">
+                <ul class="nav pull-right">
+                    <li id="navbarCartControl" class="hidden">
+                        <a class="dropdown-toggle" href="#/summary"><i class="icon-shopping-cart icon-white"></i> <span class="name">{{Localization.bookingSummary.cartName}}<span class="visible-desktop"> &nbsp; {{Localization.bookingSummary.orderTotal}} <span class="orderTotal"></span></span></span></a>
+                        <ul class="dropdown-menu hidden-desktop">
+                            <li class=""><a class="" href="#/summary">{{Localization.bookingSummary.orderTotal}}: <span class="orderTotal"></span></a></li>
+                        </ul>
+                    </li>
+                    <li id="navbarServiceTypeList" class="dropdown" style="display: none">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#navbarServiceTypeList"><i class="icon-ok icon-white"></i> <span class="name">{{Localization.general.serviceButtonLabel}}</span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {{#services}}
+                            <li class="serviceType {{id}}"><a href="#/{{href}}"><i class="icon-{{icon}}"></i> {{name}}</a></li>
+                            {{/services}}
+                            <li class="divider"></li>
+                            <li><a href="{{backLink}}"><i class="i"></i> {{Localization.paymentProcessing.goHomeButtonLabel}}</a></li>
+                        </ul>
+                    </li>
+                    {{#if Customization.multiLanguage}}
+                    <li id="navbarLanguageList" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#navbarLanguageList"><i class="icon-bullhorn icon-white"></i> <span class="name">{{Localization.general.language}}</span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {{#languages}}
+                            <li class="language {{id}}"><a href="#/greeting/language/{{id}}"><i class="icon-{{icon}}"></i> {{name}}</a></li>
+                            {{/languages}}
+                        </ul>
+                    </li>
+                    {{/if}}
+                    <li id="navbarLoginControl" class="dropdown">
+                        <ul class="dropdown-menu hidden-desktop">
+                            <li class=""><a href="#/profile"><i class="icon-user icon-white"></i> <span class="name">{{Localization.general.login.loginButtonLabel}}</span></a></li>
+                        </ul>
+                        <a class="visible-desktop" href="#/profile" data-target="navbarLoginControl"><i class="icon-user icon-white"></i> <span class="name">{{Localization.general.login.loginButtonLabel}}</span> <span class="caret visible-desktop"></span></a>
+                        <ul id="loginForm" class="dropdown-menu visible-desktop span3">
+                            <form id="navLoginForm" action="#/profile/login" method="post">
+                                <div class="form-contents">
+                                    <label>{{Localization.general.login.emailTitle}}</label>
+                                    <div class="control-group"><input name="loginEmail" id="loginEmail" class="span2" type="text" placeholder="email@address.com"></div>
+                                    <label>{{Localization.general.login.passwordTitle}}</label>
+                                    <div class="control-group"><div class="controls"><input name="loginPassword" id="loginPassword" class="span2" type="password" placeholder="password"><input type="submit" id="loginButton" class="btn btn-primary" value="{{Localization.general.login.loginButtonLabel}}" /></div></div>
+                                </div>
+                                <div class="form-actions">
+                                    {{#unless Customization.disablePasswordReset}}<a class="btn" href="#/profile/reset">{{Localization.general.login.forgotPasswordButtonLabel}}</a>{{/unless}}
+                                    {{#unless Customization.disableAccountCreation}}&nbsp;
+                                    <a class="btn" href="#/profile/create">{{Localization.general.login.newUserButtonLabel}}</a>{{/unless}}
+                                </div>
+                            </form>
+                        </ul>
+                        <ul id="logoutForm" class="dropdown-menu hidden visible-desktop">
+                            <li><a href="#/profile/change">{{Localization.general.login.changePasswordButtonLabel}}</a></li>
+                            <li class="bookingHistory hidden"><a href="#/summary/history">{{Localization.general.login.bookingHistoryLabel}}</a></li>
+                            <li class="bookingHistory hidden"><a href="#/profile">{{Localization.general.login.profileLabel}}</a></li>
+                            <li><a id="logoutButton" href="#/profile/logout">{{Localization.general.login.logoutButtonLabel}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal hide" id="progressIndicator">
+    <div class="modal-body">
+        <p>{{Localization.general.processingMessage}}</p>
+        <div class="progress progress-info progress-striped active">
+            <div class="bar" style="width: 100%;"></div>
+        </div>
+    </div>
+</div>

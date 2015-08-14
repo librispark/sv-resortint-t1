@@ -1,0 +1,307 @@
+{{#unless Customization.moveGuestItineraryToBookingSummaryBottom}}
+{{> app_views_templates_cartSummaryGuestItineraryPartial}}
+{{/unless}}
+
+<div class="well well-small span9 offset1">
+    {{#if cartData.WebFolioItem}}
+    <div class="page-header">
+        <h2>{{Localization.bookingSummary.cartName}}<br/>
+            <small>{{Localization.bookingSummary.cartTitle}}</small>
+        </h2>
+    </div>
+    {{#unless Customization.showAddMoreOnlyOnBottomOfBookingSummary}}
+    <h4>{{Localization.bookingSummary.addMore}}
+        <small>{{Localization.bookingSummary.addMoreSlogan}}</small>
+    </h4>
+    <div class="page-header serviceTypes clearfix">
+        {{#serviceTypes}}
+        <a class="btn span" style="margin-top: 16px; margin-left: 24px" href="#/{{href}}"><i class="icon-{{icon}}"></i> {{name}}</a>
+        {{/serviceTypes}}
+    </div>
+    {{/unless}}
+    {{/if}}
+
+    {{#cartData.WebFolioItem}}
+    <div class="page-header webFolioItem" data-folioid="{{FolioId}}" data-folioitemid="{{FolioItemId}}" data-category="{{Category}}">
+        <h3>
+            {{#equal Category "Hotel"}}
+            {{Location}}
+            {{/equal}}
+            {{#equal Category "Spa"}}
+            {{Details}}
+            {{/equal}}
+            {{#equal Category "Ski"}}
+            {{Details}}
+            {{/equal}}
+            {{#equal Category "Golf"}}
+            {{Details}}
+            {{/equal}}
+            {{#equal Category "Retail"}}
+            {{Details}}
+            {{/equal}}
+        </h3>
+        <div class="row">
+            <div class="span5">
+                <p>
+                    {{#equal Category "Hotel"}}
+                    {{#unless isDayBooking}}<span class="hotelRoomType">{{../../../Localization.roomReservation.roomTypeSelection.title}}: <strong>{{Details}}</strong></span><br/>{{/unless}}
+                    <span class="hotelRateType">{{../../Localization.roomReservation.packageSelection.title}}: <strong>{{RateDetails}}</strong></span>
+                    {{#if ../../Customization.roomsBooking.showDailyRates}}
+                    {{#DailyRates}}
+                    <div class="dailyRates clearfix">
+                    {{#DailyRateDetails}}
+                        <div class="dailyRate">
+                            <span class="date" data-date="{{PMSDate}}">{{{RSDateToString PMSDate ../../../../../Localization.bookingSummary.pmsDailyRateDateFormat}}}</span>
+                            <span class="amount" data-gross="{{GrossRate}}" data-net="{{NetRate}}">{{../../../../../Localization.general.currencyPrefix}}{{toFixed GrossRate 2}}{{../../../../../Localization.general.currencyPostfix}}</span>
+                        </div>
+                    {{/DailyRateDetails}}
+                    </div>
+                    {{/DailyRates}}
+                    {{/if}}
+                    {{/equal}}
+                    {{#equal Category "Spa"}}
+                    <span class="spaLocation">{{../../Localization.bookingSummary.spaServiceFrom}} <strong>{{Location}}</strong></span>
+                    {{#if ../../userLoggedIn}}{{#if CustomerName}}<span class="spaCustomer"><br>{{../../../../Localization.bookingSummary.spaServiceForName}} <strong>{{../CustomerName}}</strong></span>{{/if}}{{/if}}
+                    {{/equal}}
+                    {{#equal Category "Ski"}}
+                    {{#if Location}}<span class="skiLocation">{{../../../Localization.bookingSummary.skiTicketsFor}} <strong>{{../Location}}</strong>{{else}}{{../../../Localization.bookingSummary.skiTickets}}</span>{{/if}}
+                    {{#if ../../userLoggedIn}}{{#if CustomerName}}<br><span class="skiCustomer">{{../../../../Localization.bookingSummary.skiTicketsForName}} <strong>{{../CustomerName}}</strong></span>{{/if}}{{/if}}
+                    {{/equal}}
+                    {{#equal Category "Golf"}}
+                    <span class="golfTeeTime">{{../../Localization.bookingSummary.teetimeAt}} <strong>{{Location}}</strong></span><br/>
+                    <span class="golfPlayers"><strong>{{Players}} {{#equal Players 1}}{{../../../Localization.bookingSummary.player}}{{else}}{{../../../Localization.bookingSummary.players}}{{/equal}}</strong></span>
+                    {{/equal}}
+                    {{#equal Category "Retail"}}
+                    <span class="retailLocation">{{../../Localization.bookingSummary.issuedBy}} <strong>{{Location}}</strong></span>
+                    {{/equal}}</p>
+            </div>
+            <div class="span">
+                {{#equal Amount PreDepositAmount}}
+                <h4 class="amount">{{../../Localization.bookingSummary.grid.totalAmountLabel}}: {{../../Localization.general.currencyPrefix}}{{toFixed ../Amount 2}}{{../../Localization.general.currencyPostfix}}</h4>
+                {{else}}
+                <h4 class="total">{{../../Localization.bookingSummary.grid.totalAmountLabel}}: {{../../Localization.general.currencyPrefix}}{{toFixed ../PreDepositAmount 2}}{{../../Localization.general.currencyPostfix}}</h4>
+                <h4 class="deposit">{{../../Localization.bookingSummary.grid.depositAmountLabel}}: {{../../Localization.general.currencyPrefix}}{{toFixed ../Amount 2}}{{../../Localization.general.currencyPostfix}}</h4>
+                {{/equal}}
+                {{#equal Category "Golf"}}{{#equal Players 1}} {{else}}<span class="perPlayer">{{../../../Localization.bookingSummary.depositPerPlayer}}: <strong>{{../../../Localization.general.currencyPrefix}}{{toFixed ../../EachAmount 2}}{{../../../Localization.general.currencyPostfix}}</strong></span><br/>{{/equal}}{{/equal}}
+                {{#equal Category "Hotel"}}
+                {{#if StartDate}}{{#if isDayBooking}}<span class="visitDate">{{../../../../Localization.roomReservation.confirmation.visitDateLabel}}{{else}}<span class="arrivalDate">{{../../../../Localization.roomReservation.datesAndOccupants.arrivalLabel}}:{{/if}} <strong>{{RSDateToString StartDate}}</strong></span><br/>{{/if}}
+                {{#unless isDayBooking}}{{#if FinishDate}}<span class="departureDate">{{../../../../Localization.roomReservation.datesAndOccupants.departureLabel}}: <strong>{{RSDateToString FinishDate}}</strong></span>{{/if}}{{/unless}}
+                {{else}}
+                {{#if StartDate}}<span class="startDate">{{../../../Localization.spaBooking.serviceSelection.dateLabel}}: <strong>{{RSDateToString StartDate "D"}}</strong></span>
+                {{#if FinishDate}}{{#equal Category "Ski"}}<span class="endDate">- <strong>{{{RSDateToString FinishDate "D"}}}</strong></span> {{else}} {{/equal}}{{/if}}
+                {{#equal Category "Ski"}} {{else}}<br /><span class="startTime">{{../../../../Localization.bookingSummary.time}} <strong>{{RSDateToString StartDate "h:mm tt"}}</strong></span>{{/equal}}{{/if}}
+                {{#if FinishDate}}{{#equal Category "Ski"}} {{else}}<span class="endTime">- <strong> {{{RSDateToString FinishDate "h:mm tt"}}}</strong></span>{{/equal}}{{/if}}
+                {{/equal}}
+                </div>
+        </div>
+        <div class="row specialServices">
+            <div class="span5">
+                {{#if specialServices}}
+                <div class="folioSpecialServices">
+                    {{../../Localization.bookingSummary.selectedUpgrades}} <ul>
+                    {{#specialServices}}
+                        <li><strong>{{PMSSpecialService.PMSSpecialServiceName}}</strong>
+                            {{#equal PMSSpecialService.IsCharged "1"}} - {{RSDateToString ../ScheduledDateTime}} {{/equal}}
+                            {{#equal PMSSpecialService.Price "0.00"}}
+                                {{else}}- {{#if ../../../../Customization.roomsBooking.showSpecialServicePriceIncludingSurcharges}}{{toFixed ../../TotalWithSurcharges 2}}{{else}}{{toFixed ../../PMSSpecialService.Price 2}}{{/if}} {{#equal ../PMSSpecialService.IsCharged "Y"}}{{../../../../../Localization.bookingSummary.perNight}} {{/equal}}
+                            {{/equal}}
+                            <a class="btn btn-mini" href="#/roomsBooking/removeSpecialService/{{../FolioId}}/{{PMSFolioSpecialServiceId}}">{{../../../Localization.bookingSummary.removeUpgrade}}</a></li>
+                    {{/specialServices}}
+                    </ul>
+                </div>
+                {{/if}}
+                {{#if guestNoteSpecialService}}
+                    <div class="guestNote">
+                        <p><strong>{{../guestNoteSpecialService.PMSSpecialServiceName}}</strong></p>
+                        <p>{{{nl2br ../guestNoteSpecialService.PMSSpecialServiceDescription}}}</p>
+                        <textarea class="span4 guestNote" maxlength="1000"></textarea>
+                        <a href="#/roomsBooking/addSpecialService/{{../FolioId}}/1/{{urlEscape ../guestNoteSpecialService.PMSSpecialServiceName}}//" class="guestNote btn btn-small btn-primary">Add Note</a>
+                    </div>
+                {{/if}}
+            </div>
+            <div class="span">
+                {{#if specialServicesAvailable}}
+                <div class="availableSecialServices" style="margin-top:1.25em">
+                    <a href="#/roomsBooking/specialService/{{../FolioId}}/{{RSDateToString StartDate "yyyy-MM-dd"}}/{{RSDateToString FinishDate "yyyy-MM-dd"}}/{{urlEscape Location}}" class="btn btn-primary">{{../../Localization.bookingSummary.grid.addUpgrade}}</a>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="span pull-right">
+                <a class=" removeCartButton btn btn-danger btn-mini category{{Category}}{{#equal ActivatesPromo "Y"}} itemActivatesPromo{{/equal}}" style="margin-top:4px"
+                   href="#/summary/cancel/{{Category}}/{{FolioId}}/{{FolioItemId}}">
+            {{#equal Category "Hotel"}}
+            {{../../Localization.bookingSummary.removeHotelReservation}} {{Location}}
+            {{/equal}}
+            {{#equal Category "Spa"}}
+            {{../../Localization.bookingSummary.removeSpaReservation}} {{Details}}
+            {{/equal}}
+            {{#equal Category "Ski"}}
+            {{../../Localization.bookingSummary.removeSkiReservation}} {{Details}}
+            {{/equal}}
+            {{#equal Category "Golf"}}
+            {{../../Localization.bookingSummary.removeGolfReservation}} {{Details}}
+            {{/equal}}
+            {{#equal Category "Retail"}}
+            {{../../Localization.bookingSummary.removeRetailReservation}} {{Details}}
+            {{/equal}}</a>
+            </div>
+        </div>
+
+    </div>
+    {{/cartData.WebFolioItem}}
+    {{#if itemCount}}
+    <div class="addMore">
+        <h4>{{Localization.bookingSummary.addMore}}
+            <small>{{Localization.bookingSummary.addMoreSlogan}}</small>
+        </h4>
+        <div class="clearfix">
+            {{#serviceTypes}}
+            <a class="btn span" style="margin-top: 16px; margin-left: 24px" href="#/{{href}}"><i class="icon-{{icon}}"></i> {{name}}</a>
+            {{/serviceTypes}}
+        </div>
+    </div>
+    {{/if}}
+    {{^cartData.WebFolioItem}}
+    <div class="emptyCart">
+        <div class="page-header clearfix">
+            <p>{{../Localization.bookingSummary.cartNoItems}}</p>
+        </div>
+        <h4>{{../Localization.bookingSummary.addMore}}
+            <small>{{../Localization.bookingSummary.addMoreSlogan}}</small>
+        </h4>
+        <div class="page-header clearfix">
+            {{#serviceTypes}}
+            <a class="btn span" style="margin-top: 16px; margin-left: 24px" href="#/{{href}}"><i class="icon-{{icon}}"></i> {{name}}</a>
+            {{/serviceTypes}}
+        </div>
+    </div>
+    {{/cartData.WebFolioItem}}
+</div>
+
+{{#if cartData.WebFolioItem}}{{#if redeemedGCs}}
+<div class="well well-small span9 offset1">
+    <div class="page-header">
+        <h2>{{Localization.paymentProcessing.redeemedGCsTitle}}<br/>
+            <small>{{Localization.paymentProcessing.redeemedGCsSubTitle}}</small>
+        </h2>
+    </div>
+    {{#redeemedGCs}}
+    <h3>{{#if GiftCardId}}
+        {{../../Localization.paymentProcessing.gcTypeCard}} <small>{{GiftCardId}}</small>
+        {{else}}
+        {{../../Localization.paymentProcessing.gcTypeCert}} <small>{{GiftCertId}}</small>
+        {{/if}}
+    </h3>
+    <div class="row clearfix">
+        <div class="span5">
+            <p>
+                {{../Localization.paymentProcessing.gcRedeemedAmount}} 
+                <strong>
+                    {{../Localization.general.currencyPrefix}}{{toFixed GCRedeemedAmount 2}}{{../Localization.general.currencyPostfix}}
+                </strong>
+                <br/>
+                {{../Localization.paymentProcessing.gcRemainingAmount}} 
+                {{../Localization.general.currencyPrefix}}{{toFixed GCBalance 2}}{{../Localization.general.currencyPostfix}}
+            </p>
+        </div>
+        <a class="btn btn-mini btn-danger pull-right" href="#/summary/refundGC/{{GiftCertId}}">{{../Localization.paymentProcessing.gcRemove}}</a>
+    </div>
+    {{/redeemedGCs}}
+    {{#if anyGCEnabled}}
+    <div class="page-header">
+    </div>
+    <div class="row clearfix">
+        <div class="span">
+            <h2><small>{{Localization.paymentProcessing.gcRedeemAnother}}</small></h2>
+        </div>
+        <a class="btn btn-primary pull-right" href="#/summary/redeemGC">{{../Localization.paymentProcessing.gcRedeemAnotherButton}}</a>
+    </div>
+    {{/if}}
+</div>
+{{else}}
+{{#if anyGCEnabled}}
+<div class="well well-small span9 offset1">
+    <div class="page-header">
+        <h2>{{Localization.paymentProcessing.redeemGCsTitle}}<br/>
+            <small>{{Localization.paymentProcessing.redeemGCsSubTitle}}</small>
+        </h2>
+    </div>
+    <div class="row clearfix">
+        <a class="btn btn-primary pull-right" href="#/summary/redeemGC">{{Localization.paymentProcessing.redeemGCsButton}}</a>
+    </div>
+</div>
+{{/if}}
+{{/if}}{{/if}}
+
+{{#if cartData.WebFolioItem}}
+    {{#if Customization.showAddMoreOnlyOnBottomOfBookingSummary}}
+    <div class="well well-small span9 offset1">
+        <h4>{{Localization.bookingSummary.addMore}}
+            <small>{{Localization.bookingSummary.addMoreSlogan}}</small>
+        </h4>
+        <div class="clearfix">
+            {{#serviceTypes}}
+            <a class="btn span" style="margin-top: 16px; margin-left: 24px" href="#/{{href}}"><i class="icon-{{icon}}"></i> {{name}}</a>
+            {{/serviceTypes}}
+        </div>
+    </div>
+    {{/if}}
+
+    {{#equal ../dontShowPayButton "yes"}}
+<div class="well well-small span9 offset1">
+    <div class="page-header">
+        <h2>{{../Localization.bookingSummary.checkoutTitle}}<br/>
+            <small>{{../Localization.bookingSummary.checkoutInstruction}}</small>
+        </h2>
+    </div>
+    {{../Localization.bookingSummary.checkoutInfo}} &nbsp;
+    <a href="#/summary/cartCheckout" class="btn btn-primary">{{../Localization.bookingSummary.checkoutButton}}</a>
+    {{#if ../Localization.general.payment.customerCustomTextFooter}}
+    <div class="well well-small ">{{../Localization.general.payment.customerCustomTextFooter}}</div>
+    {{/if}}
+</div>
+    {{else}}
+<div class="well well-small {{#if ../Customization.paypal.enabled}}span7{{else}}span9{{/if}} offset1 clearfix">
+    <div class="page-header">
+        <h2>{{#equal ../../balance "0.00"}}{{../../Localization.bookingSummary.guaranteeTitle}}{{else}}{{../../Localization.bookingSummary.paymentTitle}}{{/equal}}<br/>
+            <small>{{../Localization.bookingSummary.paymentInstruction}}:</small>
+        </h2>
+    </div>
+
+    {{#equal ../../balance "0.00"}}
+
+    {{../../Localization.bookingSummary.paymentGuarantee}}
+
+    {{else}}
+
+    {{../../Localization.bookingSummary.totalDeposit}} <span class="lead" style="padding: 0 0.2em; ">{{../../Localization.general.currencyPrefix}}{{toFixed ../../../balance 2}}{{../../Localization.general.currencyPostfix}}</span>
+    {{{../../Localization.bookingSummary.using}}} &nbsp;
+
+    {{/equal}}
+    {{#if ../Customization.paypal.enabled}}
+    <a href="#/summary/ppPayment" class="pay-pp pull-right" data-loading-text="{{../Localization.general.progressIndicatorMessage}}">{{{../Localization.bookingSummary.payPal}}}</a>
+    {{else}}
+    <a href="#/summary/checkout" class="btn btn-primary pay-cc pull-right" data-loading-text="{{../Localization.general.progressIndicatorMessage}}">{{#equal ../../balance "0.00"}}{{../Localization.bookingSummary.creditCardGuarantee}}{{else}}{{../Localization.bookingSummary.creditCard}}{{/equal}}</a>
+    {{/if}}
+    {{#if ../Localization.general.payment.customerCustomTextFooter}}
+    <div class="well well-small ">{{../Localization.general.payment.customerCustomTextFooter}}</div>
+    {{/if}}
+</div>
+    {{#if ../Customization.paypal.enabled}}
+    <!-- PayPal Logo --><a class="span2" href="#" onclick="javascript:window.open('https://www.paypal.com/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=350'); return false"><img src="https://www.paypal.com/en_US/i/bnr/vertical_solution_PPeCheck.gif" border="0" alt="PayPal Logo"></a><!-- PayPal Logo -->
+    {{/if}}
+    {{/equal}}
+
+{{/if}}
+
+<div id="cartClear" class="span8 offset2">
+    <a class="btn pull-right" href="#/summary/clear">{{Localization.bookingSummary.clearCart}}</a>
+
+    <p class="pull-right" href="#/summary/clear">{{Localization.bookingSummary.clearCartInstructions}}</p>
+</div>
+
+{{#if Customization.moveGuestItineraryToBookingSummaryBottom}}
+{{> app_views_templates_cartSummaryGuestItineraryPartial}}
+{{/if}}

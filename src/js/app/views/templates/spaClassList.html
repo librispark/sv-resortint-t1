@@ -1,0 +1,35 @@
+<form id="spaClassSelection" class="form-horizontal span">
+    <div class="page-header">
+        <h2>{{location.LocationName}}
+            <small>{{Localization.spaBooking.classSelection.classTitle}}{{#if Customization.spaBooking.showPropertyName}} - {{location.PropertyName}}{{/if}}</small>
+            {{#if Customization.spaBooking.showPropertyName}}<small>{{location.PropertyName}}</small>{{/if}}
+        </h2>
+        {{#equal location.BookingType "All"}}<p><a class="btn btn-mini pull-right crossTypeLink" href="#/spaBooking/service/Location{{location.LocationId}}">{{Localization.spaBooking.alsoServices}}</a></p>{{/equal}}
+    </div>
+    <p>{{Localization.spaBooking.classSelection.instructions}}</p>
+    <p>{{Localization.spaBooking.classSelection.customerCustomTextHeader}}</p>
+    <div class="span8 offset2">
+        <div class="control-group">
+
+            <div class="input-append">
+
+                {{#if dateList}}
+                    <select id="spaClassDate" name="spaClassDate" class="spaServiceDate bookingdate required">
+                        {{#../dateList}}
+                            <option {{#equal machine ../../startDate}}selected="selected"{{/equal}} value="{{machine}}">{{human}}</option>
+                        {{/../dateList}}
+                    </select>
+                {{else}}
+                <input type="text" id="spaClassDate" name="spaClassDate" class="span2 spaServiceDate datepicker bookingdate required" readonly="readonly" value="{{startDate}}"/>
+                <label for="spaClassDate" class="add-on"><i class="icon-calendar"></i></label>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</form>
+<div id="classResults" class="row"></div>
+<div class=" span10 ohyeah offset1">
+    <div class="accordion " id="packageSelectionaccordion3">
+        <p>{{Localization.spaBooking.classSelection.customerCustomTextFooter}}</p>
+    </div>
+</div>

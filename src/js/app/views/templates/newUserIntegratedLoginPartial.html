@@ -1,0 +1,308 @@
+<p><strong>{{Localization.newUser.activeContext.title}}</strong></p>
+<p>{{{nl2br Localization.newUser.activeContext.instructions}}}</p>
+<div id="userCreateUserFormContainer">
+    <form id="userCreateUserForm" class="form-horizontal form-float span8 offset1" method="post">
+<input type="hidden" id="userPhoneHOME" value=""/>
+<input type="hidden" id="userPhoneWORK" value=""/>
+<input type="hidden" id="userPhoneWORKExt" value=""/>
+<input type="hidden" id="userPhoneOTHRE" value=""/>
+        <div class="well span8">
+            <div class="row-fluid">
+            <p class="span12"><strong>{{Localization.newUser.sectionNameAndPasswordTitle}}</strong></p></br>
+            </div>
+            <div class="row-fluid emails">
+                {{#if Customization.disableProfileScreenCreateGroupMember}}
+                <input type="hidden" id="userEmail1" name="userEmail1" value="{{email}}"/>
+                {{else}}
+                <div class="control-group form-float userEmail1 span8">
+                    <label class="control-label has-append" for="userEmail1">{{Localization.newUser.emailTitle}}</label>
+                    <div class="controls input-append span12 arrow-right">
+                        <input type="email" id="userEmail1" name="userEmail1" class="span12 required" value="{{email}}" />
+                        <span class="add-on hide"><span class="icon icon-arrow-right"></span></span>
+                	</div>
+                </div>
+                {{/if}}
+                <div class="control-group form-float userEmail2 span4 hide collapse has-popover">
+                    <label class="control-label" for="userEmail2">{{Localization.newUser.confirmEmailTitle}}</label>
+                    <div class="controls">
+                        <input type="email" id="userEmail2" name="userEmail2" class="required span12" disabled="disabled" value=""/>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid passwords exist collapse has-popover">
+                <div class="control-group form-float userPassword1 span8">
+                    <label class="control-label" for="userPassword1">{{Localization.newUser.passwordTitle}}</label>
+                    <div class="controls">
+                        <input type="password" id="userPassword1" name="userPassword1" class="required span12" value=""/>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid login collapse">
+                <div class="control-group form-float login span4">
+                    <div class="controls input-append span12">
+                        <button class="btn btn-primary span12" disabled="disabled">{{Localization.general.login.loginButtonLabel}}</button>
+                        <span class="add-on hide"><span class="icon icon-question-sign"></span></span>
+                    </div>
+                </div>
+                {{#if Customization.disablePasswordReset}} {{else}}
+                <div class="control-group form-float forgot span4">
+                    <div class="controls input-append span12">
+                        <button class="btn span12" disabled="disabled">{{Localization.general.login.forgotPasswordButtonLabel}}</button>
+                        <span class="add-on hide"><span class="icon icon-question-sign"></span></span>
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        <div class="well span8 confirm collapse">
+            <div class="row-fluid">
+                <h4>Login Successful!</h4>
+            </div>
+            <div class="row-fluid">
+                <p class="span8">{{Localization.newUser.activeContext.updateInstructions}}</p>
+                <a class="span4 btn btn-primary userUpdateSubmit">{{Localization.newUser.activeContext.buttonProceed}}</a>
+            </div>
+        </div>
+        <div class="well span8 disabled contact">
+            <div class="backdrop"></div>
+            <p><strong>{{Localization.newUser.guestNameSectionTitle}}</strong></p>
+            <div class="row-fluid names">
+                <div class="control-group form-float span2 filled">
+                    <label class="control-label" for="userSalutation">{{Localization.newUser.salutationTitle}}</label>
+                    <div class="controls">
+                        <select id="userSalutation" name="userSalutation" class="required span12" disabled="disabled">
+                            <option value="Mr."{{#equal Customization.spaBooking.defaultSalutation "Mr."}} selected="selected"{{/equal}}>{{Localization.general.salutation.mister}}</option>
+                            <option value="Ms."{{#equal Customization.spaBooking.defaultSalutation "Ms."}} selected="selected"{{/equal}}>{{Localization.general.salutation.mizz}}</option>
+                            <option value="Mrs."{{#equal Customization.spaBooking.defaultSalutation "Mrs."}} selected="selected"{{/equal}}>{{Localization.general.salutation.missus}}</option>
+                            <option value="Miss."{{#equal Customization.spaBooking.defaultSalutation "Miss."}} selected="selected"{{/equal}}>{{Localization.general.salutation.miss}}</option>
+                            <option value="Dr."{{#equal Customization.spaBooking.defaultSalutation "Dr."}} selected="selected"{{/equal}}>{{Localization.general.salutation.doctor}}</option>
+                            <option value="MrMrs"{{#equal Customization.spaBooking.defaultSalutation "MrMrs"}} selected="selected"{{/equal}}>{{Localization.general.salutation.misterAndMissus}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                {{#if Customization.showGenderInput}}
+                <div class="control-group form-float span2 filled">
+                    <label class="control-label" for="userGender">{{Localization.newUser.genderTitle}}</label>
+                    <div class="controls">
+                        <select id="userGender" name="userGender" class="required span12" disabled="disabled">
+                            <option value="M"{{#equal Customization.spaBooking.defaultGender "M"}} selected="selected"{{/equal}}>{{Localization.general.gender.male}}</option>
+                            <option value="F"{{#equal Customization.spaBooking.defaultGender "F"}} selected="selected"{{/equal}}>{{Localization.general.gender.female}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid names">
+                {{else}}
+                <input type="hidden" id="userGender" name="userGender" value="">
+                {{/if}}
+                <div class="control-group form-float span5">
+                    <label class="control-label" for="userFirstName">{{Localization.newUser.firstNameTitle}}</label>
+                    <div class="controls">
+                        <input type="text" id="userFirstName" name="userFirstName" class="required span12" disabled="disabled" value=""/>
+                    </div>
+                </div>
+                <div class="control-group form-float span5">
+                    <label class="control-label" for="userLastName">{{Localization.newUser.lastNameTitle}}</label>
+                    <div class="controls">
+                        <input type="text" id="userLastName" name="userLastName" class="required span12" disabled="disabled" value=""/>
+                    </div>
+                </div>
+            </div>
+            <p><strong>{{Localization.newUser.contactInfo}}</strong></p>
+            <div class="row-fluid phones">
+            <div class="control-group form-float span3 filled">
+                <label class="control-label" for="userMainPhone"> {{Localization.newUser.phoneType}}</label>
+                <div class="controls">
+                    <select id="userMainPhone" class="span12" disabled="disabled">
+                        <option value="HOME">{{Localization.newUser.homePhoneTitle}}</option>
+                        <option value="WORK">{{Localization.newUser.workPhoneTitle}}</option>
+                        <option value="OTHER">{{Localization.newUser.mainPhoneOther}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group form-float span5">
+                <label class="control-label" for="userPhone">{{Localization.newUser.phoneNumber}}{{#if Customization.requireAddress}}*{{/if}}</label>
+                <div class="controls">
+                    <input type="tel" id="userPhone" name="userPhone" disabled="disabled" class="span12 {{#if Customization.requireAddress}}required{{/if}}" value=""/>
+                </div>
+            </div>
+            <div class="control-group form-float span2 userPhoneExt collapse collapse-horiz ">
+                <label class="control-label" for="userPhoneExt">{{Localization.newUser.workPhoneExtension}}</label>
+                <div class="controls">
+                    <input type="tel" id="userPhoneExt" name="userPhoneExt" disabled="disabled" class="span12" value=""/>
+                </div>
+            </div>
+            </div>
+            <p><strong>{{Localization.newUser.addressTypeHome}}{{#if Customization.requireAddress}} *{{/if}}</strong></p>
+            <div class="row-fluid address">
+                <div class="control-group form-float span6">
+                    <label class="control-label" for="userHomeAddress1">{{Localization.newUser.address1Title}}{{#if Customization.requireAddress}} *{{/if}}</label>
+                    <div class="controls">
+                        <input type="text" id="userHomeAddress1" disabled="disabled" name="userHomeAddress1" class="span12 {{#if Customization.requireAddress}}required{{/if}}" value=""/>
+                    </div>
+                </div>
+                <div class="control-group form-float span6">
+                    <label class="control-label" for="userHomeAddress2">{{Localization.newUser.address2Title}}</label>
+                    <div class="controls">
+                        <input type="text" id="userHomeAddress2" disabled="disabled" name="userHomeAddress2" class="span12" value=""/>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid address">
+                <div class="control-group form-float span5">
+                    <label class="control-label" for="userHomeCity">{{Localization.newUser.cityTitle}}{{#if Customization.requireAddress}} *{{/if}}</label>
+                    <div class="controls">
+                        <input type="text" id="userHomeCity" disabled="disabled" name="userHomeCity" class="span12 {{#if Customization.requireAddress}}required{{/if}}" value=""/>
+                    </div>
+                </div>
+                <div class="control-group form-float span5">
+                    <label class="control-label" for="userHomeProvince">{{Localization.newUser.stateTitle}}{{#if Customization.requireAddress}} *{{/if}}</label>
+                    <div class="controls">
+                        <select id="userHomeProvince" disabled="disabled" name="userHomeProvince" class="span12 {{#if Customization.requireAddress}}required{{/if}}">
+                            <option value=""></option>
+                            {{#Localization.stateList}}
+                            <option value="{{code}}"{{#equal ../Customization.defaultState code}}{{#equal code ""}} {{else}}selected="selected"{{/equal}}{{/equal}}>{{#if ../Customization.showProvinceCode}}{{code}} - {{/if}}{{name}}</option>
+                            {{/Localization.stateList}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid address">
+                <div class="control-group form-float span5">
+                    <label class="control-label" for="userHomePostalCode">{{Localization.newUser.postCodeTitle}}{{#if Customization.requireAddress}} *{{/if}}</label>
+                    <div class="controls">
+                        <input type="text" id="userHomePostalCode" disabled="disabled" name="userHomePostalCode" class="span12 {{#if Customization.requireAddress}}required{{/if}}" value=""/>
+                    </div>
+                </div>
+                <div class="control-group form-float span5">
+                    <label class="control-label" for="userHomeCountry">{{Localization.newUser.countryTitle}}{{#if Customization.requireAddress}} *{{/if}}</label>
+                    <div class="controls">
+                    <select  id="userHomeCountry" disabled="disabled" name="userHomeCountry" class="required span12 {{#if Customization.requireAddress}}required{{/if}}" >
+                    <option value=""></option>
+                    {{#Localization.countryList}}
+                    <option value="{{code}}" {{#equal ../Customization.defaultCountry code}} selected="selected"{{/equal}}{{#equal ../Customization.defaultCountry name}} selected="selected"{{/equal}}>{{name}}</option>
+                    {{/Localization.countryList}}
+                    </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="well span8 disabled address-other hide">
+            <div class="backdrop"></div>
+            <p><strong>{{Localization.newUser.addressTypeOther}}</strong></p>
+
+            <div class="control-group">
+                <label class="control-label" for="userOtherAddress1">{{Localization.newUser.address1Title}}</label>
+                <div class="controls">
+                    <input type="text" id="userOtherAddress1" disabled="disabled" name="userOtherAddress1" value=""/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userOtherAddress2">{{Localization.newUser.address2Title}}</label>
+                <div class="controls">
+                    <input type="text" id="userOtherAddress2" disabled="disabled" name="userOtherAddress2" class="" value=""/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userOtherCity">{{Localization.newUser.cityTitle}}</label>
+                <div class="controls">
+                    <input type="text" id="userOtherCity" disabled="disabled" name="userOtherCity" value=""/>
+                </div>
+            </div>
+
+
+            <div class="control-group">
+                <label class="control-label" for="userOtherProvince">{{Localization.newUser.stateTitle}}</label>
+                <div class="controls">
+                    <select id="userOtherProvince" disabled="disabled" name="userOtherProvince">
+                        <option value=""></option>
+                        {{#Localization.stateList}}
+                        <option value="{{code}}">{{#if ../Customization.showProvinceCode}}{{code}} - {{/if}}{{name}}</option>
+                        {{/Localization.stateList}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="userOtherCountry">{{Localization.newUser.countryTitle}}</label>
+                <div class="controls">
+                <select  id="userOtherCountry" disabled="disabled" name="userOtherCountry" >
+                <option value=""></option>
+                {{#Localization.countryList}}
+                <option value="{{name}}">{{name}}</option>
+                {{/Localization.countryList}}
+                </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userOtherPostalCode">{{Localization.newUser.postCodeTitle}}</label>
+                <div class="controls">
+                    <input type="text" id="userOtherPostalCode" disabled="disabled" name="userOtherPostalCode" value=""/>
+                </div>
+            </div>
+        </div>
+        {{#if Customization.multiLanguage}}
+        <div class="well span8 disabled language">
+            <div class="backdrop"></div>
+            <div class="control-group">
+                <label class="control-label" for="userLanguage"><strong>{{Localization.newUser.language}}</strong></label>
+                <div class="controls">
+                    <div id="userLanguage" class="btn-group" data-toggle="buttons-radio">
+                    {{#languages}}
+                        <a class="btn {{#equal id ../language}} btn-primary active{{/equal}}" id="userLanguage{{id}}">{{name}}</a>
+                    {{/languages}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <input type="hidden" id="userLanguage{{language}}" name="userLanguage{{language}}" class="active" value="{{language}}"/>
+        {{/if}}
+        <div class="well span8 disabled newsletter">
+            <div class="backdrop"></div>
+            <div class="control-group">
+                <label class="control-label" for="newsletter"><strong>{{Localization.newUser.newsletter}}</strong></label>
+                <div class="controls">
+                    <label class="checkbox" for="newsletter"><input type="checkbox" {{#equal Customization.defaultMarketingOptIn true}}checked="checked" {{/equal}}id="newsletter" disabled="disabled" name="newsletter" class="" value="Y"/>{{Localization.newUser.subscribeNewsletter}}</label>
+
+                </div>
+            </div>
+        </div>
+        <div class="well span8 passwords new collapse">
+            <div class="row-fluid names">
+                <div class="control-group span12">
+                    <label class="control-label" for="newPasswordTypeCustom"><strong>{{Localization.newUser.passwordSectionTitle}}</strong></label>
+                    <div class="controls">
+                        <p>{{Localization.newUser.passwordInstruction}}</p>
+                        <label class="radio" for="newPasswordTypeRandom"><input type="radio" checked="checked" id="newPasswordTypeRandom" name="newPasswordType" class="" value="Random"/>{{{Localization.newUser.predefinedPassword}}</label>
+                        <div class="radio newPasswordTypeCustom"><input type="radio" id="newPasswordTypeCustom" name="newPasswordType" class="" value="Custom"/>
+                            <label for="newPasswordTypeCustom">{{Localization.newUser.passwordCustom}}</label>
+                            <div class="control-group form-float newPassword1">
+                                <label class="control-label" for="newPassword1">{{Localization.newUser.passwordTitle}}</label>
+                                <div class="controls">
+                                    <input type="password" id="newPassword1" name="newPassword1" class="disabled span12" value=""/>
+                                </div>
+                            </div>
+                            <div class="control-group form-float">
+                                <label class="control-label" for="newPassword2">{{Localization.newUser.confirmPasswordTitle}}</label>
+                                <div class="controls">
+                                    <input type="password" id="newPassword2" name="newPassword2" class="disabled span12" value=""/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="well span8 disabled submit-controls">
+            <div class="backdrop"></div>
+            <div class="row-fluid">
+                <div class="control-group span8"></div>
+                <button type="submit" id="userCreateSubmit" name="userCreateSubmit" class="btn btn-primary userUpdateSubmit save span4">{{Localization.newUser.activeContext.buttonCreate}}</button>
+            </div>
+
+        </div>
+    </form>
+</div>

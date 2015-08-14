@@ -1,0 +1,39 @@
+<p>{{Localization.roomReservation.packageSelection.instructions}}</p>
+<p>{{Localization.roomReservation.packageSelection.customerCustomTextHeader}}</p>
+<div class=" span10 offset1">
+    <div class="accordion " id="packageSelectionaccordion2">
+        {{#pmsRates}}
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <{{#unless ../Customization.roomsBooking.autoExpandRateRoomResults}}a data-toggle="collapse" class="accordion-toggle"{{else}}div class="accordion-toggle disabled"{{/unless}} data-parent="#packageSelectionaccordion2" href="#collapse{{stripChars PMSRateTypeId}}">
+                    <span class="pull-left-ie7">{{PMSRateTypeDesc}}</span>
+                </{{#if ../Customization.roomsBooking.autoExpandRateRoomResults}}div{{else}}a{{/if}}>
+            </div>
+            <div id="collapse{{stripChars PMSRateTypeId}}" class="accordion-body {{#equal PMSRateTypeId ../showitem}}in {{else}}{{#if ../../Customization.roomsBooking.autoExpandRateRoomResults}}in {{/if}}{{/equal}}collapse">
+                <div class="accordion-inner">
+                    <div class="row">
+                        {{#if PMSRateTypeImage}}
+                        <div class="span3 pagination-centered">
+                            <img width="270" src="{{PMSRateTypeImage}}" alt="">
+                        </div>
+                        <div class="span5">
+                        {{else}}
+                        <div class="span7">
+                        {{/if}}
+                            <p>{{{nl2br PMSRateTypeCustDesc}}}</p>
+                        </div>
+                        <div class="span1">
+                            <a class="btn btn-primary" style="margin-top:4px" data-loading-text="{{../Localization.general.progressIndicatorMessage}}" href="#/roomsBooking/roomtype/{{urlEscape PMSRateTypeId}}">{{../Localization.general.continueProcessButtonLabel}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/pmsRates}}
+    </div>
+</div>
+<div class=" span10 ohyeah offset1">
+    <div class="accordion " id="packageSelectionaccordion3">
+        <p>{{Localization.roomReservation.packageSelection.customerCustomTextFooter}}</p>
+    </div>
+</div>

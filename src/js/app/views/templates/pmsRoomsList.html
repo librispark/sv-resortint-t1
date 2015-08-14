@@ -1,0 +1,44 @@
+<p>{{Localization.roomReservation.roomTypeSelection.roomSelection.instructions}}</p>
+<p>{{Localization.roomReservation.roomTypeSelection.roomSelection.customerCustomTextHeader}}</p>
+<div class=" span10 offset1">
+    <div class="accordion " id="packageSelectionaccordion2">
+        {{#pmsRooms}}
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <{{#unless ../Customization.roomsBooking.autoExpandRateRoomResults}}a data-toggle="collapse" class="accordion-toggle"{{else}}div class="accordion-toggle disabled"{{/unless}} data-parent="#packageSelectionaccordion2" href="#collapse{{stripChars PMSRoomNumber}}">
+                    <span>{{PMSRoomName}}</span>
+                </{{#if ../Customization.roomsBooking.autoExpandRateRoomResults}}div{{else}}a{{/if}}>
+            </div>
+            <div id="collapse{{stripChars PMSRoomNumber}}" class="accordion-body {{#equal PMSRoomNumber ../showitem}}in {{else}}{{#if ../../Customization.roomsBooking.autoExpandRateRoomResults}}in {{/if}}{{/equal}}collapse">
+                <div class="accordion-inner">
+                    <div class="row">
+                        {{#if PMSRoomImage}}
+                        <div class="span3 pagination-centered">
+                            <img width="270" src="{{PMSRoomImage}}" alt="">
+                        </div>
+                        <div class="span5">
+                        {{else}}{{! <!-- }}
+                        <div class="span7">{{! --> }}
+                        {{/if}}
+                            <p>{{{nl2br PMSRoomDesc}}}</p>
+                            <ul>
+                                {{#each PMSRoomFeature}}
+                                <li>{{this}}</li>
+                                {{/each }}
+                            </ul>
+                        </div>
+                        <div class="span1">
+                            <a class="btn btn-primary" style="margin-top:4px" data-loading-text="{{../Localization.general.progressIndicatorMessage}}" href="#/roomsBooking/confirm/{{PMSRoomType}}/{{urlEscape PMSRoomNumber}}">{{../Localization.general.continueProcessButtonLabel}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/pmsRooms}}
+    </div>
+</div>
+<div class=" span10 ohyeah offset1">
+    <div class="accordion " id="packageSelectionaccordion3">
+        <p>{{Localization.roomReservation.roomTypeSelection.roomSelection.customerCustomTextFooter}}</p>
+    </div>
+</div>

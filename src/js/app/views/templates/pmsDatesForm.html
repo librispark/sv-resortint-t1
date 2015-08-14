@@ -1,0 +1,140 @@
+<div class="span12">
+
+</div>
+<form id="pmsDatesForm" class="" action="" method="get">
+    <div class="row">
+        <div class="span offset1">
+            <div class="page-header">
+                <h2>{{venue.VenueName}}
+                    <small>{{#if dayGuest}}{{../Localization.roomReservation.datesAndOccupants.dayGuestInstructions}}{{else}}{{../Localization.roomReservation.datesAndOccupants.instructions}}{{/if}}</small>
+                </h2>
+                <p>{{#if dayGuest}}
+			    	{{../Localization.roomReservation.datesAndOccupants.dayGuest.customerCustomTextHeader}}
+			    	{{else}}
+			    	{{../Localization.roomReservation.datesAndOccupants.customerCustomTextHeader}}
+			    	{{/if}}
+		    	</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="well {{#if dayGuest}}span5 offset3{{else}}span9 offset1{{/if}}">
+		{{#if dayGuest}} {{else}}
+		<div class="row">
+			<div>
+                <div id="pmsDatesCalendar" style="height:28em"></div>
+                <div class="datepicker-legend ui-corner-all ui-widget-content">
+                    <div class="clearfix">
+                        <div class="datepickerlegenditem selected"><div class="swatch ui-state-active"></div> <div class="swatch ui-state-selected"></div> {{../Localization.roomReservation.calendar.selectedStayDates}} &nbsp; </div>
+                        <div class="datepickerlegenditem low-avail"><div class="swatch ui-state-low"></div> {{../Localization.roomReservation.calendar.lowAvailability}} &nbsp; </div>
+                        <div class="datepickerlegenditem unavailable"><div class="swatch ui-state-disabled"></div> {{../Localization.roomReservation.calendar.dateUnavailable}} &nbsp; </div>
+                        {{#unless ../Customization.roomsBooking.ignoreMinLengthOfStayOnCalendar}}<div class="datepickerlegenditem min-length"><div class="swatch min-los"></div> {{../Localization.roomReservation.calendar.minLOS}} &nbsp; </div>{{/unless}}
+                    </div>
+                    <div class="clearfix space">
+                        <strong class="datepickernextsteptitle">{{../Localization.roomReservation.calendar.nextStep}}</strong> <span class="datepickernextstep">{{../Localization.roomReservation.calendar.selectArrivalDateOnCalendar}}</span>
+                    </div>
+                </div>
+			</div>
+		</div>
+		{{/if}}
+		<div class="row">
+			<div class="span2">
+				<label class="" for="pmsArrivalDate">{{#if dayGuest}}{{../Localization.roomReservation.datesAndOccupants.visitDate}}{{else}}{{../Localization.roomReservation.datesAndOccupants.arrivalLabel}}{{/if}} *</label>
+			</div>
+			<div class="span">
+				<div class="input-append">
+					<input type="text" id="pmsArrivalDate" name="pmsArrivalDate" class="span2 bookingdate required" readonly="readonly" value=""/>
+					<label for="pmsArrivalDate" class="add-on" title="{{Localization.roomReservation.datesAndOccupants.selectDateAbove}}">&lt;</label>
+				</div>
+			</div>
+		</div>
+		{{#unless dayGuest}}
+		<div class="row">
+			<div class="span2 ">
+				<label class="" for="pmsDepartureDate">{{../Localization.roomReservation.datesAndOccupants.departureLabel}} *</label>
+			</div>
+			<div class="span">
+				<div class="input-append">
+					<input type="text" id="pmsDepartureDate" name="pmsDepartureDate" class="span2 bookingdate required" readonly="readonly" value=""/>
+					<label for="pmsDepartureDate" class="add-on hidden" title="{{../Localization.roomReservation.datesAndOccupants.selectDateAbove}}">&lt;</label>
+				</div>
+			</div>
+		</div>
+		{{/unless}}
+		{{#if dayGuestAndOnlyOne}}
+		<input type="hidden" id="pmsNumAdults" value="1"/>
+		{{else}}
+		<div class="row">
+			<div class="span2">
+				<label class="" for="pmsNumAdults">{{../Localization.roomReservation.datesAndOccupants.adultOccupantsLabel}} *</label>
+			</div>
+			<div class="span2 ie7nudge">
+				<input type="text" id="pmsNumAdults" class="span1 required" value="{{#if ../pmsNumAdults}}{{pmsNumAdults}}{{else}}{{../Customization.roomsBooking.defaultNumAdults}}{{/if}}"/>
+			</div>
+		</div>
+		{{/if}}
+	    {{#if showmore}}
+		<div class="row">
+			<div class="span3">
+				<a href="#" class="visible-link" id="showMore">{{Localization.roomReservation.datesAndOccupants.moreLabel}}</a>
+			</div>
+		</div>
+        <div id="more" class="hidden">
+            {{#if Customization.roomsBooking.showpmsNumYouth}}
+			<div class="row">
+				<div class="span2">
+					<label class="" for="pmsNumYouth">{{Localization.roomReservation.datesAndOccupants.youthOccupantsLabel}}</label>
+				</div>
+				<div class="span2 ie7nudge">
+					<input type="text" id="pmsNumYouth" class="span1" value="{{pmsNumYouth}}"/>
+				</div>
+			</div>
+            {{/if}}
+            {{#if Customization.roomsBooking.showpmsNumChildren}}
+			<div class="row">
+				<div class="span2">
+					<label class="" for="pmsNumChildren">{{Localization.roomReservation.datesAndOccupants.childOccupantsLabel}}</label>
+				</div>
+				<div class="span2 ie7nudge">
+					<input type="text" id="pmsNumChildren" class="span1" value="{{pmsNumChildren}}"/>
+				</div>
+			</div>
+            {{/if}}
+            {{#if Customization.roomsBooking.showpmsNumJrChildren}}
+			<div class="row">
+				<div class="span2">
+					<label class="" for="pmsNumJrChildren">{{Localization.roomReservation.datesAndOccupants.infantsOccupantsLabel}}</label>
+				</div>
+				<div class="span2 ie7nudge">
+					<input type="text" id="pmsNumJrChildren" class="span1" value="{{pmsNumJrChildren}}"/>
+				</div>
+			</div>
+            {{/if}}
+
+	            {{#if ../Customization.roomsBooking.showpmsPromoCode}}
+				<div class="row">
+					<div class="span2">
+						<label class="" for="pmsPromoCode">{{../../Localization.roomReservation.datesAndOccupants.promoOccupantsLabel}}</label>
+					</div>
+					<div class="span2 ie7nudge">
+						<input type="text" id="pmsPromoCode" class="span2" value="{{pmsPromoCode}}"/>
+					</div>
+				</div>
+	            {{/if}}
+        </div>
+        {{else}}
+        	{{#if dayGuest}}
+            {{/if}}
+        {{/if}}
+        <div class="row">
+		    <a id="pmsFormSubmit" class="btn btn-primary pull-right" href="#/roomsBooking/{{#if dayGuest}}day{{/if}}rate">{{Localization.general.continueProcessButtonLabel}}</a>
+        </div>
+    </div>
+</form>
+<div class=" span10 ohyeah offset1">
+    <p>{{#if dayGuest}}
+    	{{../Localization.roomReservation.datesAndOccupants.dayGuest.customerCustomTextFooter}}
+    	{{else}}
+    	{{../Localization.roomReservation.datesAndOccupants.customerCustomTextFooter}}
+    	{{/if}}</p>
+</div>

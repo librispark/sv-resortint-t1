@@ -1,0 +1,438 @@
+{{#unless isEditable}}
+<a class="pull-right btn" href="#/profile">{{Localization.general.login.returnToProfileLabel}}</a>
+{{/unless}}
+<p><strong>{{Localization.newUser.title}}</strong></p>
+<p>{{Localization.newUser.description}}</p>
+    <form id="userProfileForm" class="form-horizontal span6 offset2 {{#unless isEditable}}disabled{{/unless}}" method="post">
+        <div class="well span6">
+            <p><strong>{{Localization.general.login.sectionNameTitle}}</strong></p></br>
+            <div class="control-group">
+                <label class="control-label" for="userEmail1">{{Localization.newUser.emailTitle}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userEmail1" name="userEmail1" class="required" value="{{../EmailAddress}}"/>
+                    {{else}}
+                    <p>{{../EmailAddress}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userGender">{{Localization.newUser.genderTitle}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <select id="userGender" name="userGender" class="required">
+                        {{#equal Gender ""}}<option value="" selected="selected">{{Localization.spaBooking.serviceSelection.err.genderRequired}}</option>{{/equal}}
+                        <option value="M"{{#equal Gender "M"}} selected="selected"{{/equal}}>{{Localization.general.gender.male}}</option>
+                        <option value="F"{{#equal Gender "F"}} selected="selected"{{/equal}}>{{Localization.general.gender.female}}</option>
+                    </select>
+                    {{else}}
+                    <p>{{#equal ../Gender "M"}}{{Localization.general.gender.male}}{{/equal}}
+                       {{#equal ../Gender "F"}}{{Localization.general.gender.female}}{{/equal}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userSalutation">{{Localization.newUser.salutationTitle}}</label>
+                <div class="controls">
+                        {{#if isEditable}}
+                    <select id="userSalutation" name="userSalutation" class="required">
+                        {{#equal Name.Salutation ""}}<option value="" selected="selected">--</option>{{/equal}}
+                        <option value="Mr."{{#equal Name.Salutation "Mr."}} selected="selected"{{/equal}}>{{Localization.general.salutation.mister}}</option>
+                        <option value="Ms."{{#equal Name.Salutation "Ms."}} selected="selected"{{/equal}}>{{Localization.general.salutation.mizz}}</option>
+                        <option value="Mrs."{{#equal Name.Salutation "Mrs."}} selected="selected"{{/equal}}>{{Localization.general.salutation.missus}}</option>
+                        <option value="Miss."{{#equal Name.Salutation "Miss."}} selected="selected"{{/equal}}>{{Localization.general.salutation.miss}}</option>
+                        <option value="Dr."{{#equal Name.Salutation "Dr."}} selected="selected"{{/equal}}>{{Localization.general.salutation.doctor}}</option>
+                        <option value="MrMrs"{{#equal Name.Salutation "MrMrs"}} selected="selected"{{/equal}}>{{Localization.general.salutation.misterAndMissus}}</option>
+                    </select>
+                        {{else}}
+                        <p>{{#equal Name.Salutation ""}}{{/equal}}
+                        {{#equal Name.Salutation "Mr."}}{{Localization.general.salutation.mister}}{{/equal}}
+                        {{#equal Name.Salutation "Ms."}}{{Localization.general.salutation.mizz}}{{/equal}}
+                        {{#equal Name.Salutation "Mrs."}}{{Localization.general.salutation.missus}}{{/equal}}
+                        {{#equal Name.Salutation "Miss."}}{{Localization.general.salutation.miss}}{{/equal}}
+                        {{#equal Name.Salutation "Dr."}}{{Localization.general.salutation.doctor}}{{/equal}}
+                        {{#equal Name.Salutation "MrMrs"}}{{Localization.general.salutation.misterAndMissus}}{{/equal}}</p>
+                        {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userFirstName">{{Localization.newUser.firstNameTitle}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userFirstName" name="userFirstName" class="required" value="{{Name.FirstName}}"/>
+                    {{else}}
+                    <p>{{../Name.FirstName}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userLastName">{{Localization.newUser.lastNameTitle}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userLastName" name="userLastName" class="required" value="{{Name.LastName}}"/>
+                    {{else}}
+                    <p>{{../Name.LastName}}</p>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        <div class="well span6">
+            <p><strong>{{Localization.newUser.contactInfoSectionTitle}}</strong></p>
+            <div class="control-group">
+                <label class="control-label" for="userMainPhone"> {{Localization.newUser.mainPhoneTitle}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <div id="userMainPhone" class="btn-group" data-toggle="buttons-radio">
+                        <button class="btn btn-primary {{#Phone}}{{#equal type "HOME"}}{{#if primary}}active{{/if}}{{/equal}}{{/Phone}}" id="userMainPhoneH">{{Localization.newUser.mainPhoneHome}}</button>
+                        <button class="btn btn-primary {{#Phone}}{{#equal type "WORK"}}{{#if primary}}active{{/if}}{{/equal}}{{/Phone}}" id="userMainPhoneW">{{Localization.newUser.mainPhoneWork}}</button>
+                        <button class="btn btn-primary {{#Phone}}{{#equal type "OTHER"}}{{#if primary}}active{{/if}}{{/equal}}{{/Phone}}" id="userMainPhoneO">{{Localization.newUser.mainPhoneOther}}</button>
+                    </div>
+                    {{else}}
+                    <p>
+                        {{#Phone}}{{#equal type "HOME"}}{{#if primary}}{{Localization.newUser.mainPhoneHome}}{{/if}}{{/equal}} 
+                        {{#equal type "WORK"}}{{#if primary}}{{Localization.newUser.mainPhoneWork}}{{/if}}{{/equal}}
+                        {{#equal type "OTHER"}}{{#if primary}}{{Localization.newUser.mainPhoneOther}}{{/if}}{{/equal}}{{/Phone}}
+                    </p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userHomePhone">{{Localization.newUser.homePhoneTitle}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userHomePhone" name="userHomePhone" class="" value="{{#Phone}}{{#equal type "HOME"}}{{PhoneNumber}}{{/equal}}{{/Phone}}"/>
+                    {{else}}
+                    <p>{{#Phone}}{{#equal type "HOME"}}{{PhoneNumber}}{{/equal}}{{/Phone}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userWorkPhone">{{Localization.newUser.workPhoneTitle}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userWorkPhone" name="userWorkPhone" class="" value="{{#Phone}}{{#equal type "WORK"}}{{PhoneData.PhoneNumber}}{{/equal}}{{/Phone}}"/>
+                    {{else}}
+                    <p>{{#Phone}}{{#equal type "WORK"}}{{PhoneData.PhoneNumber}}{{/equal}}{{/Phone}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userWorkExt">{{Localization.newUser.workPhoneExtension}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userWorkExt" name="userWorkExt" class="" value="{{#Phone}}{{#equal type "WORK"}}{{PhoneData.Extension}}{{/equal}}{{/Phone}}"/>
+                    {{else}}
+                    <p>{{#Phone}}{{#equal type "WORK"}}{{PhoneData.Extension}}{{/equal}}{{/Phone}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userOtherPhone">{{Localization.newUser.otherPhoneTitle}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userOtherPhone" name="userOtherPhone" class="" value="{{#Phone}}{{#equal type "OTHER"}}{{PhoneNumber}}{{/equal}}{{/Phone}}"/>
+                    {{else}}
+                    <p>{{#Phone}}{{#equal type "OTHER"}}{{PhoneNumber}}{{/equal}}{{/Phone}}</p>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        <div class="well span6">
+            <p><strong>{{Localization.newUser.addressTypeHome}}</strong></p>
+            {{#Address}}{{#equal type "HOME"}}
+            <div class="control-group">
+                <label class="control-label" for="userHomeAddress1">{{../../Localization.newUser.address1Title}}{{#if Customization.requireAddress}}*{{/if}}</label>
+                <div class="controls">
+                    {{#if ../../isEditable}}
+                    <input type="text" id="userHomeAddress1" name="userHomeAddress1" class="{{#if Customization.requireAddress}}required{{/if}}" value="{{Address1}}"/>
+                    {{else}}
+                    <p>{{../Address1}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userHomeAddress2">{{../../Localization.newUser.address2Title}}</label>
+                <div class="controls">
+                    {{#if ../../isEditable}}
+                    <input type="text" id="userHomeAddress2" name="userHomeAddress2" class="" value="{{Address2}}"/>
+                    {{else}}
+                    <p>{{../Address2}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userHomeCity">{{../../Localization.newUser.cityTitle}}{{#if Customization.requireAddress}}*{{/if}}</label>
+                <div class="controls">
+                    {{#if ../../isEditable}}
+                    <input type="text" id="userHomeCity" name="userHomeCity" class="{{#if Customization.requireAddress}}required{{/if}}" value="{{City}}"/>
+                    {{else}}
+                    <p>{{../City}}</p>
+                    {{/if}}
+                </div>
+            </div>
+
+
+            <div class="control-group">
+                <label class="control-label" for="userHomeProvince">{{../../Localization.newUser.stateTitle}}{{#if Customization.requireAddress}}*{{/if}}</label>
+                <div class="controls">
+                    {{#if ../../isEditable}}
+                    <select id="userHomeProvince" name="userHomeProvince">
+                        <option value=""></option>
+                        {{#../../../Localization.stateList}}
+                        <option value="{{code}}" {{#equal ../StateProv code}} selected="selected"{{/equal}}>{{#if ../../../../Customization.showProvinceCode}}{{code}} - {{/if}}{{name}}</option>
+                        {{/../../../Localization.stateList}}
+                    </select>
+                    {{else}}
+                    <p>{{../StateProv}}</p>
+                    {{/if}}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="userHomeCountry">{{../../Localization.newUser.countryTitle}}{{#if Customization.requireAddress}}*{{/if}}</label>
+                <div class="controls">
+                    {{#if ../../isEditable}}
+                <select  id="userHomeCountry" name="userHomeCountry" {{#if Customization.requireAddress}}class="required"{{/if}} >
+                <option value=""></option>
+                {{#../../../Localization.countryList}}
+                <option value="{{name}}" {{#equal ../Country code}} selected="selected"{{/equal}}{{#equal ../Country name}} selected="selected"{{/equal}}>{{name}}</option>
+                {{/../../../Localization.countryList}}
+                </select>
+                    {{else}}
+                    <p>{{../Country}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userHomePostalCode">{{../../Localization.newUser.postCodeTitle}}{{#if Customization.requireAddress}}*{{/if}}</label>
+                <div class="controls">
+                    {{#if ../../isEditable}}
+                    <input type="text" id="userHomePostalCode" name="userHomePostalCode" class="{{#if Customization.requireAddress}}required{{/if}}" value="{{PostCode}}"/>
+                    {{else}}
+                    <p>{{../PostCode}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            {{/equal}}{{/Address}}
+        </div>
+        <div class="well span6">
+            <p><strong>{{Localization.newUser.addressTypeOther}}</strong></p>
+            {{#Address}}{{#equal type "OTHER"}}
+            <div class="control-group">
+                <label class="control-label" for="userOtherAddress1">{{../../Localization.newUser.address1Title}}{{#if Customization.requireAddress}}*{{/if}}</label>
+                <div class="controls">
+                    {{#if ../../isEditable}}
+                    <input type="text" id="userOtherAddress1" name="userOtherAddress1"  value="{{Address1}}"/>
+                    {{else}}
+                    <p>{{../Address1}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userOtherAddress2">{{../../Localization.newUser.address2Title}}</label>
+                <div class="controls">
+                    {{#if ../../isEditable}}
+                    <input type="text" id="userOtherAddress2" name="userOtherAddress2" class="" value="{{Address2}}"/>
+                    {{else}}
+                    <p>{{../Address2}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userOtherCity">{{../../Localization.newUser.cityTitle}}{{#if Customization.requireAddress}}{{/if}}</label>
+                <div class="controls">
+                    {{#if ../../isEditable}}
+                    <input type="text" id="userOtherCity" name="userOtherCity"  value="{{City}}"/>
+                    {{else}}
+                    <p>{{../City}}</p>
+                    {{/if}}
+                </div>
+            </div>
+
+
+            <div class="control-group">
+                <label class="control-label" for="userOtherProvince">{{../../Localization.newUser.stateTitle}}{{#if Customization.requireAddress}}{{/if}}</label>
+                <div class="controls">
+                    {{#if ../../isEditable}}
+                    <select id="userOtherProvince" name="userOtherProvince">
+                        <option value=""></option>
+                        {{#../../../Localization.stateList}}
+                        <option value="{{code}}" {{#equal ../StateProv code}} selected="selected"{{/equal}}>{{#if ../../../../Customization.showProvinceCode}}{{code}} - {{/if}}{{name}}</option>
+                        {{/../../../Localization.stateList}}
+                    </select>
+                    {{else}}
+                    <p>{{../StateProv}}</p>
+                    {{/if}}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="userOtherCountry">{{../../Localization.newUser.countryTitle}}{{#if Customization.requireAddress}}{{/if}}</label>
+                <div class="controls">
+                    {{#if ../../isEditable}}
+                <select  id="userOtherCountry" name="userOtherCountry" >
+                <option value=""></option>
+                {{#../../../Localization.countryList}}
+                <option value="{{name}}" {{#equal ../Country code}} selected="selected"{{/equal}}{{#equal ../Country name}} selected="selected"{{/equal}}>{{name}}</option>
+                {{/../../../Localization.countryList}}
+                </select>
+                    {{else}}
+                    <p>{{../Country}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userOtherPostalCode">{{../../Localization.newUser.postCodeTitle}}{{#if ../../Customization.requireAddress}}*{{/if}}</label>
+                <div class="controls">
+                    {{#if ../../isEditable}}
+                    <input type="text" id="userOtherPostalCode" name="userOtherPostalCode"  value="{{PostCode}}"/>
+                    {{else}}
+                    <p>{{../PostCode}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            {{/equal}}{{/Address}}
+        </div>
+
+        {{#if Customization.features.skiBooking}}
+        <div class="well span6">
+            <p><strong>{{Localization.newUser.skiSettings.title}}</strong></p>
+            <div class="control-group">
+                <label class="control-label" for="userSkiSize">{{Localization.newUser.skiSettings.skiSize}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userSkiSize" name="userSkiSize" class="" value="{{SkiSettings.SkiSize}}"/>
+                    {{else}}
+                    <p>{{SkiSettings.SkiSize}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userSkiBootSize">{{Localization.newUser.skiSettings.skiBootSize}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userSkiBootSize" name="userSkiBootSize" class="" value="{{SkiSettings.SkiBootSize}}"/>
+                    {{else}}
+                    <p>{{SkiSettings.SkiBootSize}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userSnowboardSize">{{Localization.newUser.skiSettings.snowboardSize}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userSnowboardSize" name="userSnowboardSize" class="" value="{{SkiSettings.SnowboardSize}}"/>
+                    {{else}}
+                    <p>{{SkiSettings.SnowboardSize}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userSnowboardBootSize">{{Localization.newUser.skiSettings.snowboardBootSize}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userSnowboardBootSize" name="userSnowboardBootSize" class="" value="{{SkiSettings.SnowboardBootSize}}"/>
+                    {{else}}
+                    <p>{{SkiSettings.SnowboardBootSize}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userDinNumber">{{Localization.newUser.skiSettings.dinNumber}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userDinNumber" name="userDinNumber" class="" value="{{SkiSettings.DinNumber}}"/>
+                    {{else}}
+                    <p>{{SkiSettings.DinNumber}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userAge">{{Localization.newUser.skiSettings.age}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userAge" name="userAge" class="" value="{{SkiSettings.Age}}"/>
+                    {{else}}
+                    <p>{{SkiSettings.Age}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userWeight">{{Localization.newUser.skiSettings.weight}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userWeight" name="userWeight" class="" value="{{SkiSettings.Weight}}"/>
+                    {{else}}
+                    <p>{{SkiSettings.Weight}}</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="userHeight">{{Localization.newUser.skiSettings.height}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                    <input type="text" id="userHeight" name="userHeight" class="" value="{{SkiSettings.Height}}"/>
+                    {{else}}
+                    <p>{{SkiSettings.Height}}</p>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        {{/if}}
+        {{#if Customization.multiLanguage}}
+        <div class="well span6">
+            <div class="control-group">
+                <label class="control-label" for="language">{{Localization.newUser.language}}</label>
+                <div class="controls">
+                    {{#if isEditable}}
+                        <div id="userLanguage" class="btn-group" data-toggle="buttons-radio">
+                        {{#languages}}
+                            <button class="btn btn-primary{{#equal id ../userLanguage}} active{{/equal}}" id="userLanguage{{id}}">{{name}}</button>
+                        {{/languages}}
+                        </div>
+                    {{else}}
+                        {{#languages}}
+                            {{#equal id ../userLanguage}}{{name}}{{/equal}}
+                        {{/languages}}
+                    {{/if}}
+
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <input type="hidden" id="userLanguage{{userLanguage}}" name="userLanguage{{userLanguage}}" class="active" value="{{userLanguage}}"/>
+        {{/if}}
+        <div class="well span6">
+            <div class="control-group">
+                <label class="control-label" for="newsletter">{{Localization.newUser.newsletter}}</label>
+                <div class="controls">
+                    <label class="checkbox" for="newsletter"><input type="checkbox" id="newsletter" name="newsletter" 
+                        {{#unless isEditable}}disabled="disabled" readonly="readonly"{{/unless}} class=""
+                        value="Y" {{#equal NoEmail "N"}}checked="checked"{{/equal}} />{{Localization.newUser.subscribeNewsletter}}</label>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!--<div class="well span6">
+            <div class="control-group">
+                <label class="control-label" for="newsletter">{{Localization.newUser.newsletter}}</label>
+                <div class="controls">
+                    <label class="checkbox" for="newsletter"><input type="checkbox" id="newsletter" name="newsletter" class="" checked="checked"
+                    value="Y"/>{{Localization.newUser.subscribeNewsletter}}</label>
+
+                </div>
+            </div>
+        </div>-->
+        {{#if isEditable}}
+        <div class="well span6">
+        <div class="control-group">
+                <div class="controls">
+                    <a id="userProfileCancel" class="btn" href="#/profile">{{Localization.newUser.cancelButtonLabel}}</a>
+                    <input type="submit" id="userProfileSubmit" name="userProfileSubmit" class="btn btn-primary" value="{{Localization.newUser.updateButtonLabel}}" />
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </form>

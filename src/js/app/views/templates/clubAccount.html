@@ -1,0 +1,84 @@
+<div class="span10 offset1">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#account-profile">
+                {{Localization.club.profile}}
+            </a>
+        </div>
+        <div id="account-profile" class="accordion-body in">
+            <div class="accordion-inner">
+                <div class="row">
+                    <div class="span4">
+                        <h4>{{Localization.club.accountDetails}}</h4>
+                        <dl class="dl-horizontal">
+                            <dt>{{Localization.club.account}} #:</dt><dd>{{nbspUnless accountData.AccountId}}</dd>
+                            <dt>{{Localization.club.accountType}}:</dt><dd>{{nbspUnless accountData.AccountClass}}</dd>
+                            <dt>{{Localization.club.accountOwner}}:</dt><dd>{{nbspUnless accountStatement.Customer.LastName}}, {{accountStatement.Customer.FirstName}}</dd>
+                            <dt>{{Localization.club.memberId}}:</dt><dd>{{nbspUnless accountStatement.Customer.CustomerCode}}</dd>
+                            <dt>{{Localization.club.memberLevel}}:</dt><dd>{{nbspUnless accountStatement.Customer.VIPLevel}}</dd>
+                            <dt>{{Localization.club.address}}:</dt>
+                            <dd>
+                                {{accountStatement.Customer.Address.AddressLine1}}
+                                {{accountStatement.Customer.Address.AddressLine2}}
+                                {{accountStatement.Customer.Address.City}}
+                                {{accountStatement.Customer.Address.Province}}
+                                {{accountStatement.Customer.Address.Country}}
+                                {{accountStatement.Customer.Address.PostalCode}}
+                            </dd>
+                            <dt>{{Localization.club.phone}}:</dt><dd>{{nbspUnless accountStatement.Customer.PhoneNumber}}</dd>
+                        </dl>
+                    </div>
+                    <div class="span4">
+                        <h4>{{Localization.club.accountMembers}}</h4>
+                        {{#accountData.Members.Member}}
+                        <dl class="dl-horizontal">
+                            <dt>{{../Localization.club.memberName}}:</dt><dd>{{nbspUnless Salutation}} {{nbspUnless FirstName}} {{nbspUnless LastName}}</dd>
+                            <dt>{{../Localization.club.memberLevel}}:</dt><dd>{{#if VIPLevel}}{{VIPLevel}}{{else}}{{../../Localization.club.memberLevelNA}}{{/if}}</dd>
+                        </dl>
+                        {{/accountData.Members.Member}}
+                    </div>
+                </div>
+                <hr />
+                <h4>{{Localization.club.memberships}}</h4>
+                {{#if accountMemberships}}
+                {{#accountMemberships}}
+                <dl class="dl-horizontal">
+                    <dt>{{../Localization.club.member}}:</dt><dd>{{nbspUnless Salutation}} {{nbspUnless FirstName}} {{nbspUnless LastName}}</dd>
+                    <dt>{{../Localization.club.status}}:</dt><dd>{{nbspUnless Status}}</dd>
+                    <dt>{{../Localization.club.effectiveDate}}:</dt><dd>{{RSDateToString EffectiveDate "MMMM d, yyyy"}}&nbsp;</dd>
+                    <dt>{{../Localization.club.expiryDate}}:</dt><dd>{{RSDateToString ExpiryDate "MMMM d, yyyy"}}&nbsp;</dd>
+                </dl>
+                {{/accountMemberships}}
+                {{else}}
+                <dl class="dl-horizontal">
+                    <dt>&nbsp;</dt><dd>{{Localization.club.noMemberships}}</dd>
+                </dl>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+
+
+    <div style="margin: 20px 0px 10px; font-size: 18px;">{{Localization.club.statements}}</div>
+    {{#billings}}
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle statement-table" id="toggle-{{BillDate}}" data-account-id="{{../accountData.AccountId}}" data-bill-date="{{BillDate}}">
+                {{BillDateYearMonth}}
+            </a>
+        </div>
+        <div id="collapse-{{BillDate}}" class="statement-body accordion-body collapse">
+            <div class="accordion-inner">
+                <dl class="dl-horizontal">
+                    <dt>{{../Localization.club.statementPeriod}}:</dt><dd>{{PeriodStartDateShortDate}} - {{BillDateShortDate}}</dd>
+                    <dt>{{../Localization.club.previousBalance}}:</dt><dd>{{../Localization.general.currencyPrefix}}{{toFixed PreviousBalance 2}}{{../Localization.general.currencyPostfix}}&nbsp;</dd>
+                    <dt>{{../Localization.club.payments}}:</dt><dd>{{../Localization.general.currencyPrefix}}{{toFixed Payments 2}}{{../Localization.general.currencyPostfix}}&nbsp;</dd>
+                    <dt>{{../Localization.club.newCharges}}:</dt><dd>{{../Localization.general.currencyPrefix}}{{toFixed Charges 2}}{{../Localization.general.currencyPostfix}}&nbsp;</dd>
+                    <dt>{{../Localization.club.accountBalance}}:</dt><dd>{{../Localization.general.currencyPrefix}}{{toFixed AccountBalance 2}}{{../Localization.general.currencyPostfix}}&nbsp; </dd>
+                </dl>
+                <div id="statement-table-{{BillDate}}"></div>
+            </div>
+        </div>
+    </div>
+    {{/billings}}
+</div>

@@ -1,0 +1,9 @@
+<div class=" span8 offset2">
+    <p>{{Localization.golf.availableTeeTimeTitle}} {{Localization.golf.on}} {{RSDateToString firstTeeTime.DateTime}} </p>
+
+    <ul >
+        {{#teeInfo.TeeTime}}
+        <p>{{RSDateToString DateTime "h:mm tt"}} {{#unless ../Customization.golfBooking.onlyShowTeeTimesWithFourAvailableSlots}}<small>(for up to {{SlotsAvailable}} Players)</small>{{/unless}} <a class="btn btn-primary bookGolfTime" href="#/golfBooking/confirm/{{../teeInfo.CourseId}}/{{DateTime}}/{{../numberOfPlayers}}" style="margin: 4px 0 0 24px;">Book {{../numberOfPlayers}} Player{{#equal ../numberOfPlayers 1}} {{else}}s{{/equal}}</a></p>
+        {{/teeInfo.TeeTime}}
+        </ul>
+</div>

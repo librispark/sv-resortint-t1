@@ -1,0 +1,43 @@
+<p>{{Localization.roomReservation.getPMSVenues.instructions}}</p>
+<div class=" span10 offset1">
+    <div class="accordion " id="pmsaccordion2">
+        {{#pmsVenues}}
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle clearfix" data-toggle="collapse" data-parent="#pmsaccordion2" href="#collapse{{stripChars VenueId}}">
+                    {{VenueName}} {{#if ../Customization.roomsBooking.showPropertyName}}<small>{{PropertyName}}</small>{{/if}}
+                </a>
+            </div>
+            <div id="collapse{{stripChars VenueId}}" class="accordion-body {{#equal VenueId ../showitem}}in {{/equal}}collapse">
+                <div class="accordion-inner">
+                    <div class="row">
+                        {{#if VenueImageURL}}
+                        <div class="span3 pagination-centered">
+                            <img width="270" src="{{VenueImageURL}}" alt="">
+                        </div>
+                        <div class="span5">
+                        {{else}}{{! <!-- }}
+                        <div class="span7">{{! --> }}
+                        {{/if}}
+                            <p>{{VenueAddress}}<br />
+                                {{VenueCity}}, {{VenueStateProv}}<br />
+                                {{VenuePostalCode}}</p>
+                            {{#if VenuePhone}}<p>{{../../Localization.general.location.phone}}: {{VenuePhone}}</p>{{/if}}
+                            {{#if VenueWebAddress}}<p>{{../../Localization.general.location.website}}: <a href="http://{{VenueWebAddress}}">{{VenueWebAddress}}</a></p>{{/if}}
+                        </div>
+                        <div class="span1">
+                            {{#if ../Customization.roomsBooking.dayGuestPromoCode}}
+                            <a class="btn btn-primary" style="margin-top:4px" data-loading-text="{{../Localization.general.progressIndicatorMessage}}" href="#/roomsBooking/venue/{{urlEscape VenueId}}">{{../../Localization.roomReservation.getPMSVenues.stayBooking}}</a>
+                            <br/><br/><br/>
+                            <a class="btn btn-primary" style="margin-top:4px" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}" href="#/roomsBooking/dayvenue/{{urlEscape ../VenueId}}">{{../../Localization.roomReservation.getPMSVenues.dayBooking}}</a>
+                            {{else}}
+                            <a class="btn btn-primary" style="margin-top:4px" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}" href="#/roomsBooking/venue/{{urlEscape ../VenueId}}">{{../../Localization.general.continueProcessButtonLabel}}</a>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/pmsVenues}}
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<form id="redirectYPForm" action="{{forwardURL}}payment" method="POST">
+    <input type="hidden" name="MTR" value="{{mtr}}" />
+    <input type="hidden" name="merchantID" value="{{mid}}" />
+    <input type="hidden" name="confirm" value="true"/>
+    <input type="hidden" name="digest" value="{{digest}}"/>
+    <input type="hidden" name="amount" value="{{amount}}"/>
+    <input type="hidden" name="currency" value="{{currency}}"/>
+    <input type="hidden" name="callbackSuccess" value="{{successURL}}"/>
+    <input type="hidden" name="callbackFailure" value="{{failURL}}?YPCancel=true"/>
+    <input type="hidden" name="version" value="2000"/>
+    <input type="hidden" name="createSubscription" value="true"/>
+    <input type="hidden" name="email" value="{{email}}"/>
+    {{#cartData.WebFolioItem}}
+    <input type="hidden" name="item_name_{{key}}" value="{{stripPlain Details}}"/>
+    <input type="hidden" name="item_value_{{key}}" value="{{Amount}}"/>
+    <!-- <input type="hidden" name="item_tax_{{key}}" value="{{FolioSurcharges}}"/> -->
+    <input type="hidden" name="item_number_{{key}}" value="{{WebFolioId}}-{{FolioId}}{{#if FolioItemId}}-{{FolioItemId}}{{/if}}"/>
+    <input type="hidden" name="item_quantity_{{key}}" value="1"/>
+    {{/cartData.WebFolioItem}}
+    <input type="submit" style="visibility:hidden"/>
+</form>

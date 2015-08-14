@@ -1,0 +1,86 @@
+						<div class="accordion-inner clearfix">
+                            {{#equal ItemActivatesPromo "Y"}}{{#unless user.CustomerId}}
+                            <div class="row mustLoginPurchaseItemActivatesPromo">
+                                <div class="span7 offset1 alert">
+                                    <a class="btn btn-small pull-right" style="position: relative; top:-4px; left: 4px" href="#/profile/login/next{{url}}">{{Localization.general.login.loginButtonLabel}}</a>
+                                    {{Localization.ski.mustLoginPurchaseItemActivatesPromo}}
+                                </div>
+                            </div>
+                            {{/unless}}{{/equal}}
+
+                            <div class="row">
+                                <div class="span2 notie7"></div>
+                                {{#if ItemImage}}
+                                <div class="span3 pagination-centered">
+                                    <img width="270" src="{{ItemImage}}" alt="">
+                                </div>
+                                <div class="span5">
+                                {{else}}{{! <!-- this comment is just a trick to make your tag-matching editor not lose its hair }}
+                                <div class="span8">{{! --> }}
+                                {{/if}}
+                                    <p style="padding-bottom: 6px">{{{nl2br ItemDesc}}}</p>
+                                    <div class="row-fluid">
+                                        <dl class="span6 invert-emphasis {{#unless ItemImage}}dl-horizontal{{/unless}}">
+                                            {{#if ItemSubCategory}}
+                                            <dt class="itemSubCategory">
+                                                {{Localization.ski.subCategoryLabel}} 
+                                            </dt>
+                                            <dd class="itemSubCategory">{{ItemSubCategory}}</dd>
+                                            {{/if}}
+                                            {{#equal ItemActivatesPromo "Y"}}
+                                            {{else}}
+                                            {{#if earliestStartDate}}
+                                            <dt class="earliestStartDate">
+                                                {{Localization.ski.passStartDate}}  
+                                            </dt>
+                                            <dd class="earliestStartDate">
+                                                {{RSDateToString earliestStartDate Localization.CultureInfo.formatPatterns.mediumDate}}
+                                                {{#equal earliestStartDate skiDate}} {{else}}
+                                                {{#if ItemImage}}<br>{{/if}}<span class="label label-red">{{Localization.ski.passStartDateMismatch}}</span>{{/equal}}
+                                            </dd>
+                                            
+                                            {{/if}}
+                                            {{#if effectiveEndDate}}
+                                            <dt class="effectiveEndDate">
+                                                {{Localization.ski.passEndDate}} 
+                                            </dt>
+                                            <dd class="effectiveEndDate">{{RSDateToString effectiveEndDate Localization.CultureInfo.formatPatterns.mediumDate}}</dd>
+                                            {{/if}}
+                                            {{/equal}}
+                                        </dl>
+                                        <dl class="span6 invert-emphasis {{#unless ItemImage}}dl-horizontal{{/unless}}">
+                                            <dt class="price">
+                                            {{Localization.spaBooking.confirmation.servicePriceLabel}} 
+                                            </dt>
+                                            <dd class="price">{{Localization.general.currencyPrefix}}{{toFixed Price 2}}{{Localization.general.currencyPostfix}}</dd>
+                                            {{#if DurationDays}}
+                                            <dt class="DurationDays">
+                                                {{Localization.ski.durationDaysTitle}}
+                                            </dt>
+                                            <dd class="DurationDays">{{Localization.ski.durationDaysPre}}<strong>{{DurationDays}}</strong>{{Localization.ski.durationDaysPost}}</dd>
+                                            {{/if}}
+                                            {{#if StartDate}}
+                                            <dt class="startDate">
+                                                {{#equal ItemActivatesPromo "Y"}} {{Localization.ski.promoActivatingPassStartDate}} {{else}} {{Localization.ski.passTypeStartDate}} {{/equal}} 
+                                            </dt>
+                                            <dd class="startDate">{{RSDateToString StartDate Localization.CultureInfo.formatPatterns.mediumDate}}</dd>
+                                            {{/if}}
+                                            {{#if EndDate}}
+                                            <dt class="endDate">
+                                                {{#equal ItemActivatesPromo "Y"}} {{Localization.ski.promoActivatingPassEndDate}} {{else}} {{Localization.ski.passTypeEndDate}} {{/equal}} 
+                                            </dt>
+                                            <dd class="endDate">{{RSDateToString EndDate Localization.CultureInfo.formatPatterns.mediumDate}}</dd>
+                                            {{/if}}
+                                        </dl>
+                                    </div>
+                                </div>
+                                <div class="span1 spa">
+                                    <a class="{{#equal ItemActivatesPromo "Y"}}{{#unless user.CustomerId}}disabled-{{/unless}}{{/equal}}skiServiceButton btn btn-primary error-hide {{#equal ItemActivatesPromo "Y"}}{{#unless user.CustomerId}}disabled{{/unless}}{{/equal}}"
+                                       title="{{Localization.spaBooking.serviceSelection.err.dateRequired}}"
+                                       data-loading-text="{{Localization.general.progressIndicatorMessage}}"
+                                       {{#equal ItemActivatesPromo "Y"}}{{#unless user.CustomerId}}disabled-{{/unless}}{{/equal}}href="#/ski/purchase{{#if pass}}Pass{{/if}}/{{SkiItemId}}/{{earliestStartDate}}">{{Localization.ski.purchaseButton}}</a>
+                                    
+                                </div>
+                            </div>
+
+                        </div>

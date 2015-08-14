@@ -1,0 +1,26 @@
+{
+  "name": "rsweb",
+  "description": "ResortSuite Web JavaScript Client",
+  "version": "0.0.0",
+  "author": {
+    "name": "Andy Zarzycki",
+    "url": "http://andy.zarzycki.ca/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/rsweb.js.git"
+  },
+  "licenses": [
+    {
+      "type": "Proprietary"
+    }
+  ],
+  "main": "main",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.3.8"
+  },
+  "keywords": [
+    "rsweb"
+  ]
+}

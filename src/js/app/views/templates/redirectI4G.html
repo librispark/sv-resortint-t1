@@ -1,0 +1,14 @@
+<div class="modal" id="I4GModal">
+    <div class="modal-body" style="padding: 0 15px 0 15px; max-height:450px">
+        <div class="row">
+            <iframe style="width: 560px; height: 400px; display:block" id="I4GFrame" name="I4GFrame" src=""></iframe>
+        </div>
+    </div>
+</div>
+
+<form id="redirectI4GForm" action="{{forwardURL}}" method="POST" target="I4GFrame">
+    <input type="hidden" name="i4Go_SuccessURL" value="{{successURL}}"/>
+    <input type="hidden" name="i4Go_FailureURL" value="{{failURL}}"/>
+    <input type="hidden" name="i4Go_Target" value="_top"/>
+    <input type="submit" style="visibility:hidden"/>
+</form>

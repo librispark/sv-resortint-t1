@@ -1,0 +1,25 @@
+<script>
+_gaq.push(['_addTrans',
+   '{{appData.WebFolioId}}',           // transaction ID - required
+   '{{escapeJSString storeName}}', // affiliation or store name
+   '{{toFixed balance 2}}',          // total - required
+   '',           // tax
+   '',          // shipping
+   '{{escapeJSString customerCity}}',       // city
+   '{{escapeJSString customerState}}',     // state or province
+   '{{escapeJSString customerCountry}}'             // country
+]);
+
+{{#cartData}}
+_gaq.push(['_addItem',
+   '{{../appData.WebFolioId}}',           // transaction ID - necessary to associate item with transaction
+   '{{escapeJSString sku}}',           // SKU/code - required
+   '{{escapeJSString name}}',   // product name
+   '{{escapeJSString cat}}',        // category or variation
+   '{{#equal category "Hotel"}}{{toFixed adr 2}}{{else}}{{toFixed price 2}}{{/equal}}',          // unit price - required  EachAmount
+   '{{#equal category "Hotel"}}{{nights}}{{else}}{{qty}}{{/equal}}'               // quantity - required
+]);
+{{/cartData}}
+
+_gaq.push(['_trackTrans']);
+</script>

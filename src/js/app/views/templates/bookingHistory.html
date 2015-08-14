@@ -1,0 +1,115 @@
+<div class="well well-small span9 offset1">
+    <div class="bookingHistory clearfix page-header">
+        <h3>{{Localization.bookingSummary.BookingHistory}}<br/>
+            <small>{{Localization.bookingSummary.pastBookings}}</small>
+        </h2>
+
+    </div>
+    <div class="page-header">
+        <h4>{{Localization.bookingSummary.addMore}}
+            <small>{{Localization.bookingSummary.addMoreSlogan}}</small>
+        </h4>
+    </div>
+    <div class="page-header clearfix">
+        {{#serviceTypes}}
+        <a class="btn span" style="margin-top: 16px; margin-left: 24px" href="#/{{href}}"><i class="icon-{{icon}}"></i> {{name}}</a>
+        {{/serviceTypes}}
+    </div>
+    {{#pmsBookings}}{{#if Past}}
+    <div class="page-header" data-folioid="{{PMSFolioId}}" data-webfolioid="{{WebFolioId}}">
+        <h3>
+            {{#if isDayBooking}}
+                {{../../../Localization.bookingSummary.dayVisitAt}} {{Venue}}
+            {{else}}
+                {{../../../Localization.bookingSummary.roomReservationAt}} {{Venue}}
+            {{/if}}
+        </h3>
+        <div class="row">
+            <div class="span5">
+                <p>
+                    {{#unless isDayBooking}}{{../../../Localization.roomReservation.roomTypeSelection.title}}: <strong class="pmsRoomTypeName{{stripChars PMSRoomType}}">{{PMSRoomType}}</strong><br/>{{/unless}}
+                    {{../../Localization.roomReservation.packageSelection.title}}: <strong class="pmsRateName{{stripChars PMSRateType}}">{{PMSRateType}}</strong>
+                </p>
+            </div>
+            <div class="span">
+                <h4>{{../../Localization.bookingSummary.grid.totalAmountLabel}}: {{../../Localization.general.currencyPrefix}}{{toFixed TotalStayRateIncl 2}}{{../../Localization.general.currencyPostfix}}</h4>
+                {{#if ArrivalDate}}
+                    {{#if isDayBooking}}
+                        {{../../../../Localization.roomReservation.confirmation.visitDateLabel}}
+                    {{else}}
+                        {{../../../../Localization.roomReservation.datesAndOccupants.arrivalLabel}}:
+                    {{/if}}
+                    <strong>{{RSDateToString ArrivalDate}}</strong><br/>
+                {{/if}}
+                {{#unless isDayBooking}}{{#if DepartureDate}}
+                    {{../../../../Localization.roomReservation.datesAndOccupants.departureLabel}}: <strong>{{RSDateToString DepartureDate}}</strong>
+                {{/if}}{{/unless}}
+                </div>
+        </div>
+        <div class="row">
+            <div class="span pull-right">
+                <a class=" removeCartButton btn btn-primary" style="margin-top:4px"
+                   href="#/roomsBooking/roomtype/{{urlEscape PMSRateType}}//1/{{urlEscape Venue}}">{{../../Localization.bookingSummary.bookPackageAgain}}</a>
+            </div>
+        </div>
+    </div>
+    {{/if}}{{/pmsBookings}}
+    {{#spaBookings}}{{#if Past}}
+    <div class="page-header" data-folioid="{{SpaFolioId}}" data-webfolioid="{{SpaFolioItem.WebFolioId}}">
+        <h3>
+            {{SpaFolioItem.ItemName}}
+        </h3>
+        <div class="row">
+            <div class="span5">
+                <p>
+                    {{../../Localization.bookingSummary.spaServiceFrom}} <strong>{{SpaFolioItem.LocationName}}</strong>
+                </p>
+            </div>
+            <div class="span">
+                <h4>{{../../Localization.bookingSummary.grid.totalAmountLabel}}: {{../../Localization.general.currencyPrefix}}{{toFixed FolioTotal 2}}{{../../Localization.general.currencyPostfix}}</h4>
+                {{#unless isDayBooking}}{{#if DepartureDate}}
+                    {{../../../../Localization.roomReservation.datesAndOccupants.departureLabel}}: <strong>{{RSDateToString DepartureDate}}</strong>
+                {{/if}}{{/unless}}
+
+                {{#if SpaFolioItem.BookStartTime}}{{../../../Localization.spaBooking.serviceSelection.dateLabel}}: <strong>{{RSDateToString SpaFolioItem.BookStartTime "D"}}</strong><br />{{../../../Localization.bookingSummary.time}} <strong>{{RSDateToString SpaFolioItem.BookStartTime "h:mm tt"}}</strong>{{/if}}
+            {{#if SpaFolioItem.BookEndTime}}- <strong>{{{RSDateToString SpaFolioItem.BookEndTime "h:mm tt"}}}</strong>{{/if}}
+                </div>
+        </div>
+        <div class="row">
+            <div class="span pull-right">
+                {{#equal SpaFolioItem.ItemClass "C"}}
+                <a class=" removeCartButton btn btn-primary" style="margin-top:4px" href="#/spaBooking/class/Location{{SpaFolioItem.LocationId}}/">{{../../../Localization.bookingSummary.bookClassAgain}}</a>
+                {{else}}
+                <a class=" removeCartButton btn btn-primary" style="margin-top:4px" href="#/spaBooking/service/Location{{SpaFolioItem.LocationId}}|{{SpaFolioItem.SpaItemId}}">{{../../../Localization.bookingSummary.bookServiceAgain}}</a>
+                {{/equal}}
+            </div>
+        </div>
+    </div>
+    {{/if}}{{/spaBookings}}
+    {{#golfBookings}}{{#if Past}}
+    <div class="page-header" data-bookingid="{{GolfBookingId}}" data-webfolioid="{{SpaFolioItem.WebFolioId}}">
+        <h3>
+            {{golfPlayers.itemName}}
+        </h3>
+        <div class="row">
+            <div class="span5">
+                <p>
+                    {{../../Localization.bookingSummary.players}} <strong>{{golfPlayers.players}}</strong>
+                </p>
+            </div>
+            <div class="span">
+                <h4>{{../../Localization.bookingSummary.grid.totalAmountLabel}}: {{../../Localization.general.currencyPrefix}}{{toFixed golfPlayers.price 2}}{{../../Localization.general.currencyPostfix}}</h4>
+
+
+                {{#if BookingTime}}{{../../../Localization.spaBooking.serviceSelection.dateLabel}}: <strong>{{RSDateToString BookingTime "D"}}</strong><br />{{../../../Localization.bookingSummary.time}} <strong>{{RSDateToString BookingTime "h:mm tt"}}</strong>{{/if}}
+                </div>
+        </div>
+        <div class="row">
+            <div class="span pull-right">
+                <a class=" removeCartButton btn btn-primary" style="margin-top:4px" href="#/golfBooking">{{../../Localization.bookingSummary.bookCourseAgain}}</a>
+            </div>
+        </div>
+    </div>
+    {{/if}}{{/golfBookings}}
+
+</div>

@@ -1,0 +1,34 @@
+<div class="span10 offset1">
+    <div class="accordion " id="accordion2">
+        <p>{{Localization.golf.selectCourseDefault}}</p>
+        {{#golfCourse}}
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
+                   href="#collapse{{CourseId}}">
+                    {{CourseName}}
+                </a>
+            </div>
+            <div id="collapse{{CourseId}}" class="accordion-body {{#equal CourseId ../showitem}}in {{/equal}}collapse">
+                <div class="accordion-inner">
+                    <div class="row">
+                        {{#if CourseImage}}
+                        <div class="span3 pagination-centered">
+                            <img width="270" src="{{CourseImage}}" alt="">
+                        </div>
+                        <div class="span4">
+                        {{else}}
+                        {{! <!-- }}<div class="span7">{{! --> }}
+                        {{/if}}
+                            <p>{{CourseDesc}}</p>
+                        </div>
+                        <div class="span2">
+                            <a class="btn btn-primary" style="margin-top:4px" data-loading-text="{{../Localization.general.progressIndicatorMessage}}" href="#/golfBooking/course/{{CourseId}}">{{../Localization.golf.selectCourse}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/golfCourse}}
+    </div>
+</div>

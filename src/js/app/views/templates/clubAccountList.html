@@ -1,0 +1,14 @@
+<div class="span10 offset1">
+    <div class="accordion " id="accordion2">
+        <p>{{Localization.club.selectAccount}}</p>
+        {{#clubAccounts}}
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-parent="#accordion2" href="#/membership/account/{{AccountId}}">
+                    {{AccountClass}} {{../Localization.club.membership}}
+                </a>
+            </div>
+        </div>
+        {{/clubAccounts}}
+    </div>
+</div>

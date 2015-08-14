@@ -1,0 +1,239 @@
+<p>{{Localization.giftCertificate.instructions}}</p>
+<p>{{Localization.giftCertificate.customerCustomTextHeader}}</p>
+<div class=" span10 offset1">
+    <div class="accordion " id="retailaccordion">
+        {{#giftCertificates}}
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle clearfix" data-toggle="collapse" data-parent="#retailaccordion" href="#collapse{{stripChars ItemId}}">
+                    <span class="pull-left-ie7">{{Name}}</span>
+                    <div class="pull-right ">
+                        <span class="label label-info">{{../Localization.general.currencyPrefix}}{{toFixed Price 2}}{{../Localization.general.currencyPostfix}}</span>
+                    </div>
+                </a>
+            </div>
+            <div id="collapse{{stripChars ItemId}}" class="accordion-body giftCertCollapse collapse">
+                <div class="accordion-inner">
+                    {{#equal Customizable "Y"}}
+                    <div id="giftcert{{stripChars ItemId}}" class="row giftCert">
+                        <div class="span3">
+                            <div class="thumbnail">
+                                <img class="gcStyleActive" width="258" src="img/GCStyleA.jpg" alt="" data-gcstyle="1">
+                                <br>
+                                <h5>{{../../Localization.giftCertificate.customGiftCertificate.styleImgTitle}}</h5>
+                                <br>
+                                <div class="clearfix">
+                                    <img class="gcStyle" width="80" src="img/GCStyleA.jpg" alt="" data-gcstyle="1">
+                                    <img class="gcStyle" width="80" src="img/GCStyleB.jpg" alt="" data-gcstyle="2">
+                                    <img class="gcStyle noRightMargin" width="80" src="img/GCStyleC.jpg" alt="" data-gcstyle="3">
+                                </div>
+
+                            </div>
+                        </div>
+                        <form class="form-horizontal span6 accordion-group" action="">
+                            <input type="hidden" class="gcStyleValue" id="certStyle{{stripChars ItemId}}" value="1">
+                            <input type="hidden" class="gcId" id="gcId{{stripChars ItemId}}" value="{{stripChars ItemId}}">
+                            <p>{{{nl2br Description}}}</p>
+                            &nbsp;
+
+                            <div class="control-group">
+                                <label class="control-label" for="gcRecipient{{stripChars ItemId}}">{{../../Localization.giftCertificate.customGiftCertificate.recipientNameLabel}}</label>
+                                <div class="controls">
+                                    <input type="text" id="gcRecipient{{stripChars ItemId}}" name="gcRecipient" class="gcRecipient required span4" value=""/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="gcMessage{{stripChars ItemId}}">{{../../Localization.giftCertificate.customGiftCertificate.messageLabel}}</label>
+                                <div class="controls">
+                                    <textarea id="gcMessage{{stripChars ItemId}}" class="gcMessage span4" rows="4"></textarea>
+                                </div>
+                            </div>
+                            &nbsp;
+                            <h4>{{../../Localization.giftCertificate.customGiftCertificate.deliverVia}}</h4>
+                            <div class="btn-group" data-toggle="buttons-radio">
+                                <a data-toggle="collapse" data-target="#gcEmail{{stripChars ItemId}}" data-parent="#giftcert{{stripChars ItemId}}" data-value="E" class="btn btn-small active gcDeliverViaBtn gcEmail">{{../../Localization.giftCertificate.customGiftCertificate.sendByEmailLabel}}</a>
+                                {{#if ../../Customization.retail.showSnailMail}}
+                                <a data-toggle="collapse" data-target="#gcPost{{stripChars ItemId}}" data-parent="#giftcert{{stripChars ItemId}}" data-value="M" class="btn btn-small gcDeliverViaBtn gcPost">{{../../../Localization.giftCertificate.customGiftCertificate.sendByMailTitle}}</a>
+                                {{/if}}{{#if ../../Customization.retail.showPickup}}
+                                <a data-toggle="collapse" data-target="#gcPickup{{stripChars ItemId}}" data-parent="#giftcert{{stripChars ItemId}}" data-value="P" class="btn btn-small gcDeliverViaBtn gcPickup">{{../../../Localization.giftCertificate.customGiftCertificate.pickupTitle}}</a>
+                                {{/if}}
+                            </div>
+                            &nbsp;
+                            <div id="gcEmail{{stripChars ItemId}}" class="gcDeliverVia gcEmail collapse in">
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcEmailAddress{{stripChars ItemId}}">{{../../Localization.giftCertificate.customGiftCertificate.emailAddressLabel}}</label>
+                                        <div class="controls">
+                                            <input type="text" id="gcEmailAddress{{stripChars ItemId}}" class="gcEmailAddress email" name="gcEmailAddress" value=""/>
+                                        </div>
+                                    </div>
+                            </div>
+                            {{#if ../../Customization.retail.showSnailMail}}
+                            <div id="gcPost{{stripChars ItemId}}" class="gcDeliverVia gcPost collapse">
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostAddress{{stripChars ItemId}}">{{../../../Localization.giftCertificate.customGiftCertificate.postalAddressLabel}}</label>
+                                        <div class="controls">
+                                            <input type="text" id="gcPostAddress{{stripChars ItemId}}" class="gcPostAddress" name="gcPostAddress" value=""/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostAddress2{{stripChars ItemId}}">{{../../../Localization.giftCertificate.customGiftCertificate.postalAddress2Label}}</label>
+                                        <div class="controls">
+                                            <input type="text" id="gcPostAddress2{{stripChars ItemId}}" class="gcPostAddress2" name="gcPostAddress2" value=""/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostCity{{stripChars ItemId}}">{{../../../Localization.giftCertificate.customGiftCertificate.cityLabel}}</label>
+                                        <div class="controls">
+                                            <input type="text" id="gcPostCity{{stripChars ItemId}}" class="gcPostCity" name="gcPostCity" value=""/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostState{{stripChars ItemId}}">{{../../../Localization.giftCertificate.customGiftCertificate.stateLabel}}</label>
+                                        <div class="controls">
+                                            <select id="gcPostState{{stripChars ItemId}}" class="gcPostState" name="gcPostState">
+                                            <option value=""></option>
+                                            {{#../../../Localization.stateList}}
+                                            <option value="{{code}}">{{#if ../../../../Customization.showProvinceCode}}{{code}} - {{/if}}{{name}}</option>
+                                            {{/../../../Localization.stateList}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostCountry{{stripChars ItemId}}">{{../../../Localization.giftCertificate.customGiftCertificate.countryLabel}}</label>
+                                        <div class="controls">
+                                            <input type="text" id="gcPostCountry{{stripChars ItemId}}" class="gcPostCountry" name="gcPostCountry" value=""/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostZip{{stripChars ItemId}}">{{../../../Localization.giftCertificate.customGiftCertificate.zipLabel}}</label>
+                                        <div class="controls">
+                                            <input type="text" id="gcPostZip{{stripChars ItemId}}" class="gcPostZip" name="gcPostZip" value=""/>
+                                        </div>
+                                    </div>
+                                    {{#equal ExpressShippingAvailable "Y"}}
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostZip{{stripChars ../ItemId}}">{{../../../../Localization.giftCertificate.customGiftCertificate.expressLabel}}</label>
+                                        <div class="controls">
+                                            <input type="checkbox" id="gcExpress{{stripChars ../ItemId}}" class="gcExpress" name="gcExpress" value="true"/>
+                                        </div>
+                                    </div>
+                                    {{/equal}}
+                            </div>
+                            {{/if}}{{#if ../../Customization.retail.showPickup}}
+                            <div id="gcPickup{{stripChars ItemId}}" class="gcDeliverVia gcPickup collapse">
+                                    <div class="control-group">
+                                        {{../../../Localization.giftCertificate.customGiftCertificate.pickupText}}
+                                    </div>
+                            </div>
+                            {{/if}}
+                            <div class="pull-right">
+                                <a class="btn btn-primary submitGCForm" style="margin-top:4px" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}" href="#/giftCertificates/purchaseGC/{{urlEscape ItemId}}">{{../../Localization.general.continueProcessButtonLabel}}</a>
+                            </div>
+
+
+                        </form>
+                    </div>
+                            {{else}}
+                    <div id="giftcert{{stripChars ItemId}}" class="row giftCert">
+
+
+						<form class="form-horizontal span8 accordion-group" action="">
+                            <input type="hidden" class="gcId" id="gcId{{stripChars ItemId}}" value="{{stripChars ItemId}}">
+                            <p>{{{nl2br Description}}}</p>
+                            &nbsp;
+
+                            <div class="control-group">
+                                <label class="control-label" for="gcRecipient{{stripChars ItemId}}">{{../../Localization.giftCertificate.customGiftCertificate.recipientNameLabel}}</label>
+                                <div class="controls">
+                                    <input type="text" id="gcRecipient{{stripChars ItemId}}" name="gcRecipient" class="gcRecipient required span4" value=""/>
+                                </div>
+                            </div>
+                            {{#if ../../Customization.retail.allowMessageInNonCustomGC}}
+                            <div class="control-group">
+                                <label class="control-label" for="gcMessage{{stripChars ItemId}}">{{../../../Localization.giftCertificate.customGiftCertificate.messageLabel}}</label>
+                                <div class="controls">
+                                    <textarea id="gcMessage{{stripChars ItemId}}" class="gcMessage span4" rows="4"></textarea>
+                                </div>
+                            </div>
+                            {{/if}}
+                            &nbsp;
+                            {{#if ../../mailOrPickup}}
+                            <h4>{{../../Localization.giftCertificate.customGiftCertificate.deliverVia}} {{#unless ../../../Customization.retail.showSnailMail}}<small>{{../../../../Localization.giftCertificate.customGiftCertificate.pickupTitle}}</small>{{/unless}}{{#unless ../../../Customization.retail.showPickup}}<small>{{../../../../Localization.giftCertificate.customGiftCertificate.sendByMailTitle}}</small>{{/unless}}</h4>
+                            <div class="btn-group" data-toggle="buttons-radio">
+                                {{#if ../../../Customization.retail.showPickup}}{{#if ../../../../Customization.retail.showSnailMail}}
+                                <a data-toggle="collapse" data-target="#gcPost{{stripChars ItemId}}" data-parent="#giftcert{{stripChars ItemId}}" data-value="M" class="btn btn-small gcDeliverViaBtn active gcPost">{{../../../../../Localization.giftCertificate.customGiftCertificate.sendByMailTitle}}</a>
+                                <a data-toggle="collapse" data-target="#gcPickup{{stripChars ItemId}}" data-parent="#giftcert{{stripChars ItemId}}" data-value="P" class="btn btn-small gcDeliverViaBtn gcPickup">{{../../../../../Localization.giftCertificate.customGiftCertificate.pickupTitle}}</a>
+                                {{/if}}{{/if}}
+                            </div>
+                            &nbsp;
+                                {{#if ../../../Customization.retail.showSnailMail}}
+                            <div id="gcPost{{stripChars ItemId}}" class="gcDeliverVia gcPost collapse in">
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostAddress{{stripChars ItemId}}">{{../../../../Localization.giftCertificate.customGiftCertificate.postalAddressLabel}}</label>
+                                        <div class="controls">
+                                            <input type="text" id="gcPostAddress{{stripChars ItemId}}" class="gcPostAddress" name="gcPostAddress" value=""/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostAddress2{{stripChars ItemId}}">{{../../../../Localization.giftCertificate.customGiftCertificate.postalAddress2Label}}</label>
+                                        <div class="controls">
+                                            <input type="text" id="gcPostAddress2{{stripChars ItemId}}" class="gcPostAddress2" name="gcPostAddress2" value=""/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostCity{{stripChars ItemId}}">{{../../../../Localization.giftCertificate.customGiftCertificate.cityLabel}}</label>
+                                        <div class="controls">
+                                            <input type="text" id="gcPostCity{{stripChars ItemId}}" class="gcPostCity" name="gcPostCity" value=""/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostState{{stripChars ItemId}}">{{../../../../Localization.giftCertificate.customGiftCertificate.stateLabel}}</label>
+                                        <div class="controls">
+                                            <select id="gcPostState{{stripChars ItemId}}" class="gcPostState" name="gcPostState">
+                                            <option value=""></option>
+                                            {{#../../../../Localization.stateList}}
+                                            <option value="{{code}}">{{#if ../../../../../Customization.showProvinceCode}}{{code}} - {{/if}}{{name}}</option>
+                                            {{/../../../../Localization.stateList}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostCountry{{stripChars ItemId}}">{{../../../../Localization.giftCertificate.customGiftCertificate.countryLabel}}</label>
+                                        <div class="controls">
+                                            <input type="text" id="gcPostCountry{{stripChars ItemId}}" class="gcPostCountry" name="gcPostCountry" value=""/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="gcPostZip{{stripChars ItemId}}">{{../../../../Localization.giftCertificate.customGiftCertificate.zipLabel}}</label>
+                                        <div class="controls">
+                                            <input type="text" id="gcPostZip{{stripChars ItemId}}" class="gcPostZip" name="gcPostZip" value=""/>
+                                        </div>
+                                    </div>
+                            </div>
+                                {{/if}}{{#if ../../../Customization.retail.showPickup}}
+                            <div id="gcPickup{{stripChars ItemId}}" class="gcDeliverVia gcPickup collapse {{#unless ../../../../Customization.retail.showSnailMail}}in{{/unless}}">
+                                    <div class="control-group">
+                                        {{../../../../Localization.giftCertificate.customGiftCertificate.pickupText}}
+                                    </div>
+                            </div>
+                                {{/if}}
+                            {{/if}}
+                            <div class="pull-right">
+                                <a class="btn btn-primary submitGCForm" style="margin-top:4px" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}" href="#/giftCertificates/purchaseGC/{{urlEscape ItemId}}">{{../../Localization.general.continueProcessButtonLabel}}</a>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    {{/equal}}
+                </div>
+            </div>
+        </div>
+        {{/giftCertificates}}
+    </div>
+</div>
+<div class=" span10 ohyeah offset1">
+    <div class="accordion " id="packageSelectionaccordion3">
+        <p>{{Localization.giftCertificate.customerCustomTextFooter}}</p>
+    </div>
+</div>

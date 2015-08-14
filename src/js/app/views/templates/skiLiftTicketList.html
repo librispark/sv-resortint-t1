@@ -1,0 +1,103 @@
+<form id="spaServiceForm" class="form-horizontal span">
+    <div class="page-header">
+        <h2>{{location.LocationName}}
+            <small>{{Localization.ski.serviceTitle}}{{#if Customization.ski.showPropertyName}} - {{location.PropertyName}}{{/if}}</small>
+        </h2>
+    </div>
+    <p>{{Localization.ski.instructionsTickets}}</p>
+    <p>{{{Localization.ski.customerCustomTextHeader}}}</p>
+    <input type="hidden" id="skiServiceDate" class="skiDate" />
+    <input type="hidden" id="skiRecipients" class="skiRecipients" value="{{selectedRecipient}}" />
+    <input type="hidden" id="skiItemSelected" class="skiItemSelected" />
+    <div class="row">
+        <div class="span4 offset2">
+            <div class="control-group">
+
+                <label for="skiDate">{{Localization.ski.dateLabel}}</label>
+                <div class="input-append">
+
+
+
+                    <input type="text" id="skiDate" name="skiDate" class="span2 skiDate datepicker bookingdate required" readonly="readonly" value="{{startDate}}"/>
+                    <label for="skiDate" class="add-on"><i class="icon-calendar"></i></label>
+                </div>
+            </div>
+        </div>
+        {{#if showBookForGroupMember}}
+        <div class="span5">
+            <div class="control-group">
+                    <label for="skiRecipients">{{Localization.ski.ticketFor}}</label>
+                    <select class="skiRecipients required" name="">
+                        <option {{#equal "" selectedRecipient}}selected="selected"{{/equal}} value="">{{#if user.Name.FirstName}}{{user.Name.FirstName}} {{user.Name.LastName}}{{else}}{{Localization.ski.meLabel}}{{/if}}</option>
+                        {{#group}}
+                            <option {{#equal CustomerId ../selectedRecipient}}selected="selected"{{/equal}} value="{{CustomerId}}">{{Name.FirstName}} {{Name.LastName}}</option>
+                        {{/group}}
+                        {{#unless Customization.skiBooking.disallowQuickAddGroupMember}}<option id="newMemberOption">Add new Member</option>{{/unless}}
+                    </select>
+                    <div class="newMember hide">
+                        <h4>{{Localization.newUser.newGroupMember}}</h4>
+                        <div class="pull-left">
+                            <label for="newMemberFirstName">{{Localization.newUser.firstNameTitle}}</label>
+                            <input class="span2" type=text name="newMemberFirstName" id="newMemberFirstName" placeholder="{{Localization.newUser.firstNameTitle}}"/>
+                        </div>
+                        <div class="pull-left">
+                            <label for="newMemberLastName">{{Localization.newUser.lastNameTitle}}</label>
+                            <input class="span2" type=text name="newMemberLastName" id="newMemberLastName" placeholder="{{Localization.newUser.lastNameTitle}}"/>
+                        </div>
+                        <div class="pull-left">
+                            <label>&nbsp;</label>
+                            <a class="btn btn-primary btn-small" id="newMemberAdd">{{Localization.newUser.addButtonLabel}}</a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        {{else}}
+        <input type=hidden class="skiRecipients required" name="" value="" />
+        {{#unless Customization.skiBooking.disallowBookForGroupMember}}<div class="span4 loginPrompt"><strong>{{Localization.ski.areYouAMember}}</strong><a class="btn btn-small pull-right" style="position: relative; top:-4px; left: 4px" href="#/profile/login/next{{url}}">{{Localization.general.login.loginButtonLabel}}</a><br/>{{Localization.ski.loginToReceive}}</div>{{/unless}}
+        {{/if}}
+    </div>
+    <div class="tabbable tabs-left-desktop" id="categories">
+        <ul class="nav nav-tabs span" id="categoryTabs">
+            {{#if anyLiftTickets}}<h4>{{Localization.ski.locationLabel}}</h4>{{/if}}
+            {{#categories}}
+            {{#if first}}<p class="categoryLabel promo">{{../../Localization.ski.promo}}</p>{{/if}}
+            <li class="{{#equal name ../showcategory.name}}{{#equal ../promo ../../showcategory.promo}}active{{/equal}}{{/equal}}{{#if promo}} promo{{/if}}"><a href="#category_{{stripChars name}}{{#if promo}}_promo{{/if}}"
+                data-toggle="tab"
+                class="{{#equal name ../showcategory.name}}{{#equal ../promo ../../showcategory.promo}}active{{/equal}}{{/equal}} alert-hide">{{name}}</a></li>
+            {{/categories}}
+        </ul>
+        <div class="tab-content">
+            {{#if anyLiftTickets}}<h4>{{Localization.ski.serviceNameLabel}}</h4>{{/if}}
+            {{#equal showitem ""}}{{#if ../anyLiftTickets}}
+            <div class="span2 notie7"></div>
+            <div class="alert alert-success span4" style="margin-top: 6px;"><i class="icon-arrow-left visible-desktop"></i><strong> {{../../Localization.ski.unselectText}} </strong><i class="icon-arrow-up upicon hidden-desktop"></i></div>
+            {{/if}}{{/equal}}
+            <div style="overflow-y:hidden; height:1px">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </div>
+            {{#categories}}
+            <div class="tab-pane accordion {{first}}{{#equal name ../showcategory.name}}{{#equal ../promo ../../showcategory.promo}} active{{/equal}}{{/equal}}"
+                 id="category_{{stripChars name}}{{#if promo}}_promo{{/if}}">
+                {{#tickets}}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a id="skiItemToggle{{SkiItemId}}" class="skiItemToggle accordion-toggle clearfix alert-hide" data-toggle="collapse" data-parent="#category_{{stripChars ../name}}{{#if ../promo}}_promo{{/if}}" href="#skiItem{{SkiItemId}}">
+                            <span class="pull-left-ie7">{{ItemName}}</span>
+                            <div class="pull-right ">
+                                <span class="label label-info">{{../../Localization.general.currencyPrefix}}{{toFixed Price 2}}{{../../Localization.general.currencyPostfix}}</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div id="skiItem{{SkiItemId}}" class="skiItem accordion-body collapse empty">
+                        &nbsp;
+                    </div>
+                </div>
+                {{/tickets}}
+            </div>
+            {{/categories}}
+        </div>
+    </div>
+</form>
+<div class=" span10 ohyeah offset1">
+    <div class="accordion " id="packageSelectionaccordion3">
+        <p>{{Localization.ski.customerCustomTextFooter}}</p>
+    </div>
+</div>

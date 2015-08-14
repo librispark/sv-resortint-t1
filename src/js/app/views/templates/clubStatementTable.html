@@ -1,0 +1,78 @@
+<h3>{{Localization.club.charges}}</h3>
+<table class="table charges">
+    <thead>
+        <tr>
+            <th>{{Localization.club.date}}</th>
+            <th>{{Localization.club.description}}</th>
+            <th>{{Localization.club.amount}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#if charges}}
+            {{#charges}}
+                <tr data-toggle="collapse" {{#if ChargeDetails.PostingItem}}data-target="#folio-{{FolioItemId}}" style="cursor:pointer;" {{/if}}>
+                    <td class="date">{{#if ChargeDetails.PostingItem}}<i id="icon-{{FolioItemId}}" class="icon-chevron-right"></i>{{else}}<i style="visibility: hidden;" class="icon-chevron-right"></i>{{/if}} {{DateMonthDay}}</td>
+                    <td class="name">{{Name}}</td>
+                    <td class="price">{{../Localization.general.currencyPrefix}}{{toFixed TotalPrice 2}}{{../Localization.general.currencyPostfix}}</td>
+                </tr>
+                {{#if ChargeDetails.PostingItem}}
+                <tr>
+                    <td style="line-height: 0px;padding: 0px;border-top: none;" colspan="3">
+                        <div id="folio-{{FolioItemId}}" data-folio-id="{{FolioItemId}}" class="collapse transaction-details">
+                            <table class="table table-condensed table-striped">
+                                {{#ChargeDetails.PostingItem}}
+                                <tr>
+                                    <td class="date"><i style="visibility: hidden;" class="icon-chevron-right"></i>{{Item.DateMonthDay}}</td>
+                                    <td class="name">{{Item.Name}}</td>
+                                    <td class="price">{{../../../Localization.general.currencyPrefix}}{{toFixed Item.Amount 2}}{{../../../Localization.general.currencyPostfix}}</td>
+                                </tr>
+                                {{/ChargeDetails.PostingItem}}
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                {{/if}}
+            {{/charges}}
+        {{else}}
+            <tr><td colspan="3" style="text-align: center">{{../Localization.club.noTransactions}}</td></tr>
+        {{/if}}
+    </tbody>
+</table>
+
+<h3>{{Localization.club.payments}}</h3>
+<table class="table payments">
+    <thead>
+        <tr>
+            <th>{{Localization.club.date}}</th>
+            <th>{{Localization.club.description}}</th>
+            <th>{{Localization.club.amount}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#if payments}}
+        {{#payments}}
+        <tr>
+            <td>{{DateMonthDay}}</td>
+            <td>{{Label}}</td>
+            <td>{{../Localization.general.currencyPrefix}}{{toFixed Amount 2}}{{../Localization.general.currencyPostfix}}</td>
+        </tr>
+        {{/payments}}
+        {{else}}
+        <tr>
+            <td colspan="3" style="text-align: center">{{../Localization.club.noTransactions}}</td>
+        </tr>
+        {{/if}}
+    </tbody>
+</table>
+
+
+{{#if minimums}}{{#minimums}}
+<h3>{{../Localization.club.minimums}}</h3>
+<dl class="dl-horizontal span6 pull-left">
+    <dt>{{../Localization.club.minimumChargeDate}}:</dt><dd>{{RSDateToString MinimumChargeDate ../Localization.CultureInfo.formatPatterns.shortDate}}</dd>
+    <dt>{{../Localization.club.minimumStartDate}}:</dt><dd>{{RSDateToString MinimumStartDate ../Localization.CultureInfo.formatPatterns.shortDate}}</dd>
+    <dt>{{../Localization.club.minimumCharged}}:</dt><dd>{{../Localization.general.currencyPrefix}}{{toFixed MinimumCharged 2}}{{../Localization.general.currencyPostfix}}&nbsp;</dd>
+    <dt>{{../Localization.club.minimumTotal}}:</dt><dd>{{../Localization.general.currencyPrefix}}{{toFixed MinimumTotal 2}}{{../Localization.general.currencyPostfix}}&nbsp;</dd>
+    <dt>{{../Localization.club.minimumUsed}}:</dt><dd>{{../Localization.general.currencyPrefix}}{{toFixed MinimumUsed 2}}{{../Localization.general.currencyPostfix}}&nbsp;</dd>
+</dl>
+{{/minimums}}{{/if}}

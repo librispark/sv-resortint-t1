@@ -1,0 +1,66 @@
+<p>{{Localization.spaBooking.confirmation.title}}</p>
+<p>{{Localization.spaBooking.confirmation.customerCustomTextHeader}}</p>
+<form id="pmsBookConfirm" class="form-horizontal well span8 offset2" method="get">
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.golf.confirmation.locationLabel}}</p></label>
+            <div class="controls">
+                <p><strong>{{location.LocationName}}</strong></p>
+            </div>
+        </div></div>
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.spaBooking.classSelection.classNameLabel}}</p></label>
+            <div class="controls">
+                <p><strong>{{item.SpaItemName}}</strong></p>
+            </div>
+        </div></div>
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{#if spaClassComponent.SpaClassComponent}} {{../Localization.spaBooking.confirmation.serviceStartDateLabel}} {{else}} {{../Localization.spaBooking.confirmation.serviceDateLabel}}{{/if}}</p></label>
+            <div class="controls">
+                <p><strong>{{RSDateToString startDate "dddd, MMMM d, yyyy h:mm tt"}}</strong></p>
+            </div>
+        </div></div>
+        {{#if spaClassComponent.SpaClassComponent}}
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{../Localization.spaBooking.confirmation.additionalClasses}}</p></label>
+            <div class="controls">
+                <p>{{../Localization.spaBooking.confirmation.additionalClassesPartOfProgram}}</p>
+                {{#../spaClassComponent.SpaClassComponent}}
+                <p><strong>{{SpaItemName}} - {{RSDateToString StartTime "dddd, MMMM d, yyyy h:mm tt"}} - {{ServiceTime}} {{../Localization.spaBooking.serviceSelection.minutesLabel}}</strong></p>
+                {{/../spaClassComponent.SpaClassComponent}}
+            </div>
+        </div></div>
+        {{/if}}
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.spaBooking.confirmation.servicePriceLabel}}</p></label>
+            <div class="controls">
+                <p class="pull-left"><strong>{{Localization.general.currencyPrefix}}{{toFixed item.Price 2}}{{Localization.general.currencyPostfix}}</strong>{{#if total}} {{../Localization.spaBooking.confirmation.servicePerClassLabel}}{{/if}}
+                </p>
+            </div>
+        </div></div>
+        {{#if total}}
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.spaBooking.confirmation.serviceClassesLabel}}</p></label>
+            <div class="controls">
+                <p><strong>{{spaClassComponentCount}} </strong></p>
+
+            </div>
+        </div></div>
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.spaBooking.confirmation.serviceTotalLabel}}</p></label>
+            <div class="controls">
+                <p><strong>{{Localization.general.currencyPrefix}}{{toFixed ../total 2}}{{Localization.general.currencyPostfix}} </strong></p>
+
+            </div>
+        </div></div>
+        {{/if}}
+        <div class="row"><div class="control-group">
+        <div class="controls">
+            <a id="pmsFormSubmit" class="btn btn-primary pull-right" href="#/spaBooking/bookClass/{{spaLocationId}}/{{classId}}/{{itemId}}/{{startDate}}/{{guestName}}/1" data-loading-text="{{Localization.general.progressIndicatorMessage}}">{{Localization.roomReservation.confirmation.bookButtonLabel}}</a>
+        </div>
+    </div></div>
+</form>
+<div class=" span10 ohyeah offset1">
+    <div class="accordion " id="packageSelectionaccordion3">
+        <p>{{Localization.spaBooking.confirmation.customerCustomTextFooter}}</p>
+    </div>
+</div>

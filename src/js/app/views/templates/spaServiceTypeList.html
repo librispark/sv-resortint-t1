@@ -1,0 +1,44 @@
+    <p>{{Localization.spaBooking.categorySelection.instructions}}</p>
+    <div class="span10 offset1">
+        <div class="accordion " id="accordion2">
+            {{#location}}
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <span class="accordion-toggle" data-x-toggle="collapse" data-x-parent="#accordion2" x-href="#collapse{{LocationId}}">
+                        {{LocationName}}
+                    </span>
+                </div>
+                <div id="collapse{{LocationId}}" class="accordion-body in collapse">
+                    <div class="accordion-inner">
+                        <div class="row">
+                            {{#if LocationImage}}
+                            <div class="span3 pagination-centered">
+                                <img width="270" src="{{LocationImage}}" alt="">
+                            </div>
+                            <div class="span4">
+                                {{else}}
+                                {{! <!-- }}<div class="span7">{{! --> }}
+                                {{/if}}
+                                <p>{{LocationAddress}}<br />
+                                    {{LocationCity}}, {{LocationStateProv}}<br />
+                                    {{LocationPostalCode}}</p>
+                                {{#if LocationPhone}}<p>{{../../Localization.general.location.phone}}: <a href="tel:{{LocationPhone}}">{{LocationPhone}}</a></p>{{/if}}
+                                {{#if LocationWebAddress}}<p>{{../../Localization.general.location.website}}: <a href="http://{{LocationWebAddress}}">{{LocationWebAddress}}</a></p>{{/if}}
+                            </div>
+                            <div class="span2">
+                                {{#equal BookingType "Service"}}<a class="btn btn-primary" style="margin-top:4px" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}" href="#/spaBooking/service/Location{{../LocationId}}">{{../../Localization.spaBooking.serviceSelection.serviceNameLabel}}</a>{{/equal}}
+
+                                {{#equal BookingType "All"}}<a class="btn btn-primary" style="margin-top:4px" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}" href="#/spaBooking/service/Location{{../LocationId}}">{{../../Localization.spaBooking.serviceSelection.serviceNameLabel}}</a>
+                                <br/><br/><br/>
+                                <a class="btn btn-primary " style="margin-top:4px" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}" href="#/spaBooking/class/Location{{../LocationId}}">{{../../Localization.spaBooking.classSelection.classNameLabel}}</a>{{/equal}}
+
+                                {{#equal BookingType "Class"}}<br/><br/><br/>
+                                <a class="btn btn-primary " style="margin-top:4px" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}" href="#/spaBooking/class/Location{{../LocationId}}">{{../../Localization.spaBooking.classSelection.classNameLabel}}</a>{{/equal}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/location}}
+        </div>
+    </div>

@@ -1,0 +1,115 @@
+<p>{{Localization.roomReservation.confirmation.instructions}}</p>
+<p>{{Localization.roomReservation.confirmation.customerCustomTextHeader}}</p>
+<form id="pmsBookConfirm" class="form-horizontal well span8 offset2" method="get">
+<!--    {{#userLoggedIn}}
+    <div class="row"><div class="control-group">
+        <label class="control-label"><p>{{Localization.roomReservation.confirmation.guestNameLabel}}</p></label>
+        <div class="controls">
+            <p><strong>{{FirstName}} {{LastName}}</strong></p>
+        </div>
+    </div></div>
+    {{/userLoggedIn}} -->
+        <div class="row">
+		<div class="control-group">
+            <label class="control-label"><p>{{Localization.roomReservation.packageSelection.title}}</p></label>
+            <div class="controls">
+                <p><strong>{{{nl2br bookingParams.rateType.PMSRateTypeDesc}}}</strong></p>
+            </div>
+        </div></div>
+        {{#if bookingParams.dayGuestMode}} {{else}}
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.roomReservation.roomTypeSelection.title}}</p></label>
+            <div class="controls">
+                <p><strong>{{{nl2br roomTypeDetails.PMSRoomType.PMSRoomTypeDesc}}}</strong></p>
+            </div>
+        </div></div>
+        {{/if}}
+        {{#if RoomNumber}}
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.roomReservation.roomTypeSelection.roomNumber}}</p></label>
+            <div class="controls">
+                <p><strong>{{RoomNumber}}</strong></p>
+            </div>
+        </div></div>
+        {{/if}}
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{#if bookingParams.dayGuestMode}}{{Localization.roomReservation.confirmation.visitDateLabel}}{{else}}{{Localization.roomReservation.confirmation.arrivalDateLabel}}{{/if}}</p></label>
+            <div class="controls">
+                <p><strong>{{RSDateToString bookingParams.ArrivalDate}}</strong></p>
+            </div>
+        </div></div>
+        {{#if bookingParams.dayGuestMode}} {{else}}
+        <div class="row"><div class="control-group">
+        <label class="control-label"><p>{{Localization.roomReservation.confirmation.departureDateLabel}}</p></label>
+        <div class="controls">
+            <p><strong>{{RSDateToString bookingParams.DepartureDate}}</strong></p>
+        </div>
+    </div></div>
+        {{/if}}
+        <div class="row"><div class="control-group">
+        <label class="control-label"><p>{{Localization.roomReservation.confirmation.numberOfNightsLabel}}</p></label>
+        <div class="controls">
+            <p><strong>{{#if bookingParams.dayGuestMode}}{{Localization.roomReservation.confirmation.dayVisitOnly}}{{else}}{{bookingParams.stayDuration}}{{/if}}</strong></p>
+        </div>
+    </div></div>
+        <div class="row"><div class="control-group">
+        <label class="control-label"><p>{{Localization.roomReservation.confirmation.adultTotalLabel}}</p></label>
+        <div class="controls">
+            <p><strong>{{bookingParams.Adults}}</strong></p>
+        </div>
+    </div></div>
+    {{#if bookingParams.Youth}}
+        <div class="row"><div class="control-group">
+        <label class="control-label"><p>{{Localization.roomReservation.confirmation.youthTotalLabel}}</p></label>
+        <div class="controls">
+            <p><strong>{{bookingParams.Youth}}</strong></p>
+        </div>
+    </div></div>
+    {{/if}}
+    {{#if bookingParams.Children}}
+        <div class="row"><div class="control-group">
+        <label class="control-label"><p>{{Localization.roomReservation.confirmation.childTotalLabel}}</p></label>
+        <div class="controls">
+            <p><strong>{{bookingParams.Children}}</strong></p>
+        </div>
+    </div></div>
+    {{/if}}
+    {{#if bookingParams.Infants}}
+        <div class="row"><div class="control-group">
+        <label class="control-label"><p>{{Localization.roomReservation.confirmation.infantTotalLabel}}</p></label>
+        <div class="controls">
+            <p><strong>{{bookingParams.Infants}}</strong></p>
+        </div>
+    </div></div>
+    {{/if}}
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.roomReservation.confirmation.amountLabel}}</p></label>
+            <div class="controls">
+                {{#if noTotal}}
+                <p><strong>{{../Localization.general.currencyPrefix}}{{toFixed ../bookingParams.totalAmount 2}}{{../Localization.general.currencyPostfix}} </strong> {{../Localization.roomReservation.roomTypeSelection.roomTotalLabel}}</p>
+                {{else}}
+                <p><strong>{{../Localization.general.currencyPrefix}}{{toFixed ../roomTypeDetails.AverageRate 2}}{{../Localization.general.currencyPostfix}} </strong> {{../Localization.roomReservation.roomTypeSelection.roomRateLabel}}</p>
+                {{/if}}
+            </div>
+        </div></div>
+        {{#if noTotal}}
+        {{else}}
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.paymentProcessing.totalLabel}}:</p></label>
+            <div class="controls">
+                <p><strong>{{../Localization.general.currencyPrefix}}{{toFixed ../bookingParams.totalAmount 2}}{{../Localization.general.currencyPostfix}} </strong> {{../Localization.roomReservation.roomTypeSelection.roomTotalLabel}}</p>
+            </div>
+        </div></div>
+        {{/if}}
+        <div class="row"><div class="control-group">
+        <div class="controls">
+            <a id="pmsFormSubmit" class="btn btn-primary pull-right" href="#/roomsBooking/book" data-loading-text="{{Localization.general.progressIndicatorMessage}}">{{Localization.roomReservation.confirmation.bookButtonLabel}}</a>
+        </div>
+    </div></div>
+
+</form>
+<div class=" span10 ohyeah offset1">
+    <div class="accordion " id="packageSelectionaccordion3">
+        <p>{{Localization.roomReservation.confirmation.customerCustomTextFooter}}</p>
+    </div>
+</div>

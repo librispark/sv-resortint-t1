@@ -1,0 +1,37 @@
+<div class="row">
+<form id="golfTeeInfo" class="form-horizontal span8 offset2">
+    <p>{{Localization.golf.dateTimePlayerTitle}}</p>
+    <div class="control-group">
+        <label class="control-label" for="golfTeeDate">{{Localization.golf.dateLabel}}</label>
+        <div class="controls">
+            <input type="text" id="golfTeeDate" name="golfTeeDate" class="datepicker bookingdate required" readonly="readonly" value="{{startDate}}"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="golfTeeTime">{{Localization.golf.timeLabel}}</label>
+        <div class="controls">
+            <select id="golfTeeTime">
+                <option>{{Localization.golf.dateInstructions}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="golfTeePlayers">{{Localization.golf.playersLabel}}</label>
+        <div class="controls">
+            <select id="golfTeePlayers" class="required">
+                <option {{#equal numberOfPlayers "1"}}selected="selected" {{/equal}}value="1">1</option>
+                <option {{#equal numberOfPlayers "2"}}selected="selected" {{/equal}}{{#equal numberOfPlayers undefined}}selected="selected" {{/equal}}value="2">2</option>
+                <option {{#equal numberOfPlayers "3"}}selected="selected" {{/equal}}value="3">3</option>
+                <option {{#equal numberOfPlayers "4"}}selected="selected" {{/equal}}value="4">4</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="golfTeeInfoSubmit"></label>
+        <div class="controls">
+            <a id="golfTeeInfoSubmit" class="btn pull-right disabled" href="#/golfBooking/course/{{course}}">{{Localization.golf.continueButton}}</a>
+        </div>
+    </div>
+</form>
+        </div>
+<div id="golfResults" class="row"></div>

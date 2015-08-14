@@ -1,0 +1,43 @@
+<p>{{Localization.paymentProcessing.gcRedeemDescription}} <small>{{Localization.paymentProcessing.gcRedeemDescriptionSubtitle}}</small></p>
+<form id="cartGCRedeemForm" class="form-horizontal well span8 offset2 pristine" action="#/summary" method="post">
+    {{#if bothGCTypes}}
+    <p><strong>{{Localization.paymentProcessing.gcTypeDescription}}</strong></p>
+    <div class="control-group">
+        <label class="control-label" for="gcType"> {{Localization.paymentProcessing.gcTypeLabel}}</label>
+        <div class="controls">
+            <div id="gcType" class="btn-group" data-toggle="buttons-radio">
+                <button class="btn btn-primary active" data-value="CARD" id="gcTypeCard">{{Localization.paymentProcessing.gcTypeCard}}</button>
+                <button class="btn btn-primary" data-value="CERT" id="gcTypeCert">{{Localization.paymentProcessing.gcTypeCert}}</button>
+            </div>
+        </div>
+    </div>
+    {{else}}
+        {{#if eitherGCTypeID}}
+            <div id="gcType"><div class="active" data-value="CARD"></div></div>
+        {{/if}}
+        {{#if eitherGCTypeNum}}
+            <div id="gcType"><div class="active" data-value="CERT"></div></div>
+        {{/if}}
+    {{/if}}
+    <div class="control-group">
+        <label class="control-label" for="gcNumber" id="gcNumberLabel">{{Localization.paymentProcessing.gcNumber}}</label>
+        <div class="controls">
+            <input type="text" id="gcNumber" name="gcNumber" class="required" placeholder="{{Localization.paymentProcessing.gcNumberBlank}}" value=""/>
+        </div>
+    </div>
+    <div class="gcRefNumEnabled">
+        <p><strong>{{Localization.paymentProcessing.gcRefNumberDescription}}</strong></p>
+        <div class="control-group">
+            <label class="control-label" for="gcRefNumber">{{Localization.paymentProcessing.gcRefNumber}} <span class="gcRefNumberRequired">*</span></label>
+            <div class="controls">
+                <input type="text" id="gcRefNumber" name="gcRefNumber" placeholder="{{Localization.paymentProcessing.gcRefNumberBlank}}" value=""/>
+            </div>
+        </div>
+    </div>    
+    <div class="control-group">
+        <label class="control-label" for="gcRedeemSubmit"></label>
+        <div class="controls">
+            <input type="submit" id="gcRedeemSubmit" class="btn pull-right error-hide disabled" value="{{Localization.paymentProcessing.gcRedeemSubmit}}">
+        </div>
+    </div>
+</form>

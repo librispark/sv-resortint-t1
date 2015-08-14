@@ -1,0 +1,77 @@
+
+<div class="tabbable tabs-left-desktop" id="categories">
+    {{#equal numberOfCategories 1}} {{else}}
+    <ul class="nav nav-tabs span" id="categoryTabs">
+        <h4>{{../Localization.roomReservation.specialService.category}}</h4>
+
+        {{#../specialServices.PMSSpecialService}}
+        <li>
+            <a href="#category_{{stripChars name}}" data-toggle="tab" class=" alert-hide">
+                {{name}}
+            </a>
+        </li>
+        {{/../specialServices.PMSSpecialService}}
+    </ul>
+    {{/equal}}
+
+    <div class="tab-content">
+        <h4>{{Localization.roomReservation.specialService.name}}</h4>
+        <div class="span2 notie7"></div>
+        {{#equal numberOfCategories 1}} {{else}}<div class="alert alert-success span4" style="margin-top: 6px;"><i class="icon-arrow-left visible-desktop"></i><strong> {{Localization.roomReservation.specialService.unselectText}} </strong><i class="icon-arrow-up upicon hidden-desktop"></i></div>{{/equal}}
+        
+        {{#specialServices.PMSSpecialService}}
+        <div class="tab-pane accordion {{#equal ../numberOfCategories 1}} active{{/equal}}" id="category_{{stripChars name}}">
+            {{#val}}
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle clearfix alert-hide" data-toggle="collapse"
+                                                             data-parent="#category_{{stripChars ../name}}" href="#specialService_{{stripChars PMSSpecialServiceName}}">
+                                                             <span class="pull-left-ie7">{{PMSSpecialServiceName}}</span>
+                                                         </a>
+				</div>
+				<div id="specialService_{{stripChars PMSSpecialServiceName}}" class="specialService accordion-body collapse">
+					<div class="accordion-inner clearfix">
+
+                        <div class="row">
+                            <div class="span2 notie7"></div>
+                            {{#if ImageURL}}
+                            <div class="span3 pagination-centered">
+                                <img width="270" src="{{ImageURL}}" alt="">
+                            </div>
+                            <div class="span6">
+							{{else}}
+							<div class="span9">
+							{{/if}}
+                                <div class="pull-right">
+                                    {{#if hasPrice}}
+                                    <span class="price">{{../../../Localization.general.currencyPrefix}}{{toFixed Price 2}}{{../../../Localization.general.currencyPostfix}}</span>
+                                    {{else}}
+                                    <span class="noPrice"></span>
+                                    {{/if}}
+                                    <a data-for="{{../../folioId}}" data-charged="{{IsCharged}}" class="addSpecialServiceButton btn btn-primary" href="#/roomsBooking/addSpecialService/{{../../folioId}}/1/{{urlEscape PMSSpecialServiceName}}/" data-loading-text="{{../../Localization.general.progressIndicatorMessage}}">{{../../Localization.roomReservation.specialService.add}}</a>
+                                </div>
+
+                                {{#if PMSSpecialServiceDescription}}<p>{{{nl2br PMSSpecialServiceDescription}}}</p>{{/if}}
+
+								{{#if dateList}}
+									<br>{{../../../Localization.roomReservation.specialService.selectUpgradeDate}}<br>
+									<select class="specialServicesDates" data-folioid="{{../../../folioId}}" data-pmsspecialservicename="{{urlEscape ../PMSSpecialServiceName}}">
+										{{#dateList}}
+											<option value="{{machine}}">{{human}}</option>
+										{{/dateList}}
+									</select>
+								{{/if}}
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {{/val}}
+        </div>
+        {{/specialServices.PMSSpecialService}}
+    </div>
+
+</div>

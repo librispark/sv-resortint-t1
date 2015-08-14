@@ -1,0 +1,99 @@
+{{#if userLoggedIn}}
+<div class="span6 offset2">
+<div class="well span6">
+    <div class="page-header"><h3>{{Localization.general.login.alreadyLoggedIn}}</h3>
+    <p>{{Localization.paymentProcessing.userIDLabel}}: <strong>{{CustomerEmail}}</strong></p></div>
+    {{#user.Customer}}
+        <h4 style="margin-top:1.5em">{{../Localization.general.login.profileLabel}}</h4>
+        <a href="#/profile/details" class="btn pull-right" style="">{{../Localization.general.login.editProfileLabel}}</a>
+        <p>{{../Localization.general.login.guestName}} <strong>{{Name.Salutation}} {{Name.FirstName}} {{Name.LastName}}</strong></p>
+    
+        {{#Phone}}
+            {{#equal primary "true"}}
+                <p>
+                {{#equal type "HOME"}}
+                    {{../../../../Localization.newUser.homePhoneTitle }}
+                {{/equal}}
+                {{#equal type "WORK"}}
+                    {{../../../../Localization.newUser.workPhoneTitle }}
+                {{/equal}}
+                {{#equal type "OTHER"}}
+                    {{../../../../Localization.newUser.otherPhoneTitle }}
+                {{/equal}}
+                <strong>
+                    {{#if PhoneNumber}}
+                         {{PhoneNumber}}
+                    {{else}}
+                        {{#if PhoneData.PhoneNumber}} 
+                            {{PhoneData.PhoneNumber}} {{#if PhoneData.Extension}}x {{PhoneData.Extension}}{{/if}}
+                        {{/if}}
+                    {{/if}}
+                </strong>
+                </p>
+            {{/equal}}
+        {{/Phone}}
+    {{/user.Customer}}
+    <h4 style="margin-top:1.5em;margin-bottom:1.5em" class="clearfix">
+        {{Localization.general.login.familyGroupTitle}}
+        {{#unless Customization.disableProfileScreenCreateGroupMember}}<small><a href="#/profile/addmember" class="btn pull-right" style="">
+            <span class="icon-plus"></span> {{../Localization.general.login.addGroupMember}}
+        </a></small>{{/unless}}
+    </h4>
+    {{#group.GroupMember}}
+        <div class="clearfix">
+            <p style="margin-top:1em">
+                {{../Localization.general.login.guestName}} <strong>{{Name.Salutation}} {{Name.FirstName}} {{Name.LastName}}</strong>
+                <a href="#/profile/details/{{CustomerId}}" class="btn pull-right" style="">{{../Localization.general.login.viewProfileLabel}}</a>
+            </p>
+            {{#if Relationship}}
+                <p>{{../../Localization.general.login.relationshipLabel}} <strong>{{Relationship}}</strong></p>
+            {{/if}}
+        </div>
+    {{/group.GroupMember}}
+
+    <div style="margin-top: 3em;">
+        <a href="#/summary" class="span btn" style="margin-left: 24px">{{Localization.bookingSummary.cartName}}</a>
+        {{#if anyPastBookings}}<a href="#/summary/history" class="span btn" style="margin-left: 24px">{{Localization.bookingSummary.BookingHistory}}</a>{{/if}}
+        <a href="#/profile/change" class="span btn" style="margin-left: 24px" >{{Localization.general.login.changePasswordButtonLabel}}</a>
+        <a href="#/profile/logout" class="span btn btn-danger" style="margin-left: 24px" >{{Localization.general.login.logoutButtonLabel}}</a>
+    </div>
+</div>
+</div>
+{{else}}
+    {{#if useIntegratedLogin}}
+        {{> app_views_templates_newUserIntegratedLoginPartial}}
+    {{else}}
+<p><strong>{{Localization.general.login.title}}</strong></p>
+<p>{{Localization.general.login.description}}</p>
+<form id="userLoginForm" class="form-horizontal  span6 offset2" action="#" method="post">
+    <div class="well span6">
+        <p><strong>{{Localization.general.login.title}}</strong></p>
+
+        <div class="control-group">
+            <label class="control-label" for="userEmailAddress">{{Localization.general.login.emailTitle}}</label>
+
+            <div class="controls">
+                <input type="text" id="userEmailAddress" class="span3 required" value="{{email}}"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="userPassword">{{Localization.general.login.passwordTitle}}</label>
+
+            <div class="controls">
+                <input type="password" id="userPassword" class="span3 required" value="{{password}}"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" id="userLoginSubmit" class="btn btn-primary"
+                       value="{{Localization.general.login.loginButtonLabel}}"/>
+            </div>
+        </div>
+        <div class="control-group" id>
+            {{#unless Customization.disablePasswordReset}}<a id="userResetPassword" class="visible-link" href="#">{{Localization.general.login.forgotPasswordButtonLabel}}</a><br/>{{/unless}}
+            {{#unless Customization.disableAccountCreation}}<a id="userCreateUser" class="visible-link" href="#">{{Localization.general.login.newUserButtonLabel}}</a>{{/unless}}
+        </div>
+    </div>
+</form>
+    {{/if}}
+{{/if}}

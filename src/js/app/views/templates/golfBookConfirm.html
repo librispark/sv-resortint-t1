@@ -1,0 +1,58 @@
+<p>{{Localization.golf.confirmGolfBooking}}</p>
+<form id="pmsBookConfirm" class="form-horizontal well span8 offset2" method="get">
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.golf.confirmation.locationLabel}}</p></label>
+            <div class="controls">
+                <p><strong>{{location.LocationName}}</strong></p>
+            </div>
+        </div></div>
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.golf.confirmation.courseLabel}}</p></label>
+            <div class="controls">
+                <p><strong>{{course.CourseName}}</strong></p>
+            </div>
+        </div></div>
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.golf.confirmation.rateLabel}}</p></label>
+            <div class="controls">
+                <p><strong>{{golfRate.ItemName}}</strong></p>
+            </div>
+        </div></div>
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.golf.confirmation.teeTimeLabel}}</p></label>
+            <div class="controls">
+                <p><strong>{{RSDateToString dateTime "dddd, MMMM d, yyyy h:mm tt"}}</strong></p>
+            </div>
+        </div></div>
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.golf.playersLabel}}</p></label>
+            <div class="controls">
+                <p><strong>{{numberOfPlayers}}</strong></p>
+            </div>
+        </div></div>
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.golf.confirmation.priceLabel}}</p></label>
+            <div class="controls">
+                <p class="pull-left"><strong>{{Localization.general.currencyPrefix}}{{toFixed golfRate.Price 2}}{{Localization.general.currencyPostfix}}</strong>
+                {{^CustomerId}}
+                <strong style="padding-left: 24px">{{Localization.golf.areYouAMember}}</strong> {{Localization.golf.loginToReceive}}<a class="btn btn-small" style="position: relative; top:-4px; left: 4px" href="#/profile/login/next/golfBooking/confirm/{{course.CourseId}}/{{date}}{{time}}/{{numberOfPlayers}}">{{Localization.general.login.loginButtonLabel}}</a>
+                {{/CustomerId}}
+                </p>
+            </div>
+        </div></div>
+        {{#if total}}
+        <div class="row"><div class="control-group">
+            <label class="control-label"><p>{{Localization.roomReservation.confirmation.amountLabel}}</p></label>
+            <div class="controls">
+                <p><strong>{{Localization.general.currencyPrefix}}{{toFixed ../total 2}}{{Localization.general.currencyPostfix}} </strong></p>
+
+            </div>
+        </div></div>
+        {{/if}}
+        <div class="row"><div class="control-group">
+        <label class="control-label" for="input01"></label>
+        <div class="controls">
+            <a id="pmsFormSubmit" class="btn btn-primary pull-right" href="#/golfBooking/book/{{location.LocationId}}/{{course.CourseId}}/{{golfRate.ItemId}}/{{golfRate.Price}}/{{date}}/{{time}}/{{numberOfPlayers}}" data-loading-text="{{Localization.general.progressIndicatorMessage}}">{{Localization.roomReservation.confirmation.bookButtonLabel}}</a>
+        </div>
+    </div></div>
+</form>

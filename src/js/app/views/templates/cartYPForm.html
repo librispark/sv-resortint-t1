@@ -1,0 +1,405 @@
+<p>{{Localization.paymentProcessing.sectionDescription}} <small>{{Localization.paymentProcessing.err.requiredInfo}}</small></p>
+<form id="cartCCPaymentForm" class="form-horizontal well span8 offset2">
+    <div class="control-group">
+        <label class="control-label">{{Localization.paymentProcessing.guestLabel}}</label>
+        <div class="controls">
+            <p>{{FirstName}} {{LastName}}</p>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCEmail">{{Localization.paymentProcessing.userIDLabel}}</label>
+        <div class="controls">
+            <p>{{email}}</p>
+            <input type="hidden" id="cartCCEmail" name="cartCCEmail" value="{{email}}"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCTotal">{{Localization.paymentProcessing.totalLabel}}</label>
+        <div class="controls">
+            <p>{{Localization.general.currencyPrefix}}{{toFixed balance 2}}{{Localization.general.currencyPostfix}}</p>
+            <input type="hidden" id="cartCCTotal" name="cartCCTotal" class="disabled" value="{{balance}}"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCFName">{{Localization.newUser.firstNameTitle}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCFName" name="cartCCFName" class="required" placeholder="{{Localization.paymentProcessing.cardHolderBlank}}" value=""/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCLName">{{Localization.newUser.lastNameTitle}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCLName" name="cartCCLName" class="required" placeholder="{{Localization.paymentProcessing.cardHolderBlank}}" value=""/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCaddress">{{Localization.paymentProcessing.addressLabel}}{{#if Customization.requirePaymentAddress}} *{{/if}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCaddress" name="cartCCaddress" class="{{#if Customization.requirePaymentAddress}}required{{/if}}" value=""/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCaddress2">{{Localization.paymentProcessing.addressLabel2}}{{#if Customization.requirePaymentAddress}} *{{/if}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCaddress2" name="cartCCaddress2" class="{{#if Customization.requirePaymentAddress}}required{{/if}}" value=""/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCcity">{{Localization.newUser.cityTitle}}{{#if Customization.requirePaymentAddress}} *{{/if}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCcity" name="cartCCcity" class="{{#if Customization.requirePaymentAddress}}required{{/if}}" value=""/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCstate">{{Localization.newUser.stateTitle}}{{#if Customization.requirePaymentAddress}} *{{/if}}</label>
+        <div class="controls">
+            <select id="cartCCstate" name="cartCCstate"">
+            <option value=""></option>
+            <option value="AL">AL - Alabama</option>
+            <option value="AK">AK - Alaska</option>
+            <option value="AZ">AZ - Arizona/option>
+            <option value="AR">AR - Arkansas</option>
+            <option value="AS">AS - American Samoa</option>
+            <option value="CA">CA - California</option>
+            <option value="CO">CO - Colorado</option>
+            <option value="CT">CT - Connecticut</option>
+            <option value="DE">DE - Delaware</option>
+            <option value="DC">DC - District of Columbia</option>
+            <option value="FM">FM - Fed. States of Micronesia</option>
+            <option value="FL">FL - Florida</option>
+            <option value="GA">GA - Georgia</option>
+            <option value="GU">GU - Guam</option>
+            <option value="HI">HI - Hawaii</option>
+            <option value="ID">ID - Idaho</option>
+            <option value="IL">IL - Illinois</option>
+            <option value="IN">IN - Indiana</option>
+            <option value="IA">IA - Iowa</option>
+            <option value="KS">KS - Kansas</option>
+            <option value="KY">KY - Kentucky</option>
+            <option value="LA">LA - Louisiana</option>
+            <option value="ME">ME - Maine</option>
+            <option value="MD">MD - Maryland</option>
+            <option value="MH">MH - Marshall Islands</option>
+            <option value="MA">MA - Massachusetts</option>
+            <option value="MI">MI - Michigan</option>
+            <option value="MN">MN - Minnesota</option>
+            <option value="MS">MS - Mississippi</option>
+            <option value="MO">MO - Missouri/option>
+            <option value="MT">MT - Montana</option>
+            <option value="NE">NE - Nebraska</option>
+            <option value="NV">NV - Nevada</option>
+            <option value="NH">NH - New Hampshire</option>
+            <option value="NJ">NJ - New Jersey</option>
+            <option value="NM">NM - New Mexico</option>
+            <option value="NY">NY - New York</option>
+            <option value="NC">NC - North Carolina</option>
+            <option value="ND">ND - North Dakota</option>
+            <option value="MP">MP - Northern Marianas</option>
+            <option value="OH">OH - Ohio</option>
+            <option value="OK">OK - Oklahoma</option>
+            <option value="OR">OR - Oregon</option>
+            <option value="PA">PA - Pennsylvania</option>
+            <option value="PR">PR - Puerto Rico</option>
+            <option value="RI">RI - Rhode Island</option>
+            <option value="SC">SC - South Carolina</option>
+            <option value="SD">SD - South Dakota</option>
+            <option value="TN">TN - Tennessee/option>
+            <option value="TX">TX - Texas</option>
+            <option value="UT">UT - Utah</option>
+            <option value="VT">VT - Vermont</option>
+            <option value="VA">VA - Virginia</option>
+            <option value="VI">VI - (U.S.) Virgin Islands</option>
+            <option value="WA">WA - Washington</option>
+            <option value="WV">WV - West Virginia</option>
+            <option value="WI">WI - Wisconsin</option>
+            <option value="WY">WY - Wyoming</option>
+            <option value="AA">AA - Armed Forces, the Americas</option>
+            <option value="AE">AE - Armed Forces, Europe</option>
+            <option value="AP">AP - Armed Forces, Pacific</option>
+            <option value="">---------------------</option>
+            <option value="AB">AB - Alberta</option>
+            <option value="BC">BC - British Columbia</option>
+            <option value="MB">MB - Manitoba</option>
+            <option value="NB">NB - New Brunswick</option>
+            <option value="NL">NL - Newfoundland and Labrador</option>
+            <option value="NT">NT - Northwest Territories'</option>
+            <option value="NS">NS - Nova Scotia</option>
+            <option value="NU">NU - Nunavut</option>
+            <option value="ON">ON - Ontario</option>
+            <option value="PE">PE - Prince Edward Island</option>
+            <option value="QC">QC - Quebec</option>
+            <option value="SK">SK - Saskatchewan</option>
+            <option value="YT">YT - Yukon</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCzip">{{Localization.paymentProcessing.zipLabel}}{{#if Customization.requirePaymentAddress}} *{{/if}}</label>
+        <div class="controls">
+            <input type="text" id="cartCCzip" name="cartCCzip" class="{{#if Customization.requirePaymentAddress}}required{{/if}}" value=""/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCcountry">{{Localization.newUser.countryTitle}}{{#if Customization.requirePaymentAddress}} *{{/if}}</label>
+        <div class="controls">
+            <select  id="cartCCcountry" name="cartCCcountry" class="{{#if Customization.requirePaymentAddress}}required{{/if}}" >
+            <option value=""></option>
+            <option value="AF"{{#equal Customization.defaultCountry "AF"}} selected="selected"{{/equal}}>Afghanistan</option>
+            <option value="AX"{{#equal Customization.defaultCountry "AX"}} selected="selected"{{/equal}}>Åland Islands</option>
+            <option value="AL"{{#equal Customization.defaultCountry "AL"}} selected="selected"{{/equal}}>Albania</option>
+            <option value="DZ"{{#equal Customization.defaultCountry "DZ"}} selected="selected"{{/equal}}>Algeria</option>
+            <option value="AS"{{#equal Customization.defaultCountry "AS"}} selected="selected"{{/equal}}>American Samoa</option>
+            <option value="AD"{{#equal Customization.defaultCountry "AD"}} selected="selected"{{/equal}}>Andorra</option>
+            <option value="AO"{{#equal Customization.defaultCountry "AO"}} selected="selected"{{/equal}}>Angola</option>
+            <option value="AI"{{#equal Customization.defaultCountry "AI"}} selected="selected"{{/equal}}>Anguilla</option>
+            <option value="AQ"{{#equal Customization.defaultCountry "AQ"}} selected="selected"{{/equal}}>Antarctica</option>
+            <option value="AG"{{#equal Customization.defaultCountry "AG"}} selected="selected"{{/equal}}>Antigua and Barbuda</option>
+            <option value="AR"{{#equal Customization.defaultCountry "AR"}} selected="selected"{{/equal}}>Argentina</option>
+            <option value="AM"{{#equal Customization.defaultCountry "AM"}} selected="selected"{{/equal}}>Armenia</option>
+            <option value="AW"{{#equal Customization.defaultCountry "AW"}} selected="selected"{{/equal}}>Aruba</option>
+            <option value="AU"{{#equal Customization.defaultCountry "AU"}} selected="selected"{{/equal}}>Australia</option>
+            <option value="AT"{{#equal Customization.defaultCountry "AT"}} selected="selected"{{/equal}}>Austria</option>
+            <option value="AZ"{{#equal Customization.defaultCountry "AZ"}} selected="selected"{{/equal}}>Azerbaijan</option>
+            <option value="BS"{{#equal Customization.defaultCountry "BS"}} selected="selected"{{/equal}}>Bahamas</option>
+            <option value="BH"{{#equal Customization.defaultCountry "BH"}} selected="selected"{{/equal}}>Bahrain</option>
+            <option value="BD"{{#equal Customization.defaultCountry "BD"}} selected="selected"{{/equal}}>Bangladesh</option>
+            <option value="BB"{{#equal Customization.defaultCountry "BB"}} selected="selected"{{/equal}}>Barbados</option>
+            <option value="BY"{{#equal Customization.defaultCountry "BY"}} selected="selected"{{/equal}}>Belarus</option>
+            <option value="BE"{{#equal Customization.defaultCountry "BE"}} selected="selected"{{/equal}}>Belgium</option>
+            <option value="BZ"{{#equal Customization.defaultCountry "BZ"}} selected="selected"{{/equal}}>Belize</option>
+            <option value="BJ"{{#equal Customization.defaultCountry "BJ"}} selected="selected"{{/equal}}>Benin</option>
+            <option value="BM"{{#equal Customization.defaultCountry "BM"}} selected="selected"{{/equal}}>Bermuda</option>
+            <option value="BT"{{#equal Customization.defaultCountry "BT"}} selected="selected"{{/equal}}>Bhutan</option>
+            <option value="BO"{{#equal Customization.defaultCountry "BO"}} selected="selected"{{/equal}}>Bolivia, Plurinational State of</option>
+            <option value="BQ"{{#equal Customization.defaultCountry "BQ"}} selected="selected"{{/equal}}>Bonaire, Sint Eustatius and Saba</option>
+            <option value="BA"{{#equal Customization.defaultCountry "BA"}} selected="selected"{{/equal}}>Bosnia and Herzegovina</option>
+            <option value="BW"{{#equal Customization.defaultCountry "BW"}} selected="selected"{{/equal}}>Botswana</option>
+            <option value="BV"{{#equal Customization.defaultCountry "BV"}} selected="selected"{{/equal}}>Bouvet Island</option>
+            <option value="BR"{{#equal Customization.defaultCountry "BR"}} selected="selected"{{/equal}}>Brazil</option>
+            <option value="IO"{{#equal Customization.defaultCountry "IO"}} selected="selected"{{/equal}}>British Indian Ocean Territory</option>
+            <option value="BN"{{#equal Customization.defaultCountry "BN"}} selected="selected"{{/equal}}>Brunei Darussalam</option>
+            <option value="BG"{{#equal Customization.defaultCountry "BG"}} selected="selected"{{/equal}}>Bulgaria</option>
+            <option value="BF"{{#equal Customization.defaultCountry "BF"}} selected="selected"{{/equal}}>Burkina Faso</option>
+            <option value="BI"{{#equal Customization.defaultCountry "BI"}} selected="selected"{{/equal}}>Burundi</option>
+            <option value="KH"{{#equal Customization.defaultCountry "KH"}} selected="selected"{{/equal}}>Cambodia</option>
+            <option value="CM"{{#equal Customization.defaultCountry "CM"}} selected="selected"{{/equal}}>Cameroon</option>
+            <option value="CA"{{#equal Customization.defaultCountry "CA"}} selected="selected"{{/equal}}>Canada</option>
+            <option value="CV"{{#equal Customization.defaultCountry "CV"}} selected="selected"{{/equal}}>Cape Verde</option>
+            <option value="KY"{{#equal Customization.defaultCountry "KY"}} selected="selected"{{/equal}}>Cayman Islands</option>
+            <option value="CF"{{#equal Customization.defaultCountry "CF"}} selected="selected"{{/equal}}>Central African Republic</option>
+            <option value="TD"{{#equal Customization.defaultCountry "TD"}} selected="selected"{{/equal}}>Chad</option>
+            <option value="CL"{{#equal Customization.defaultCountry "CL"}} selected="selected"{{/equal}}>Chile</option>
+            <option value="CN"{{#equal Customization.defaultCountry "CN"}} selected="selected"{{/equal}}>China</option>
+            <option value="CX"{{#equal Customization.defaultCountry "CX"}} selected="selected"{{/equal}}>Christmas Island</option>
+            <option value="CC"{{#equal Customization.defaultCountry "CC"}} selected="selected"{{/equal}}>Cocos (Keeling) Islands</option>
+            <option value="CO"{{#equal Customization.defaultCountry "CO"}} selected="selected"{{/equal}}>Colombia</option>
+            <option value="KM"{{#equal Customization.defaultCountry "KM"}} selected="selected"{{/equal}}>Comoros</option>
+            <option value="CG"{{#equal Customization.defaultCountry "CG"}} selected="selected"{{/equal}}>Congo</option>
+            <option value="CD"{{#equal Customization.defaultCountry "CD"}} selected="selected"{{/equal}}>Congo, the Democratic Republic of the</option>
+            <option value="CK"{{#equal Customization.defaultCountry "CK"}} selected="selected"{{/equal}}>Cook Islands</option>
+            <option value="CR"{{#equal Customization.defaultCountry "CR"}} selected="selected"{{/equal}}>Costa Rica</option>
+            <option value="CI"{{#equal Customization.defaultCountry "CI"}} selected="selected"{{/equal}}>Côte d'Ivoire</option>
+            <option value="HR"{{#equal Customization.defaultCountry "HR"}} selected="selected"{{/equal}}>Croatia</option>
+            <option value="CU"{{#equal Customization.defaultCountry "CU"}} selected="selected"{{/equal}}>Cuba</option>
+            <option value="CW"{{#equal Customization.defaultCountry "CW"}} selected="selected"{{/equal}}>Curaçao</option>
+            <option value="CY"{{#equal Customization.defaultCountry "CY"}} selected="selected"{{/equal}}>Cyprus</option>
+            <option value="CZ"{{#equal Customization.defaultCountry "CZ"}} selected="selected"{{/equal}}>Czech Republic</option>
+            <option value="DK"{{#equal Customization.defaultCountry "DK"}} selected="selected"{{/equal}}>Denmark</option>
+            <option value="DJ"{{#equal Customization.defaultCountry "DJ"}} selected="selected"{{/equal}}>Djibouti</option>
+            <option value="DM"{{#equal Customization.defaultCountry "DM"}} selected="selected"{{/equal}}>Dominica</option>
+            <option value="DO"{{#equal Customization.defaultCountry "DO"}} selected="selected"{{/equal}}>Dominican Republic</option>
+            <option value="EC"{{#equal Customization.defaultCountry "EC"}} selected="selected"{{/equal}}>Ecuador</option>
+            <option value="EG"{{#equal Customization.defaultCountry "EG"}} selected="selected"{{/equal}}>Egypt</option>
+            <option value="SV"{{#equal Customization.defaultCountry "SV"}} selected="selected"{{/equal}}>El Salvador</option>
+            <option value="GQ"{{#equal Customization.defaultCountry "GQ"}} selected="selected"{{/equal}}>Equatorial Guinea</option>
+            <option value="ER"{{#equal Customization.defaultCountry "ER"}} selected="selected"{{/equal}}>Eritrea</option>
+            <option value="EE"{{#equal Customization.defaultCountry "EE"}} selected="selected"{{/equal}}>Estonia</option>
+            <option value="ET"{{#equal Customization.defaultCountry "ET"}} selected="selected"{{/equal}}>Ethiopia</option>
+            <option value="FK"{{#equal Customization.defaultCountry "FK"}} selected="selected"{{/equal}}>Falkland Islands (Malvinas)</option>
+            <option value="FO"{{#equal Customization.defaultCountry "FO"}} selected="selected"{{/equal}}>Faroe Islands</option>
+            <option value="FJ"{{#equal Customization.defaultCountry "FJ"}} selected="selected"{{/equal}}>Fiji</option>
+            <option value="FI"{{#equal Customization.defaultCountry "FI"}} selected="selected"{{/equal}}>Finland</option>
+            <option value="FR"{{#equal Customization.defaultCountry "FR"}} selected="selected"{{/equal}}>France</option>
+            <option value="GF"{{#equal Customization.defaultCountry "GF"}} selected="selected"{{/equal}}>French Guiana</option>
+            <option value="PF"{{#equal Customization.defaultCountry "PF"}} selected="selected"{{/equal}}>French Polynesia</option>
+            <option value="TF"{{#equal Customization.defaultCountry "TF"}} selected="selected"{{/equal}}>French Southern Territories</option>
+            <option value="GA"{{#equal Customization.defaultCountry "GA"}} selected="selected"{{/equal}}>Gabon</option>
+            <option value="GM"{{#equal Customization.defaultCountry "GM"}} selected="selected"{{/equal}}>Gambia</option>
+            <option value="GE"{{#equal Customization.defaultCountry "GE"}} selected="selected"{{/equal}}>Georgia</option>
+            <option value="DE"{{#equal Customization.defaultCountry "DE"}} selected="selected"{{/equal}}>Germany</option>
+            <option value="GH"{{#equal Customization.defaultCountry "GH"}} selected="selected"{{/equal}}>Ghana</option>
+            <option value="GI"{{#equal Customization.defaultCountry "GI"}} selected="selected"{{/equal}}>Gibraltar</option>
+            <option value="GR"{{#equal Customization.defaultCountry "GR"}} selected="selected"{{/equal}}>Greece</option>
+            <option value="GL"{{#equal Customization.defaultCountry "GL"}} selected="selected"{{/equal}}>Greenland</option>
+            <option value="GD"{{#equal Customization.defaultCountry "GD"}} selected="selected"{{/equal}}>Grenada</option>
+            <option value="GP"{{#equal Customization.defaultCountry "GP"}} selected="selected"{{/equal}}>Guadeloupe</option>
+            <option value="GU"{{#equal Customization.defaultCountry "GU"}} selected="selected"{{/equal}}>Guam</option>
+            <option value="GT"{{#equal Customization.defaultCountry "GT"}} selected="selected"{{/equal}}>Guatemala</option>
+            <option value="GG"{{#equal Customization.defaultCountry "GG"}} selected="selected"{{/equal}}>Guernsey</option>
+            <option value="GN"{{#equal Customization.defaultCountry "GN"}} selected="selected"{{/equal}}>Guinea</option>
+            <option value="GW"{{#equal Customization.defaultCountry "GW"}} selected="selected"{{/equal}}>Guinea-Bissau</option>
+            <option value="GY"{{#equal Customization.defaultCountry "GY"}} selected="selected"{{/equal}}>Guyana</option>
+            <option value="HT"{{#equal Customization.defaultCountry "HT"}} selected="selected"{{/equal}}>Haiti</option>
+            <option value="HM"{{#equal Customization.defaultCountry "HM"}} selected="selected"{{/equal}}>Heard Island and McDonald Islands</option>
+            <option value="VA"{{#equal Customization.defaultCountry "VA"}} selected="selected"{{/equal}}>Holy See (Vatican City State)</option>
+            <option value="HN"{{#equal Customization.defaultCountry "HN"}} selected="selected"{{/equal}}>Honduras</option>
+            <option value="HK"{{#equal Customization.defaultCountry "HK"}} selected="selected"{{/equal}}>Hong Kong</option>
+            <option value="HU"{{#equal Customization.defaultCountry "HU"}} selected="selected"{{/equal}}>Hungary</option>
+            <option value="IS"{{#equal Customization.defaultCountry "IS"}} selected="selected"{{/equal}}>Iceland</option>
+            <option value="IN"{{#equal Customization.defaultCountry "IN"}} selected="selected"{{/equal}}>India</option>
+            <option value="ID"{{#equal Customization.defaultCountry "ID"}} selected="selected"{{/equal}}>Indonesia</option>
+            <option value="IR"{{#equal Customization.defaultCountry "IR"}} selected="selected"{{/equal}}>Iran, Islamic Republic of</option>
+            <option value="IQ"{{#equal Customization.defaultCountry "IQ"}} selected="selected"{{/equal}}>Iraq</option>
+            <option value="IE"{{#equal Customization.defaultCountry "IE"}} selected="selected"{{/equal}}>Ireland</option>
+            <option value="IM"{{#equal Customization.defaultCountry "IM"}} selected="selected"{{/equal}}>Isle of Man</option>
+            <option value="IL"{{#equal Customization.defaultCountry "IL"}} selected="selected"{{/equal}}>Israel</option>
+            <option value="IT"{{#equal Customization.defaultCountry "IT"}} selected="selected"{{/equal}}>Italy</option>
+            <option value="JM"{{#equal Customization.defaultCountry "JM"}} selected="selected"{{/equal}}>Jamaica</option>
+            <option value="JP"{{#equal Customization.defaultCountry "JP"}} selected="selected"{{/equal}}>Japan</option>
+            <option value="JE"{{#equal Customization.defaultCountry "JE"}} selected="selected"{{/equal}}>Jersey</option>
+            <option value="JO"{{#equal Customization.defaultCountry "JO"}} selected="selected"{{/equal}}>Jordan</option>
+            <option value="KZ"{{#equal Customization.defaultCountry "KZ"}} selected="selected"{{/equal}}>Kazakhstan</option>
+            <option value="KE"{{#equal Customization.defaultCountry "KE"}} selected="selected"{{/equal}}>Kenya</option>
+            <option value="KI"{{#equal Customization.defaultCountry "KI"}} selected="selected"{{/equal}}>Kiribati</option>
+            <option value="KP"{{#equal Customization.defaultCountry "KP"}} selected="selected"{{/equal}}>Korea, Democratic People's Republic of</option>
+            <option value="KR"{{#equal Customization.defaultCountry "KR"}} selected="selected"{{/equal}}>Korea, Republic of</option>
+            <option value="KW"{{#equal Customization.defaultCountry "KW"}} selected="selected"{{/equal}}>Kuwait</option>
+            <option value="KG"{{#equal Customization.defaultCountry "KG"}} selected="selected"{{/equal}}>Kyrgyzstan</option>
+            <option value="LA"{{#equal Customization.defaultCountry "LA"}} selected="selected"{{/equal}}>Lao People's Democratic Republic</option>
+            <option value="LV"{{#equal Customization.defaultCountry "LV"}} selected="selected"{{/equal}}>Latvia</option>
+            <option value="LB"{{#equal Customization.defaultCountry "LB"}} selected="selected"{{/equal}}>Lebanon</option>
+            <option value="LS"{{#equal Customization.defaultCountry "LS"}} selected="selected"{{/equal}}>Lesotho</option>
+            <option value="LR"{{#equal Customization.defaultCountry "LR"}} selected="selected"{{/equal}}>Liberia</option>
+            <option value="LY"{{#equal Customization.defaultCountry "LY"}} selected="selected"{{/equal}}>Libya</option>
+            <option value="LI"{{#equal Customization.defaultCountry "LI"}} selected="selected"{{/equal}}>Liechtenstein</option>
+            <option value="LT"{{#equal Customization.defaultCountry "LT"}} selected="selected"{{/equal}}>Lithuania</option>
+            <option value="LU"{{#equal Customization.defaultCountry "LU"}} selected="selected"{{/equal}}>Luxembourg</option>
+            <option value="MO"{{#equal Customization.defaultCountry "MO"}} selected="selected"{{/equal}}>Macao</option>
+            <option value="MK"{{#equal Customization.defaultCountry "MK"}} selected="selected"{{/equal}}>Macedonia, the former Yugoslav Republic of</option>
+            <option value="MG"{{#equal Customization.defaultCountry "MG"}} selected="selected"{{/equal}}>Madagascar</option>
+            <option value="MW"{{#equal Customization.defaultCountry "MW"}} selected="selected"{{/equal}}>Malawi</option>
+            <option value="MY"{{#equal Customization.defaultCountry "MY"}} selected="selected"{{/equal}}>Malaysia</option>
+            <option value="MV"{{#equal Customization.defaultCountry "MV"}} selected="selected"{{/equal}}>Maldives</option>
+            <option value="ML"{{#equal Customization.defaultCountry "ML"}} selected="selected"{{/equal}}>Mali</option>
+            <option value="MT"{{#equal Customization.defaultCountry "MT"}} selected="selected"{{/equal}}>Malta</option>
+            <option value="MH"{{#equal Customization.defaultCountry "MH"}} selected="selected"{{/equal}}>Marshall Islands</option>
+            <option value="MQ"{{#equal Customization.defaultCountry "MQ"}} selected="selected"{{/equal}}>Martinique</option>
+            <option value="MR"{{#equal Customization.defaultCountry "MR"}} selected="selected"{{/equal}}>Mauritania</option>
+            <option value="MU"{{#equal Customization.defaultCountry "MU"}} selected="selected"{{/equal}}>Mauritius</option>
+            <option value="YT"{{#equal Customization.defaultCountry "YT"}} selected="selected"{{/equal}}>Mayotte</option>
+            <option value="MX"{{#equal Customization.defaultCountry "MX"}} selected="selected"{{/equal}}>Mexico</option>
+            <option value="FM"{{#equal Customization.defaultCountry "FM"}} selected="selected"{{/equal}}>Micronesia, Federated States of</option>
+            <option value="MD"{{#equal Customization.defaultCountry "MD"}} selected="selected"{{/equal}}>Moldova, Republic of</option>
+            <option value="MC"{{#equal Customization.defaultCountry "MC"}} selected="selected"{{/equal}}>Monaco</option>
+            <option value="MN"{{#equal Customization.defaultCountry "MN"}} selected="selected"{{/equal}}>Mongolia</option>
+            <option value="ME"{{#equal Customization.defaultCountry "ME"}} selected="selected"{{/equal}}>Montenegro</option>
+            <option value="MS"{{#equal Customization.defaultCountry "MS"}} selected="selected"{{/equal}}>Montserrat</option>
+            <option value="MA"{{#equal Customization.defaultCountry "MA"}} selected="selected"{{/equal}}>Morocco</option>
+            <option value="MZ"{{#equal Customization.defaultCountry "MZ"}} selected="selected"{{/equal}}>Mozambique</option>
+            <option value="MM"{{#equal Customization.defaultCountry "MM"}} selected="selected"{{/equal}}>Myanmar</option>
+            <option value="NA"{{#equal Customization.defaultCountry "NA"}} selected="selected"{{/equal}}>Namibia</option>
+            <option value="NR"{{#equal Customization.defaultCountry "NR"}} selected="selected"{{/equal}}>Nauru</option>
+            <option value="NP"{{#equal Customization.defaultCountry "NP"}} selected="selected"{{/equal}}>Nepal</option>
+            <option value="NL"{{#equal Customization.defaultCountry "NL"}} selected="selected"{{/equal}}>Netherlands</option>
+            <option value="NC"{{#equal Customization.defaultCountry "NC"}} selected="selected"{{/equal}}>New Caledonia</option>
+            <option value="NZ"{{#equal Customization.defaultCountry "NZ"}} selected="selected"{{/equal}}>New Zealand</option>
+            <option value="NI"{{#equal Customization.defaultCountry "NI"}} selected="selected"{{/equal}}>Nicaragua</option>
+            <option value="NE"{{#equal Customization.defaultCountry "NE"}} selected="selected"{{/equal}}>Niger</option>
+            <option value="NG"{{#equal Customization.defaultCountry "NG"}} selected="selected"{{/equal}}>Nigeria</option>
+            <option value="NU"{{#equal Customization.defaultCountry "NU"}} selected="selected"{{/equal}}>Niue</option>
+            <option value="NF"{{#equal Customization.defaultCountry "NF"}} selected="selected"{{/equal}}>Norfolk Island</option>
+            <option value="MP"{{#equal Customization.defaultCountry "MP"}} selected="selected"{{/equal}}>Northern Mariana Islands</option>
+            <option value="NO"{{#equal Customization.defaultCountry "NO"}} selected="selected"{{/equal}}>Norway</option>
+            <option value="OM"{{#equal Customization.defaultCountry "OM"}} selected="selected"{{/equal}}>Oman</option>
+            <option value="PK"{{#equal Customization.defaultCountry "PK"}} selected="selected"{{/equal}}>Pakistan</option>
+            <option value="PW"{{#equal Customization.defaultCountry "PW"}} selected="selected"{{/equal}}>Palau</option>
+            <option value="PS"{{#equal Customization.defaultCountry "PS"}} selected="selected"{{/equal}}>Palestinian Territory, Occupied</option>
+            <option value="PA"{{#equal Customization.defaultCountry "PA"}} selected="selected"{{/equal}}>Panama</option>
+            <option value="PG"{{#equal Customization.defaultCountry "PG"}} selected="selected"{{/equal}}>Papua New Guinea</option>
+            <option value="PY"{{#equal Customization.defaultCountry "PY"}} selected="selected"{{/equal}}>Paraguay</option>
+            <option value="PE"{{#equal Customization.defaultCountry "PE"}} selected="selected"{{/equal}}>Peru</option>
+            <option value="PH"{{#equal Customization.defaultCountry "PH"}} selected="selected"{{/equal}}>Philippines</option>
+            <option value="PN"{{#equal Customization.defaultCountry "PN"}} selected="selected"{{/equal}}>Pitcairn</option>
+            <option value="PL"{{#equal Customization.defaultCountry "PL"}} selected="selected"{{/equal}}>Poland</option>
+            <option value="PT"{{#equal Customization.defaultCountry "PT"}} selected="selected"{{/equal}}>Portugal</option>
+            <option value="PR"{{#equal Customization.defaultCountry "PR"}} selected="selected"{{/equal}}>Puerto Rico</option>
+            <option value="QA"{{#equal Customization.defaultCountry "QA"}} selected="selected"{{/equal}}>Qatar</option>
+            <option value="RE"{{#equal Customization.defaultCountry "RE"}} selected="selected"{{/equal}}>Réunion</option>
+            <option value="RO"{{#equal Customization.defaultCountry "RO"}} selected="selected"{{/equal}}>Romania</option>
+            <option value="RU"{{#equal Customization.defaultCountry "RU"}} selected="selected"{{/equal}}>Russian Federation</option>
+            <option value="RW"{{#equal Customization.defaultCountry "RW"}} selected="selected"{{/equal}}>Rwanda</option>
+            <option value="BL"{{#equal Customization.defaultCountry "BL"}} selected="selected"{{/equal}}>Saint Barthélemy</option>
+            <option value="SH"{{#equal Customization.defaultCountry "SH"}} selected="selected"{{/equal}}>Saint Helena, Ascension and Tristan da Cunha</option>
+            <option value="KN"{{#equal Customization.defaultCountry "KN"}} selected="selected"{{/equal}}>Saint Kitts and Nevis</option>
+            <option value="LC"{{#equal Customization.defaultCountry "LC"}} selected="selected"{{/equal}}>Saint Lucia</option>
+            <option value="MF"{{#equal Customization.defaultCountry "MF"}} selected="selected"{{/equal}}>Saint Martin (France)</option>
+            <option value="PM"{{#equal Customization.defaultCountry "PM"}} selected="selected"{{/equal}}>Saint Pierre and Miquelon</option>
+            <option value="VC"{{#equal Customization.defaultCountry "VC"}} selected="selected"{{/equal}}>Saint Vincent and the Grenadines</option>
+            <option value="WS"{{#equal Customization.defaultCountry "WS"}} selected="selected"{{/equal}}>Samoa</option>
+            <option value="SM"{{#equal Customization.defaultCountry "SM"}} selected="selected"{{/equal}}>San Marino</option>
+            <option value="ST"{{#equal Customization.defaultCountry "ST"}} selected="selected"{{/equal}}>Sao Tome and Principe</option>
+            <option value="SA"{{#equal Customization.defaultCountry "SA"}} selected="selected"{{/equal}}>Saudi Arabia</option>
+            <option value="SN"{{#equal Customization.defaultCountry "SN"}} selected="selected"{{/equal}}>Senegal</option>
+            <option value="RS"{{#equal Customization.defaultCountry "RS"}} selected="selected"{{/equal}}>Serbia</option>
+            <option value="SC"{{#equal Customization.defaultCountry "SC"}} selected="selected"{{/equal}}>Seychelles</option>
+            <option value="SL"{{#equal Customization.defaultCountry "SL"}} selected="selected"{{/equal}}>Sierra Leone</option>
+            <option value="SG"{{#equal Customization.defaultCountry "SG"}} selected="selected"{{/equal}}>Singapore</option>
+            <option value="SX"{{#equal Customization.defaultCountry "SX"}} selected="selected"{{/equal}}>Sint Maarten (Nederlands)</option>
+            <option value="SK"{{#equal Customization.defaultCountry "SK"}} selected="selected"{{/equal}}>Slovakia</option>
+            <option value="SI"{{#equal Customization.defaultCountry "SI"}} selected="selected"{{/equal}}>Slovenia</option>
+            <option value="SB"{{#equal Customization.defaultCountry "SB"}} selected="selected"{{/equal}}>Solomon Islands</option>
+            <option value="SO"{{#equal Customization.defaultCountry "SO"}} selected="selected"{{/equal}}>Somalia</option>
+            <option value="ZA"{{#equal Customization.defaultCountry "ZA"}} selected="selected"{{/equal}}>South Africa</option>
+            <option value="GS"{{#equal Customization.defaultCountry "GS"}} selected="selected"{{/equal}}>South Georgia and the South Sandwich Islands</option>
+            <option value="SS"{{#equal Customization.defaultCountry "SS"}} selected="selected"{{/equal}}>South Sudan</option>
+            <option value="ES"{{#equal Customization.defaultCountry "ES"}} selected="selected"{{/equal}}>Spain</option>
+            <option value="LK"{{#equal Customization.defaultCountry "LK"}} selected="selected"{{/equal}}>Sri Lanka</option>
+            <option value="SD"{{#equal Customization.defaultCountry "SD"}} selected="selected"{{/equal}}>Sudan</option>
+            <option value="SR"{{#equal Customization.defaultCountry "SR"}} selected="selected"{{/equal}}>Suriname</option>
+            <option value="SJ"{{#equal Customization.defaultCountry "SJ"}} selected="selected"{{/equal}}>Svalbard and Jan Mayen</option>
+            <option value="SZ"{{#equal Customization.defaultCountry "SZ"}} selected="selected"{{/equal}}>Swaziland</option>
+            <option value="SE"{{#equal Customization.defaultCountry "SE"}} selected="selected"{{/equal}}>Sweden</option>
+            <option value="CH"{{#equal Customization.defaultCountry "CH"}} selected="selected"{{/equal}}>Switzerland</option>
+            <option value="SY"{{#equal Customization.defaultCountry "SY"}} selected="selected"{{/equal}}>Syrian Arab Republic</option>
+            <option value="TW"{{#equal Customization.defaultCountry "TW"}} selected="selected"{{/equal}}>Taiwan, Province of China</option>
+            <option value="TJ"{{#equal Customization.defaultCountry "TJ"}} selected="selected"{{/equal}}>Tajikistan</option>
+            <option value="TZ"{{#equal Customization.defaultCountry "TZ"}} selected="selected"{{/equal}}>Tanzania, United Republic of</option>
+            <option value="TH"{{#equal Customization.defaultCountry "TH"}} selected="selected"{{/equal}}>Thailand</option>
+            <option value="TL"{{#equal Customization.defaultCountry "TL"}} selected="selected"{{/equal}}>Timor-Leste</option>
+            <option value="TG"{{#equal Customization.defaultCountry "TG"}} selected="selected"{{/equal}}>Togo</option>
+            <option value="TK"{{#equal Customization.defaultCountry "TK"}} selected="selected"{{/equal}}>Tokelau</option>
+            <option value="TO"{{#equal Customization.defaultCountry "TO"}} selected="selected"{{/equal}}>Tonga</option>
+            <option value="TT"{{#equal Customization.defaultCountry "TT"}} selected="selected"{{/equal}}>Trinidad and Tobago</option>
+            <option value="TN"{{#equal Customization.defaultCountry "TN"}} selected="selected"{{/equal}}>Tunisia</option>
+            <option value="TR"{{#equal Customization.defaultCountry "TR"}} selected="selected"{{/equal}}>Turkey</option>
+            <option value="TM"{{#equal Customization.defaultCountry "TM"}} selected="selected"{{/equal}}>Turkmenistan</option>
+            <option value="TC"{{#equal Customization.defaultCountry "TC"}} selected="selected"{{/equal}}>Turks and Caicos Islands</option>
+            <option value="TV"{{#equal Customization.defaultCountry "TV"}} selected="selected"{{/equal}}>Tuvalu</option>
+            <option value="UG"{{#equal Customization.defaultCountry "UG"}} selected="selected"{{/equal}}>Uganda</option>
+            <option value="UA"{{#equal Customization.defaultCountry "UA"}} selected="selected"{{/equal}}>Ukraine</option>
+            <option value="AE"{{#equal Customization.defaultCountry "AE"}} selected="selected"{{/equal}}>United Arab Emirates</option>
+            <option value="GB"{{#equal Customization.defaultCountry "GB"}} selected="selected"{{/equal}}>United Kingdom</option>
+            <option value="US"{{#equal Customization.defaultCountry "US"}} selected="selected"{{/equal}}>United States</option>
+            <option value="UM"{{#equal Customization.defaultCountry "UM"}} selected="selected"{{/equal}}>United States Minor Outlying Islands</option>
+            <option value="UY"{{#equal Customization.defaultCountry "UY"}} selected="selected"{{/equal}}>Uruguay</option>
+            <option value="UZ"{{#equal Customization.defaultCountry "UZ"}} selected="selected"{{/equal}}>Uzbekistan</option>
+            <option value="VU"{{#equal Customization.defaultCountry "VU"}} selected="selected"{{/equal}}>Vanuatu</option>
+            <option value="VE"{{#equal Customization.defaultCountry "VE"}} selected="selected"{{/equal}}>Venezuela, Bolivarian Republic of</option>
+            <option value="VN"{{#equal Customization.defaultCountry "VN"}} selected="selected"{{/equal}}>Viet Nam</option>
+            <option value="VG"{{#equal Customization.defaultCountry "VG"}} selected="selected"{{/equal}}>Virgin Islands, British</option>
+            <option value="VI"{{#equal Customization.defaultCountry "VI"}} selected="selected"{{/equal}}>Virgin Islands, U.S.</option>
+            <option value="WF"{{#equal Customization.defaultCountry "WF"}} selected="selected"{{/equal}}>Wallis and Futuna</option>
+            <option value="EH"{{#equal Customization.defaultCountry "EH"}} selected="selected"{{/equal}}>Western Sahara</option>
+            <option value="YE"{{#equal Customization.defaultCountry "YE"}} selected="selected"{{/equal}}>Yemen</option>
+            <option value="ZM"{{#equal Customization.defaultCountry "ZM"}} selected="selected"{{/equal}}>Zambia</option>
+            <option value="ZW"{{#equal Customization.defaultCountry "ZW"}} selected="selected"{{/equal}}>Zimbabwe</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cartCCFormSubmit"></label>
+        <div class="controls">
+            <input type="submit" id="cartCCFormSubmit" class="btn pull-right error-hide disabled" value="{{Localization.paymentProcessing.checkoutButtonLabel}}">
+        </div>
+    </div>
+</form>
